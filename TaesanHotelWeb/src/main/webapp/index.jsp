@@ -11,7 +11,10 @@
 
 <style type="text/css">
 	.jumbotron{
-		/* background-image:url('./resources/images/chefs.jpg'); */
+	background: #FC5C7D;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to bottom, #6A82FB, #FC5C7D);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to bottom, #6A82FB, #FC5C7D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 		background-size:cover;
 		color:black;
 	}
@@ -25,8 +28,30 @@
 	#jum{
 		background-image:url('./resources/images/restaurant.jpg');
 	}
+	@font-face{
 
+	font-family:"GoodFont"; /*폰트 패밀리 이름 추가*/
+	
+	src:url("./resources/fonts/KBIZHanmaumMyungjo.ttf"); /*폰트 파일 주소*/
+	}
+	
+	@font-face{
 
+	font-family:"GoodFont2"; /*폰트 패밀리 이름 추가*/
+	
+		src:url("./resources/fonts/NANUMPEN.TTF");
+	}
+
+	body{
+		font-family:"GoodFont";
+		background-color:#e7e2f5;
+	}
+	footer{
+		background-color:#e7e2f5;
+	}
+	h1{
+		font-family:"GoodFont2";
+	}
 	</style>
 </head>
 <body>
@@ -78,11 +103,13 @@
 	<!--//////////////////////////////////////////////////////////////////  -->
 	<div class="container">
 		<div class="jumbotron">
-			<p class="text-center">지친 일상에서 떠나보세요.</p>
-			<p class="text-center">. . . . . . . . .</p>
-			<h2 class="text-center">최고의 호텔이<br>고객님을 위해 기다리고 있습니다.</h2>
-			<p class="text-center"> . . . . . . . . .</p>
-			<p class="text-center">후회없는 선택이 될겁니다.</p>
+			<h2 class="text-center">지친 일상에서 떠나보세요.</h2>
+			<p class="text-center" style="color:#FF6347; font-size:5em">. . . . . . . . .</p>
+			<br><br>
+			<h1 class="text-center">최고의 호텔이<br><br>고객님을 위해 기다리고 있습니다.</h1>
+			<p class="text-center" style="color:#FF6347; font-size:5em">. . . . . . . . .</p>
+			<br><br>
+			<h2 class="text-center">후회없는 선택이 될겁니다.</h2>
 			<br><br><br><br><br><br><br>
 
 			<div class="jumbotron" id="jum" style="
@@ -124,8 +151,9 @@
 ">
 		      <img src="./resources/images/chefs.jpg" alt="..." style="height: 500px;">
 		      <div class="caption">
-		        <h3>최고의 셰프</h3>
+		        <h2>최고의 셰프</h2>
 		        <p>항상 새롭고 맛있는 요리를 위해<br>끊임없이 매일 연구하고<br>고민합니다.</p>
+		        <p class="text-center" style="color:#FF6347; font-size:2em">. . . . . . . . .</p>
 		      </div>
 		    </div>
 		  </div>
@@ -135,8 +163,9 @@
 ">
 		      <img src="./resources/images/champagne.jpg" alt="..." style="height: 500px;">
 		      <div class="caption">
-		        <h3>샴페인과 함께...</h3>
-		        <p>저희 호텔은 생일인 고객님께<br>샴페인을 무료로 제공하고 있습니다.<br>사랑하는 사람과 파티를 즐겨보세요.</p>
+		        <h2>샴페인과 함께...</h2>
+		        <p>생일인 고객님께 제공되는 샴페인<br>과 함께 사랑하는 사람과 파티를 즐겨보세요.</p>
+		        <p class="text-center" style="color:#FF6347; font-size:2em">. . . . . . . . .</p>
 		      </div>
 		    </div>
 		  </div>
@@ -146,9 +175,9 @@
 ">
 		      <img src="./resources/images/coffee.jpg" alt="..." style="height: 500px;">
 		      <div class="caption">
-		        <h3>최고의 야경</h3>
-		        <p>한강이 보이는 View를 보며 <br>커피 한잔을...</p>
-		        
+		        <h2>최고의 야경</h2>
+		        <p>한강이 보이는 View를 보며 <br>커피 한잔과 인생을 되돌아<br>보는 기회를...</p>
+		        <p class="text-center" style="color:#FF6347; font-size:2em">. . . . . . . . .</p>
 		      </div>
 		    </div>
 		  </div>
@@ -169,7 +198,7 @@
 					
 					<div class="media-body">
 						<h2 class="media-heading"><a href="introduce.jsp?lectureName=C">&nbsp;&nbsp;이용안내</a>&nbsp;<span class="label label-primary">INFO</span> </h4>
-						<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TS호텔을 100%즐기는 방법
+						<br><h4>&nbsp;&nbsp;&nbsp;&nbsp;TS호텔을 100%즐기는 방법</h4>
 					</div>
 				</div>
 				<hr>
@@ -179,7 +208,7 @@
 					</div>
 					<div class="media-body">
 						<h2 class="media-heading"><a href="lecture.jsp?lectureName=Java">&nbsp;&nbsp;객실예약</a>&nbsp;<span class="label label-danger">HOT</span> </h4>
-						<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;최고의 TS호텔 객실예약 하러가기
+						<br><h4>&nbsp;&nbsp;&nbsp;&nbsp;최고의 TS호텔 객실예약 하러가기</h4>
 					</div>
 				</div>
 				<hr>
@@ -190,7 +219,7 @@
 					</div>
 					<div class="media-body">
 						<h2 class="media-heading"><a href="lecture.jsp?lectureName=Android">&nbsp;&nbsp;고객센터</a>&nbsp;<span class="label label-info">HELP</span> </h4>
-						<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TS호텔의 관리자에게 문의하기
+						<br><h4>&nbsp;&nbsp;&nbsp;&nbsp;TS호텔의 관리자에게 문의하기</h4>
 					</div>
 				</div>
 			</div>
@@ -199,7 +228,7 @@
 	<hr>
 	
 	<!--////////////////////////////////////////////////////////////////////  -->
-	<footer style="background-color:white; color: black">
+	<footer color: black">
 		<div class="container">
 			<br>
 			<div class="col-sm-4" style="text-align: center;"><h5>Copyright ⓒ Choi Tasean. All Rights Reserved.</h5></div>
