@@ -220,6 +220,9 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 		color:black;
 		background-color:black;
 	}
+	.redcolor{
+		color:#FF6347;
+	}
 	</style>
 </head>
 <body>
@@ -242,7 +245,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="index.jsp">소개<span class="sr-only"></span></a></li>
+					<li><a href="location.jsp">위치<span class="sr-only"></span></a></li>
 					<li><a href="introduce.jsp">이용안내</a></li>
 					<li><a href="instructor.jsp">객실예약</a></li>
 					<li class="dropdown">
@@ -276,24 +279,19 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 	<!--//////////////////////////////////////////////////////////////////  -->
 	<div class="container">
 		<div class="jumbotron">
-			<h2 class="text-center">지친 일상에서 떠나보세요.</h2>
+			<h2 class="text-center">KOREA TS HOTEL</h2>
 			<p class="text-center" style="color:#FF6347; font-size:5em">. . . . . . . . .</p>
 			<br><br>
-			<h1 class="text-center">최고의 TS호텔이<br><br>고객님을 위해 기다리고 있습니다.</h1>
+			<h1 class="text-center">최고의 TS호텔 100%<br><br>즐기기 위한 개실 이용 안내</h1>
 			<p class="text-center" style="color:#FF6347; font-size:5em">. . . . . . . . .</p>
 			<br><br>
-			<h2 class="text-center">후회없는 선택이 될겁니다.</h2>
-			<br><br><br><br><br><br><br>
-
-
-	<!--이미지 슬라이드-->
-	
-
-	<ul class="slides">
+			<h4 class="text-center">안녕하십니까 고객님,<br>TS호텔을 찾아주신 고객님을 진심으로 환영합니다.<br>모두가 쾌적하고 편리한 객실 이용을 위하여, 아래의 몇 가지 사항을 당부해 드리오니, 협조 부탁드립니다.</h4>
+			<br><hr><br>
+			<ul class="slides">
     <input type="radio" name="radio-btn" id="img-1" checked />
     <li class="slide-container">
         <div class="slide">
-            <img class="bk" src="./resources/images/background.jpg" />
+            <img class="bk" src="./resources/images/room1.jpg" />
         </div>
         <div class="nav">
             <label for="img-6" class="prev">&#x2039;</label>
@@ -304,7 +302,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
     <input type="radio" name="radio-btn" id="img-2" />
     <li class="slide-container">
         <div class="slide">
-          <img src="./resources/images/background1.jpg" />
+          <img src="./resources/images/room2.jpg" />
         </div>
         <div class="nav">
             <label for="img-1" class="prev">&#x2039;</label>
@@ -315,7 +313,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
     <input type="radio" name="radio-btn" id="img-3" />
     <li class="slide-container">
         <div class="slide">
-          <img src="./resources/images/background2.jpg" />
+          <img src="./resources/images/room3.jpg" />
         </div>
         <div class="nav">
             <label for="img-2" class="prev">&#x2039;</label>
@@ -326,7 +324,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
     <input type="radio" name="radio-btn" id="img-4" />
     <li class="slide-container">
         <div class="slide">
-          <img src="./resources/images/background3.jpg" />
+          <img src="./resources/images/room4.jpg" />
         </div>
         <div class="nav">
             <label for="img-3" class="prev">&#x2039;</label>
@@ -337,7 +335,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
     <input type="radio" name="radio-btn" id="img-5" />
     <li class="slide-container">
         <div class="slide">
-          <img src="./resources/images/background4.jpg" />
+          <img src="./resources/images/room5.jpg" />
         </div>
         <div class="nav">
             <label for="img-4" class="prev">&#x2039;</label>
@@ -348,7 +346,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
     <input type="radio" name="radio-btn" id="img-6" />
     <li class="slide-container">
         <div class="slide">
-          <img src="./resources/images/background5.jpg" />
+          <img src="./resources/images/room6.jpg" />
         </div>
         <div class="nav">
             <label for="img-5" class="prev">&#x2039;</label>
@@ -365,126 +363,27 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
       <label for="img-6" class="nav-dot" id="img-dot-6"></label>
     </li>
 </ul>
-	
-				
-		
-			<!--이미지 슬라이드  -->
-			
-			
-			
-			
-			
-			
-			<!-- <a href="login.do" class="btn btn-primary btn-lg" role="button">로그인</a><br><br><br>
-			<a href="getBoardList.do" class="btn btn-primary btn-lg" role="button">글 목록 바로가기</a>
-			<a href="dataTransform.do" class="btn btn-primary btn-lg" role="button">글 목록 변환 처리</a> -->
+			<h3 class="text-left"><span class="redcolor">1 반려동물 출입은 금지</span>합니다.(적발 시 퇴실 조치되오니 유의 바랍니다.)<br><br><br>
+			<span class="redcolor">2</span> 체크아웃 시간은 <span class="redcolor">오전 11:00</span>까지 입니다.<br><br><br>
+			<span class="redcolor">3</span> 객실 내 간단한 조리는 가능하나 냄새와 연기가 많이 발생하는 <span class="redcolor">취식 조리는 금지</span>합니다.<br><br><br>
+			<span class="redcolor">4</span> 고객님의 안전을 위해 객실 내<span class="redcolor"> 풍선, 촛불, 샴페인, 폭죽 등의 이벤트는 금지</span>합니다.<br><br><br>
+			<span class="redcolor">5</span> 해수욕장 이용 후에는 <span class="redcolor">모래세척장에서 모래를 세척 후 입실</span> 바랍니다.<br><br><br>
+			<span class="redcolor">6</span> 휴대폰 <span class="redcolor">배터리 충전은 1F 컨시어지</span>에 문의바랍니다.<br><br><br>
+			<span class="redcolor">7 짐 보관</span>  : 컨시어지, <span class="redcolor">귀중품 보관</span> : 프론트<br><br><br>
+			컨시어지(내선 0000~0000) ｜ 프론트(내선 0000~0000) ｜ 객실관리(내선 0000~0)
+			</h3>
+			<br><br><br><br><br>
+
+
+	<!--이미지 슬라이드-->
+
 		<hr>
-<!-- 		<div class="row">
-			<div class="col-md-4">
-				<h4>최고의 쉐프</h4>
-				<p>항상 새롭고 맛있는 요리를 위해<br>끊임없이 매일 연구하고<br>고민합니다.</p>
-				<p class="text-center"> . . . . . . . . .</p>
-				<img src="images/chefs.jpg" id="imagepreview" style="width:256px; height:256px;">
-				
-				
-			</div>
-			<div class="col-md-4">
-				<h4>샴페인과 함께...</h4>
-				<p>저희 호텔은 생일인 고객님께<br>샴페인을 무료로 제공하고 있습니다.<br>사랑하는 사람과 파티를 즐겨보세요.</p>
-				<p class="text-center"> . . . . . . . . .</p>
-				<img src="images/chefs.jpg" id="imagepreview" style="width:256px; height:256px;">
-			</div>
-			<div class="col-md-4">
-				<h4>최고의 야경</h4>
-				<p>한강이 보이는 View를 보며 <br>커피 한잔을...</p>
-				<p class="text-center"> . . . . . . . . .</p>
-				<img src="images/chefs.jpg" id="imagepreview" style="width:256px; height:256px;">
-			</div>
-		</div> -->
-		<div class="row">
-		  <div class="col-sm-6 col-md-4">
-		    <div id="img2" class="thumbnail" style="
-    height: 770px;
-">
-		      <img class="scale" src="./resources/images/chefs.jpg" alt="..." style="height: 500px;">
-		      <div class="caption"><br>
-		        <h2>최고의 셰프</h2>
-		        <p>항상 새롭고 맛있는 요리를 위해<br>끊임없이 매일 연구하고<br>고민합니다.</p>
-		        <p class="text-center" style="color:#FF6347; font-size:2em">. . . . . . . . .</p>
-		      </div>
-		    </div>
-		  </div>
-		   <div class="col-sm-6 col-md-4">
-		    <div id="img2" class="thumbnail" style="
-    height: 770px;
-">
-		      <img class="scale" src="./resources/images/champagne.jpg" alt="..." style="height: 500px;">
-		      <div class="caption"><br>
-		        <h2>샴페인과 함께...</h2>
-		        <p>생일인 고객님께 제공되는 샴페인<br>과 함께 사랑하는 사람과 파티를 즐겨보세요.</p>
-		        <p class="text-center" style="color:#FF6347; font-size:2em">. . . . . . . . .</p>
-		      </div>
-		    </div>
-		  </div>
-		   <div class="col-sm-6 col-md-4">
-		    <div id="img2" class="thumbnail" style="
-    height: 770px;
-">
-		      <img class="scale" src="./resources/images/coffee.jpg" alt="..." style="height: 500px;">
-		      <div class="caption"><br>
-		        <h2>최고의 야경</h2>
-		        <p>한강이 보이는 View를 보며 <br>커피 한잔과 인생을 되돌아<br>보는 기회를...</p>
-		        <p class="text-center" style="color:#FF6347; font-size:2em">. . . . . . . . .</p>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-		</div>
-		<hr>
-		<div class="panel panel-primary" style="border-color:white">
-			<div class="panel-heading" style="background-color:#e7e2f5; border-color:white">
-				<h2 class="panel-title" style="color:black;"><span class="glyphicon glyphicon-hand-right" ></span>
-					&nbsp;&nbsp;about TS호텔
-				</h2>
-			</div>
-			<div class="panel-body">
-				<div class="media">
-					<div class="media-left">
-						<a href="#"><img class="scale" src="./resources/images/use.jpg" alt="이용안내"></a>
-					</div>
-					
-					<div class="media-body">
-						<h2 class="media-heading"><a href="introduce.jsp?lectureName=C">&nbsp;&nbsp;&nbsp;이용안내</a>&nbsp;<span class="label label-primary">INFO</span> </h4>
-						<br><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TS호텔을 100%즐기는 방법</h4>
-					</div>
-				</div>
-				<hr>
-				<div class="media">
-					<div class="media-left">
-						<a href="#"><img class="scale" src="./resources/images/reservation.jpg" alt="예약"></a>
-					</div>
-					<div class="media-body">
-						<h2 class="media-heading"><a href="lecture.jsp?lectureName=Java">&nbsp;&nbsp;&nbsp;객실예약</a>&nbsp;<span class="label label-danger">HOT</span> </h4>
-						<br><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;최고의 TS호텔 객실예약 하러가기</h4>
-					</div>
-				</div>
-				<hr>
-				<div class="media">
-					<div class="media-left">
-						<a href="#"><img class="scale" src="./resources/images/staff.jpg" alt="고객센터"></a>
-					
-					</div>
-					<div class="media-body">
-						<h2 class="media-heading"><a href="lecture.jsp?lectureName=Android">&nbsp;&nbsp;&nbsp;고객센터</a>&nbsp;<span class="label label-info">HELP</span> </h4>
-						<br><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TS호텔의 관리자에게 문의하기</h4>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
-	<hr><br>
+
 	
 	<!--////////////////////////////////////////////////////////////////////  -->
+	<hr><br>
 	<footer>
 		<div class="container">
 			<br><br><br><br><br>
@@ -492,7 +391,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 			<div class="col-sm-0"></div>
 			<div class="col-sm-2"><h4 style="text-align:center;">바로가기</h4>
 				<div class="list-group">
-					<a href="index.jsp" class="list-group-item">소개</a>
+					<a href="location.jsp" class="list-group-item">위치</a>
 					<a href="introduce.jsp" class="list-group-item">이용안내</a>
 					<a href="lecture.jsp" class="list-group-item">객실예약</a>
 					<a href="lecture.jsp" class="list-group-item">고객센터</a>
@@ -509,24 +408,6 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 		</div>
 	</footer>
 	
-	<!--modal-->
-	<!-- <div class="row">
-		<div class="modal" id="modal" tabindex="-1">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						최고의 쉐프
-						<button class="close" data-dismiss="modal">&times;</button>
-					</div>
-					<div class="modal-body" style="text-align; center;">
-						끊임없이 매일 연구하고<br>
-						고민합니다.<br>
-						<img src="images/chefs.jpg" id="imagepreview" style="width:256px; height:256px;">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> -->
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="./resources/js/bootstrap.js"></script>
 </body>

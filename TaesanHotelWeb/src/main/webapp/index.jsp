@@ -242,7 +242,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="index.jsp">소개<span class="sr-only"></span></a></li>
+					<li><a href="location.jsp">위치<span class="sr-only"></span></a></li>
 					<li><a href="introduce.jsp">이용안내</a></li>
 					<li><a href="instructor.jsp">객실예약</a></li>
 					<li class="dropdown">
@@ -492,7 +492,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 			<div class="col-sm-0"></div>
 			<div class="col-sm-2"><h4 style="text-align:center;">바로가기</h4>
 				<div class="list-group">
-					<a href="index.jsp" class="list-group-item">소개</a>
+					<a href="location.jsp" class="list-group-item">위치</a>
 					<a href="introduce.jsp" class="list-group-item">이용안내</a>
 					<a href="lecture.jsp" class="list-group-item">객실예약</a>
 					<a href="lecture.jsp" class="list-group-item">고객센터</a>
