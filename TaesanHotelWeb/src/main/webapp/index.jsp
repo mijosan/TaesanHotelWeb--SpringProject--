@@ -10,6 +10,24 @@
 <!-- <link rel="stylesheet" href="./resources/css/codingBooster.css"> -->
 
 <style type="text/css">
+	#myBtn {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: red; /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
+}
+#myBtn:hover {
+		  background-color: #555; /* Add a dark-grey background on hover */
+		}
 	/*hover 기능*/
 	.scale {
 	  transform: scale(1);
@@ -482,12 +500,11 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 			</div>
 		</div>
 	</div>
-	<hr><br>
+<br>
 	
 	<!--////////////////////////////////////////////////////////////////////  -->
 	<footer>
 		<div class="container">
-			<br><br><br><br><br>
 			<div class="col-sm-8" style="text-align: center;"><h4>Taesan Hotel 부산 해운대구 00로  (우동, 벡스코 TS호텔) 48060 콜센터 051-000-0000<br><br>Copyright ⓒ Choi Tasean. All Rights Reserved.</h4></div>
 			<div class="col-sm-0"></div>
 			<div class="col-sm-2"><h4 style="text-align:center;">바로가기</h4>
@@ -508,7 +525,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 			<!-- <div class="col-sm-2"><h4 style="text-align:center;"><span class="glyphicon glyphicon-ok"></span>&nbsp;by 최태산</h4></div> -->
 		</div>
 	</footer>
-	
+	<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 	<!--modal-->
 	<!-- <div class="row">
 		<div class="modal" id="modal" tabindex="-1">
@@ -527,7 +544,26 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 			</div>
 		</div>
 	</div> -->
+	
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="./resources/js/bootstrap.js"></script>
+	<script>
+	// When the user scrolls down 20px from the top of the document, show the button
+	window.onscroll = function() {scrollFunction()};
+
+	function scrollFunction() {
+	  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+	    document.getElementById("myBtn").style.display = "block";
+	  } else {
+	    document.getElementById("myBtn").style.display = "none";
+	  }
+	}
+
+	// When the user clicks on the button, scroll to the top of the document
+	function topFunction() {
+	  document.body.scrollTop = 0; // For Safari
+	  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	}
+	</script>
 </body>
 </html>
