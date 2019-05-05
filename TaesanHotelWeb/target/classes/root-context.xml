@@ -2,13 +2,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-	<context:component-scan base-package="com.spring.TaesanHotelWeb"></context:component-scan>
+	<context:component-scan base-package="com.spring.TaesanHotelWeb.biz"></context:component-scan>
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy><!-- AOP관련 어노테이션들을 인식하고 용도에 맞게 처리-->
 	
 	<!--SqlSessionFactoryBean-->

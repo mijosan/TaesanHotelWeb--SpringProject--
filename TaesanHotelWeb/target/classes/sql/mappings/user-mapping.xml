@@ -3,7 +3,7 @@
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="UserDAO">
-	<select id="loginCheck" parameterType="com.spring.TaesanHotelWeb.vo.UserVO">
+	<select id="loginCheck" parameterType="com.spring.TaesanHotelWeb.biz.vo.UserVO">
 		<![CDATA[
 			select * from tbluser where id=#{id} and password=#{password};
 		]]>
