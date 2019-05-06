@@ -3,9 +3,26 @@
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="UserDAO">
-	<select id="loginCheck" parameterType="com.spring.TaesanHotelWeb.biz.vo.UserVO">
+	<select id="loginCheck" parameterType="com.spring.TaesanHotelWeb.biz.vo.UserVO" resultType="com.spring.TaesanHotelWeb.biz.vo.UserVO">
 		<![CDATA[
-			select * from tbluser where id=#{id} and password=#{password};
+			select * 
+			from tbluser 
+			where id=#{id} and password=#{password};
 		]]>
 	</select>
+	
+	<select id="idCheck" parameterType="String" resultType="Integer">
+		<![CDATA[
+			select count(*) 
+			from tbluser 
+			where id=#{id};
+		]]>
+	</select>
+	
+	<insert id="register" parameterType="com.spring.TaesanHotelWeb.biz.vo.UserVO">
+		<![CDATA[
+			insert into tbluser(id, password, email) 
+			values(#{id}, #{email}, #{password});
+		]]>
+	</insert>
 </mapper>

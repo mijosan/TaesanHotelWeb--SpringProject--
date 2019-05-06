@@ -180,29 +180,7 @@ footer{
   min-height: 100%;
   z-index:-5;
 }
-	/*navbar  */
-	.navbar-default .navbar-brand:hover,
-	.navbar-default .navbar-brand:focus{
-		color:black;
-		font-size:25px;
-	}
-	.navbar-default .navbar-nav > li > a:hover,
-	.navbar-default .navbar-nav > li > a:focus{
-		color:black;
-		font-size:20px;
-	}
-
 	
-	
-	.navbar-default .navbar-nav > .active > a,
-	.navbar-default .navbar-nav > .active > a:hover,
-	.navbar-default .navbar-nav > .active > a:focus{
-		color:black;
-		background-color:black;
-	}
-	.redcolor{
-		color:#FF6347;
-	}
 	</style>
 </head>
 <body>
@@ -211,45 +189,7 @@ footer{
 	</video>
 	
 	
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-				data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-				<span class="sr-only"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="index.jsp">TS호텔</a>
-			</div>
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li><a href="location.jsp">위치<span class="sr-only"></span></a></li>
-					<li><a href="introduce.jsp">이용안내</a></li>
-					<li><a href="instructor.jsp">객실예약</a></li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-						aria-haspopup="true" aria-expanded="false">고객센터<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="lecture.jsp?lectureName=C">문의게시판</a></li>
-					</ul>
-					</li>
-				</ul>
-				
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-						aria-haspopup="true" aria-expanded="false">접속하기<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-						<li><a href="loginForm.jsp">로그인</a></li>
-						<li><a href="registerForm.jsp">회원가입</a></li>
-					</ul>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+	<%@include file="nav.jsp" %>
 	<!--//////////////////////////////////////////////////////////////////  -->
 	<div class="container">
 		   	<div class="row">
@@ -269,21 +209,17 @@ footer{
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<form id="login-form" action="https://phpoll.com/login/process" method="post" role="form" style="display: none;">
+								<form id="login-form" name="login-form" action="login.do" method="post" role="form" style="display: none;">
 									<div class="form-group">
-										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="아이디" value="">
+										<input type="text" name="id" id="username" tabindex="1" class="form-control" placeholder="아이디" value="">
 									</div>
 									<div class="form-group">
 										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="비밀번호">
-									</div>
-									<div class="form-group text-center">
-										<input type="checkbox" tabindex="3" class="" name="remember" id="remember">
-										<label for="remember"> 아이디 기억하기</label>
-									</div>
+									</div>								
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+												<input type="button" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
 											</div>
 										</div>
 									</div>
@@ -296,24 +232,32 @@ footer{
 											</div>
 										</div>
 									</div>
+									
+									<!--로그인 실패했을때-->
+									<c:if test="${msg == 'failure' }">
+										<p style="color:red;">아이디 또는 비밀번호가 틀렸습니다.</p>
+									</c:if>
+									<!--  -->
 								</form>
-								<form id="register-form" action="https://phpoll.com/register/process" method="post" role="form" style="display: block;">
-									<div class="form-group">
-										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="아이디" value="">
+								<form id="register-form" action="register.do" method="post" role="form" style="display: block;">
+									<div class="form-group" id="divInputId">
+										<input type="text" name="id" id="username2" tabindex="1" class="form-control" placeholder="아이디">
+										<input type="button" id="idCheck" class="btn btn-default"  value="중복확인">
 									</div>
-									<div class="form-group">
+
+									<div class="form-group" id="divInputEmail">
 										<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="이메일 주소" value="">
 									</div>
-									<div class="form-group">
-										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="비밀번호">
+									<div class="form-group" id="divInputPassword">
+										<input type="password" name="password" id="password2" tabindex="2" class="form-control" placeholder="비밀번호">
 									</div>
-									<div class="form-group">
-										<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="비밀번호 확인">
+									<div class="form-group" id="divInputPassword-confirm">
+										<input type="password" id="confirm-password" tabindex="2" class="form-control" placeholder="비밀번호 확인">
 									</div>
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+												<input type="button" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
 											</div>
 										</div>
 									</div>
@@ -329,51 +273,173 @@ footer{
 	
 	<!--////////////////////////////////////////////////////////////////////  -->
 <br>
-	<footer>
-		<div class="container">
-			<div class="col-sm-8" style="text-align: center;"><h4>Taesan Hotel 부산 해운대구 00로  (우동, 벡스코 TS호텔) 48060 콜센터 051-000-0000<br><br>Copyright ⓒ Choi Tasean. All Rights Reserved.</h4></div>
-			<div class="col-sm-0"></div>
-			<div class="col-sm-2"><h4 style="text-align:center;">바로가기</h4>
-				<div class="list-group">
-					<a href="location.jsp" class="list-group-item">위치</a>
-					<a href="introduce.jsp" class="list-group-item">이용안내</a>
-					<a href="lecture.jsp" class="list-group-item">객실예약</a>
-					<a href="lecture.jsp" class="list-group-item">고객센터</a>
-				</div>
-			</div>
-			<div class="col-sm-2"><h4 style="text-align:center;">SNS</h4>
-				<div class="list-group">
-					<a href="https://www.facebook.com" class="list-group-item">페이스북</a>
-					<a href="https://www.youtube.com" class="list-group-item">유튜브</a>
-					<a href="https://blog.naver.com/mijosan" class="list-group-item">네이버</a>
-				</div>
-			</div>
-			<!-- <div class="col-sm-2"><h4 style="text-align:center;"><span class="glyphicon glyphicon-ok"></span>&nbsp;by 최태산</h4></div> -->
-		</div>
-	</footer>
+	<%@include file="footer.jsp" %>
 
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="./resources/js/bootstrap.js"></script>
 	<script type="text/javascript">
-	$(function() {
 
-	    $('#login-form-link').click(function(e) {
-			$("#login-form").delay(100).fadeIn(100);
-	 		$("#register-form").fadeOut(100);
-			$('#register-form-link').removeClass('active');
-			$(this).addClass('active');
-			e.preventDefault();
+	$(document).ready(function(){
+		
+		$(function() {
+		    $('#login-form-link').click(function(e) {
+				$("#login-form").delay(100).fadeIn(100);
+		 		$("#register-form").fadeOut(100);
+				$('#register-form-link').removeClass('active');
+				$(this).addClass('active');
+				e.preventDefault();
+			});
+			$('#register-form-link').click(function(e) {
+				$("#register-form").delay(100).fadeIn(100);
+		 		$("#login-form").fadeOut(100);
+				$('#login-form-link').removeClass('active');
+				$(this).addClass('active');
+				e.preventDefault();
+			});
+
 		});
-		$('#register-form-link').click(function(e) {
-			$("#register-form").delay(100).fadeIn(100);
-	 		$("#login-form").fadeOut(100);
-			$('#login-form-link').removeClass('active');
-			$(this).addClass('active');
-			e.preventDefault();
+		
+		//로그인 DIV 부분
+		$("#login-submit").click(function(){
+			var userId = $("#username").val();
+			var userPw = $("#password").val();
+			if(userId == ""){
+				alert("아이디를 입력하세요.");
+				$("#username").focus();
+				return;
+			}
+			if(userPw == ""){
+				alert("비밀번호를 입력하세요.");
+				$("#password").focus();
+				return;
+			}
+			
+			/* document.login-form.action="login.do"; */
+			$('#login-form')[0].submit();
+			alert("로그인 되었습니다");
 		});
-
-	});
-
+		
+		//아이디 중복검사 AJAX
+		var idck = 0;
+		    //idck 버튼을 클릭했을 때 
+		    $("#idCheck").click(function() {
+		    	
+		    	//아이디 공백체크
+		    	//userid 를 param.
+		    	var id = $("#username2").val();
+		    	if(id == ""){
+		    		alert("아이디를 입력하세요");
+		    		return;
+		    	}
+		        $.ajax({
+		            async: true,
+		            type : 'POST',
+		            data : id,
+		            url : "idcheck.do",
+		            dataType : "json",
+		            contentType: "application/json; charset=UTF-8",
+		            success : function(data) {
+		                if (data.cnt > 0) {	                    
+		                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
+		                    $("#divInputId").addClass("has-error")
+		                    $("#divInputId").removeClass("has-success")
+		                    $("#userid").focus();
+		                } else {
+		                    alert("사용가능한 아이디입니다.");
+		                    $("#divInputId").addClass("has-success")
+		                    $("#divInputId").removeClass("has-error")
+		                    $("#userpwd").focus();
+		                    //아이디가 중복하지 않으면  idck = 1 
+		                    idck = 1;	                    
+		                }
+		            },
+		        });
+		    });
+			
+		    //유효성 검사
+		    $("#register-submit").click(function(){
+		    	if(idck == 0){
+			    	alert("아이디 중복검사를 하세요.");
+			    	return;
+			    }
+		    	
+		    	var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
+				var userId = $("#username2").val();
+				var userPw = $("#password2").val();
+				var userPw2 = $("#confirm-password").val();
+				var email = $("#email").val();
+				if(userId == ""){
+					alert("아이디를 입력하세요.");
+					
+					$("#username2").focus();
+					return;
+				}
+			
+				
+				//이메일 유효성 검사
+				if(email == ""){
+					alert("이메일을 입력하세요.");
+					$("#divInputEmail").addClass("has-error")
+                    $("#divInputEmail").removeClass("has-success")
+					$("#email").focus();
+					return;
+				}else{
+					$("#divInputEmail").addClass("has-success")
+	                $("#divInputEmail").removeClass("has-error")
+					
+				}
+				
+		        if(!getMail.test($("#email").val())){
+		          alert("이메일형식에 맞게 입력해주세요")
+		          $("#email").val("");
+		          $("#divInputEmail").addClass("has-error")
+                  $("#divInputEmail").removeClass("has-success")
+		          $("#email").focus();
+		          return;
+		        }else{
+		        	$("#divInputEmail").addClass("has-success")
+	                $("#divInputEmail").removeClass("has-error")
+		        }
+		        
+		        //비밀번호 유효성 검사
+				if(userPw == ""){
+					alert("비밀번호를 입력하세요.");
+					   	$("#divInputPassword").addClass("has-error")
+	                    $("#divInputPassword").removeClass("has-success")
+					$("#password2").focus();
+					return;
+				}else{			
+					   $("#divInputPassword").addClass("has-success")
+	                   $("#divInputPassword").removeClass("has-error")
+				}
+				
+				if(userPw2 == ""){
+					alert("비밀번호 확인을 입력하세요.");
+					$("#divInputPassword-confirm").addClass("has-error")
+                    $("#divInputPassword-confirm").removeClass("has-success")
+					$("#divInputPassword-confirm").focus();
+					return;
+				}else{
+					$("#divInputPassword-confirm").addClass("has-success")
+                    $("#divInputPassword-confirm").removeClass("has-error")
+					
+				}
+				
+				//비밀번호 똑같은지
+		        if($("#password2").val() != ($("#confirm-password").val())){ 
+		        	alert("비밀번호 확인을 다시입력 하세요. ");
+			        $("#password2").val("");
+			        $("#confirm-password").val("");
+			        $("#confirm-password").focus();
+		        return;
+		       }
+			
+				
+				$('#register-form')[0].submit();
+				alert("회원가입이 완료 되었습니다.");
+			});
+		    
+		});
 	</script>
 </body>
 </html>
