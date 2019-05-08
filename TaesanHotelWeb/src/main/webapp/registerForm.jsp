@@ -316,7 +316,6 @@ footer{
 			
 			/* document.login-form.action="login.do"; */
 			$('#login-form')[0].submit();
-			alert("로그인 되었습니다");
 		});
 		
 		//아이디 중복검사 AJAX

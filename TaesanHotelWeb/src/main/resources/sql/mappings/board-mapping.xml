@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="BoardDAO">
+	<!--resultMap-->
+	<!-- <resultMap id="boardResult" type="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
+		<id property="seq" column="SEQ"/> PK는 id 엘리먼트 사용
+		<result property="title" column="TITLE"/> column 에는 DB의 필드명을 적고 property에는 DTO 프라퍼티명을 적어준다.
+		<result property="writer" column="WRITER"/>
+		<result property="content" column="CONTENT"/>
+		<result property="regDate" column="REGDATE"/>
+		<result property="cnt" column="CNT"/>
+	</resultMap> -->
+	
+	<select id="getBoardList" parameterType="HashMap" resultType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
+		SELECT * 
+		FROM BOARD
+		WHERE 1=1
+		<if test="BoardVO.searchCondition == 'TITLE'">
+			<![CDATA[ AND TITLE LIKE CONCAT('%', #{BoardVO.searchKeyword},'%') ]]>
+		</if> 
+		<if test="BoardVO.searchCondition == 'CONTENT'">
+			<![CDATA[ AND CONTENT LIKE CONCAT('%', #{BoardVO.searchKeyword},'%') ]]>
+		</if> 
+		<if test="BoardVO.searchCondition == 'WRITER'">
+			<![CDATA[ AND WRITER LIKE CONCAT('%', #{BoardVO.searchKeyword},'%') ]]>
+		</if> 
+		ORDER BY SEQ DESC
+		LIMIT #{pagenum}, #{contentnum}
+	</select>
+	
+	<select id="getBoardListCnt" resultType="int">
+		SELECT count(*) 
+		FROM BOARD
+	</select>
+	
+	
+	<insert id="insertBoard" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
+		<![CDATA[
+		insert into board(seq, title, writer, content)
+		values((select ifnull(max(seq) + 1,1) from board b), #{title}, #{writer}, #{content})
+		]]>
+	</insert>
+	
+	<update id="updateBoard" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
+		<![CDATA[
+		update board set title=#{title}, content=#{content} where seq=#{seq}
+		]]>
+	</update>
+	
+
+	<delete id="deleteBoard" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
+		<![CDATA[
+		delete board where seq=#{seq}
+		]]>
+	</delete>
+
+	<select id="getBoard" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO" resultType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
+		<![CDATA[
+		select * from board where seq=#{seq}
+		]]>
+	</select>
+	
+</mapper>

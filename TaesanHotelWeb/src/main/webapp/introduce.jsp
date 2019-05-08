@@ -205,7 +205,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 		background-color:#e7e2f5;
 	}
 	footer{
-		background-color:#e7e2f5;
+		background-color:white;
 	}
 	h1{
 		font-family:"GoodFont2";

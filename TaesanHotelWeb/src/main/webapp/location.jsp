@@ -83,7 +83,7 @@
 		background-color:#e7e2f5;
 	}
 	footer{
-		background-color:#e7e2f5;
+		background-color:white;
 	}
 	h1{
 		font-family:"GoodFont2";
@@ -127,9 +127,9 @@
 
 		<hr>
 					<div class="panel panel-primary" style="border-color:white">
-			<div class="panel-heading" style="background-color:#e7e2f5; border-color:white">
-				<h2 class="panel-title" style="color:black;"><span class="glyphicon glyphicon-hand-right" ></span>
-					&nbsp;&nbsp;TS호텔 찾아오시는길
+			<div class="panel-heading" style="background-color:#e7e7e7; border-color:white">
+				<h2 class="panel-title" style="color:black;">
+					TS호텔 찾아오시는길
 				</h2>
 			</div>
 			<div class="panel-body">

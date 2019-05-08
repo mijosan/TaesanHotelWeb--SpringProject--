@@ -26,10 +26,6 @@ public class UserController {
 	//로그인
 	@RequestMapping(value="/login.do")
 	public ModelAndView login(UserVO vo, ModelAndView mav, HttpSession session)throws SQLException {
-		if(vo.getId()==null || vo.getId().equals("")) {
-			throw new IllegalArgumentException("아이디는 반드시 입력해야 합니다.");
-			
-		}
 		System.out.println("로그인 처리");
 		
 		UserVO user = userService.loginCheck(vo);
@@ -39,7 +35,7 @@ public class UserController {
 				mav.setViewName("index.jsp");
 				mav.addObject("msg","success");
 				//mav.addObject("user",user.getName()); 바로 getBoardList.jsp로 간다면 쓸수있는데 getBoardList.do에서 새롭게  ModelAndView 객체를 생성해서 쓰기때문에 기존의 MAV와 다르다.
-				session.setAttribute("user", user);
+				session.setAttribute("user", user); //로그인성공시 회원정보 세션등록
 			}else{
 				mav.addObject("msg","failure");
 				mav.setViewName("loginForm.jsp");

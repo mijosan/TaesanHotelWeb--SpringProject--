@@ -27,6 +27,7 @@
 		color:black;
 		background-color:black;
 	}
+
 </style>
 </head>
 <body>
@@ -51,7 +52,7 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
 						aria-haspopup="true" aria-expanded="false">고객센터<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="lecture.jsp?lectureName=C">문의게시판</a></li>
+						<li><a href="getBoardList.do">문의게시판</a></li>
 					</ul>
 					</li>
 				</ul>

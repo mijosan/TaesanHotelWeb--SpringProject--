@@ -204,9 +204,6 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 		font-family:"GoodFont";
 		background-color:#e7e2f5;
 	}
-	footer{
-		background-color:#e7e2f5;
-	}
 	h1{
 		font-family:"GoodFont2";
 	}
@@ -386,7 +383,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 		      <img class="scale" src="./resources/images/coffee.jpg" alt="..." style="height: 500px;">
 		      <div class="caption"><br>
 		        <h2>최고의 야경</h2>
-		        <p>한강이 보이는 View를 보며 <br>커피 한잔과 인생을 되돌아<br>보는 기회를...</p>
+		        <p>해운대 바다 View를 보며 <br>커피 한잔과 인생을 되돌아<br>보는 기회를...</p>
 		        <p class="text-center" style="color:#FF6347; font-size:2em">. . . . . . . . .</p>
 		      </div>
 		    </div>
@@ -395,9 +392,9 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 		</div>
 		<hr>
 		<div class="panel panel-primary" style="border-color:white">
-			<div class="panel-heading" style="background-color:#e7e2f5; border-color:white">
-				<h2 class="panel-title" style="color:black;"><span class="glyphicon glyphicon-hand-right" ></span>
-					&nbsp;&nbsp;about TS호텔
+			<div class="panel-heading" style="background-color:#e7e7e7; border-color:white">
+				<h2 class="panel-title" style="color:black;">
+					About TS호텔 
 				</h2>
 			</div>
 			<div class="panel-body">

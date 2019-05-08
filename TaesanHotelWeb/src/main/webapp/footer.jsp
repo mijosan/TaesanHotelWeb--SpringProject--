@@ -5,6 +5,11 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<style>
+	footer{
+		background-color:#e7e7e7;
+	}
+</style>
 </head>
 <body>
 <footer>
