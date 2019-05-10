@@ -17,8 +17,8 @@
 	<mvc:annotation-driven></mvc:annotation-driven>
 	
 	<!-- ViewResolver 등록-->
-	<!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/board/"></property>
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/"></property>
 		<property name="suffix" value=".jsp"></property>
-	</bean> -->
+	</bean>
 </beans>

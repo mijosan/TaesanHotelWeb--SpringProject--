@@ -10,11 +10,7 @@
 <!-- <link rel="stylesheet" href="./resources/css/codingBooster.css"> -->
 
 <style type="text/css">
-footer{
-		position:absolute;
-		bottom:0;
-		width:100%;
-	}
+
 
 .panel-login {
 	border-color: #ccc;
@@ -189,7 +185,7 @@ footer{
 	</video>
 	
 	
-	<%@include file="nav.jsp" %>
+	<%@include file="./WEB-INF/nav.jsp" %>
 	<!--//////////////////////////////////////////////////////////////////  -->
 	<div class="container">
 		   	<div class="row">
@@ -272,8 +268,8 @@ footer{
 	
 	
 	<!--////////////////////////////////////////////////////////////////////  -->
-<br>
-	<%@include file="footer.jsp" %>
+<br><br><br><br><br><br><br><br><br>
+	<%@include file="./WEB-INF/footer.jsp" %>
 
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="./resources/js/bootstrap.js"></script>

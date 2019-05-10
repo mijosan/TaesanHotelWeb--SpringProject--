@@ -105,7 +105,7 @@
 	</video>
 	
 	
-	<%@include file="nav.jsp" %>
+	<%@include file="./WEB-INF/nav.jsp" %>
 	
 	<!--//////////////////////////////////////////////////////////////////  -->
 	<div class="container">
@@ -184,7 +184,7 @@
 	
 	<!--////////////////////////////////////////////////////////////////////  -->
 <br>
-	<%@include file="footer.jsp" %>
+	<%@include file="./WEB-INF/footer.jsp" %>
 	<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=85a19cc21df636f17e4769c1205abe68"></script>
 <script>

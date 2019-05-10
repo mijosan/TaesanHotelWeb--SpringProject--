@@ -194,7 +194,7 @@
 	</video>
 	
 	
-	<%@include file="nav.jsp" %>
+	<%@include file="./WEB-INF/nav.jsp" %>
 	
 	<!--//////////////////////////////////////////////////////////////////  -->
 
@@ -278,7 +278,7 @@
 	</div>
 	
 	<!--////////////////////////////////////////////////////////////////////  -->
-	<%@include file="footer.jsp" %>
+	<%@include file="./WEB-INF/footer.jsp" %>
 
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="./resources/js/bootstrap.js"></script>

@@ -16,8 +16,8 @@
 <div class="container">
 	<table class="table table-hover">
 		<tr>
-			<th>번호</th>
-			<th>제목</th>
+			<th style="width:20%">번호</th>
+			<th style="width:20%">제목</th>
 			<th>작성자</th>
 			<th>날짜</th>
 			<th>조회수</th>
@@ -35,7 +35,7 @@
 		</tbody>
 	</table>
 
-	<a class="btn btn-default pull-right">글쓰기</a>	
+	<a class="btn btn-default pull-right" href="writeCheck.do">글쓰기</a>	
 	<!--페이징-->
 
 	<div class="text-center">
@@ -51,7 +51,7 @@
    		</c:if>
    		
    		<c:forEach begin="${page.startPage}" end="${page.endPage}" var="idx">
-			<li><a href="javascript:page(${idx})">${idx}</a></li>
+			<li <c:out value="${page.pagenum == idx ? 'class=active' : ''}"/>><a href="javascript:page(${idx})">${idx}</a></li>
 		</c:forEach>
 			
 		<!--다음페이지-->
@@ -86,7 +86,7 @@
 	</form>
 </div>
 
-
+<br><br><br>
 	<!--게시판 테이블-->
 	<%@include file="footer.jsp" %>
 	

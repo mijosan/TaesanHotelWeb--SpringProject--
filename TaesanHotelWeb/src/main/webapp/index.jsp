@@ -116,6 +116,7 @@ html, body { background: #333 url("https://codepen.io/images/classy_fabric.png")
     text-shadow: 0px 0px 15px rgb(119, 119, 119);
 }
 
+
 .slide:hover + .nav label { opacity: 0.5; }
 
 .nav label:hover { opacity: 1; }
@@ -222,7 +223,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
  		<source src="./resources/videos/Introduce.mp4" type="video/mp4">
 	</video>
 	
-	<%@include file="nav.jsp" %>
+	<%@include file="./WEB-INF/nav.jsp" %>
 	<!--//////////////////////////////////////////////////////////////////  -->
 	<div class="container">
 		<div class="jumbotron">
@@ -435,7 +436,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 <br>
 	
 	<!--////////////////////////////////////////////////////////////////////  -->
-	<%@include file="footer.jsp" %>
+	<%@include file="./WEB-INF/footer.jsp" %>
 	
 	<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 	<!--modal-->

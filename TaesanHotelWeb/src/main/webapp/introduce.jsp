@@ -227,7 +227,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 	</video>
 	
 	
-	<%@include file="nav.jsp" %>
+	<%@include file="./WEB-INF/nav.jsp" %>
 	
 	<!--//////////////////////////////////////////////////////////////////  -->
 	<div class="container">
@@ -337,7 +337,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 	
 	<!--////////////////////////////////////////////////////////////////////  -->
 <br>
-	<%@include file="footer.jsp" %>
+	<%@include file="./WEB-INF/footer.jsp" %>
 	<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="./resources/js/bootstrap.js"></script>

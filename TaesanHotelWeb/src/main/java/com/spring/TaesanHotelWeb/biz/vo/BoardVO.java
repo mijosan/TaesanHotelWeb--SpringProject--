@@ -18,27 +18,20 @@ public class BoardVO {
 	private int cnt;
 	private String searchCondition;
 	private String searchKeyword;
-	private int startIndex;
-	private int cntPerPage;
+	private String fileName;
+	private MultipartFile uploadFile;
 	
-	public int getStartIndex() {
-		return startIndex;
+	
+	public String getFileName() {
+		return fileName;
 	}
-	public void setStartIndex(int startIndex) {
-		this.startIndex = startIndex;
-	}
-	public int getCntPerPage() {
-		return cntPerPage;
-	}
-	public void setCntPerPage(int cntPerPage) {
-		this.cntPerPage = cntPerPage;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
 
-	private MultipartFile uploadFile;
-	
 	public MultipartFile getUploadFile() {
 		return uploadFile;
 	}

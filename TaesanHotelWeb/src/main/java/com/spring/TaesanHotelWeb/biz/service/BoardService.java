@@ -25,5 +25,6 @@ public interface BoardService {
 	
 	//±Û ¸ñ·Ï °¹¼ö
 	int getBoardListCnt();
+	
 
 }

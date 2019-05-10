@@ -1,21 +1,35 @@
 package com.spring.TaesanHotelWeb.view.controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.spring.TaesanHotelWeb.biz.common.PageMaker;
 import com.spring.TaesanHotelWeb.biz.service.BoardService;
 import com.spring.TaesanHotelWeb.biz.vo.BoardVO;
+import com.spring.TaesanHotelWeb.biz.vo.UserVO;
 
 
 @Controller // Controller 어노테이션을 써야 Command객체가 만들어짐
@@ -42,7 +56,7 @@ public class BoardController {
 		PageMaker pagemaker = new PageMaker();
 		
 		pagemaker.setTotalcount(boardService.getBoardListCnt());//전체 게시글 개수
-		pagemaker.setPagenum(pagenum-1);//현재 페이지를 페이지 객체에 저장
+		pagemaker.setPagenum(pagenum);//현재 페이지를 페이지 객체에 저장
 		pagemaker.setContentnum(10);//한 페이지에 몇개씩 게시글을 보여줄지 지정한다.
 		pagemaker.setCurrentblock(pagenum);//현재 페이지 블록이 몇번인지 현재 페이지 번호를 통해서 지정한다.
 		pagemaker.setLastblock(pagemaker.getTotalcount());//마지막 블록 번호를 전체 게시글 수를 통해서 정한다.
@@ -55,11 +69,92 @@ public class BoardController {
 		if(vo.getSearchKeyword() == null) vo.setSearchKeyword("");
 		
 		//정보 저장
-		mav.addObject("boardList",boardService.getBoardList(pagemaker.getPagenum()*10,pagemaker.getContentnum(), vo));
+		mav.addObject("boardList",boardService.getBoardList((pagemaker.getPagenum()-1)*10,pagemaker.getContentnum(), vo)); //0~10, 11~21
 		mav.addObject("page", pagemaker);
-		mav.setViewName("board.jsp");
+		mav.setViewName("board");
+
 		return mav;     
 		
+	}
+	
+    @RequestMapping(value = "/insertBoard.do", method = RequestMethod.POST)
+    public String insertBoard(String editor, BoardVO vo, HttpSession session) throws IllegalStateException, IOException {
+        System.err.println("저장할 내용 : " + editor);
+        	//파일 업로드 처리
+      		MultipartFile uploadFile = vo.getUploadFile();
+      		if(!uploadFile.isEmpty()) {
+      			String fileName = uploadFile.getOriginalFilename();
+      			vo.setFileName(fileName);
+      			uploadFile.transferTo(new File("C:/Spring/TaesanHotelWeb/TaesanHotelWeb/src/main/webapp/resources/files/" + fileName));
+      		}
+      		System.out.println(vo.getContent());
+      		UserVO userVO = (UserVO)session.getAttribute("user");
+      		vo.setWriter(userVO.getId());
+      		vo.setRegDate(new Date());
+      		boardService.insertBoard(vo);
+        return "getBoardList.do";
+    }
+ 
+    // 다중파일업로드
+    @RequestMapping(value = "/file_uploader_html5.do",
+                  method = RequestMethod.POST)
+    @ResponseBody
+    public String multiplePhotoUpload(HttpServletRequest request) {
+        // 파일정보
+        StringBuffer sb = new StringBuffer();
+        try {
+            // 파일명을 받는다 - 일반 원본파일명
+            String oldName = request.getHeader("file-name");
+            // 파일 기본경로 _ 상세경로
+            String filePath = "C:/Spring/TaesanHotelWeb/TaesanHotelWeb/src/main/webapp/resources/editor/photoUpload/";
+            String saveName = sb.append(new SimpleDateFormat("yyyyMMddHHmmss")
+                          .format(System.currentTimeMillis()))
+                          .append(UUID.randomUUID().toString())
+                          .append(oldName.substring(oldName.lastIndexOf("."))).toString();
+            InputStream is = request.getInputStream();
+            OutputStream os = new FileOutputStream(filePath + saveName);
+            int numRead;
+            byte b[] = new byte[Integer.parseInt(request.getHeader("file-size"))];
+            while ((numRead = is.read(b, 0, b.length)) != -1) {
+                os.write(b, 0, numRead);
+            }
+            os.flush();
+            os.close();
+            // 정보 출력
+            sb = new StringBuffer();
+            sb.append("&bNewLine=true")
+              .append("&sFileName=").append(oldName)
+              .append("&sFileURL=").append("http://localhost:8080/TaesanHotelWeb/resources/editor/photoUpload/")
+                                                  
+        .append(saveName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return sb.toString();
+    }
+	@RequestMapping(value="/insertBoard.do") // HandlerMapping 대체
+	public String insertBoard(BoardVO vo) throws Exception{
+		System.out.println("글 등록 처리");
+		//파일 업로드 처리
+		MultipartFile uploadFile = vo.getUploadFile();
+		if(!uploadFile.isEmpty()) {
+			String fileName = uploadFile.getOriginalFilename();
+			uploadFile.transferTo(new File("C:/Spring/" + fileName));
+		}
+
+		boardService.insertBoard(vo);
+		return "redirect:getBoardList.do";
+		
+	}
+	@RequestMapping(value="/writeCheck.do")
+	public String writeCheck(HttpSession session) throws Exception{
+		
+		UserVO vo = (UserVO)session.getAttribute("user");
+		if(vo != null) {
+			return "write.jsp";
+		}else {
+			return "loginForm.jsp";
+		}
 	}
 	
 	@RequestMapping(value="/getBoard.do") 
@@ -90,28 +185,6 @@ public class BoardController {
 		mav.setViewName("redirect:getBoardList.do");
 		return mav;
 	}
-	
-	
 
-	
-
-	@RequestMapping(value="/insertBoard.do") // HandlerMapping 대체
-	public String insertBoard(BoardVO vo) throws Exception{
-		System.out.println("글 등록 처리");
-		//파일 업로드 처리
-		MultipartFile uploadFile = vo.getUploadFile();
-		if(!uploadFile.isEmpty()) {
-			String fileName = uploadFile.getOriginalFilename();
-			uploadFile.transferTo(new File("C:/Spring/" + fileName));
-		}
-
-		boardService.insertBoard(vo);
-		return "redirect:getBoardList.do";
-		
-	}
-	
-
-	
-	
 	
 }
