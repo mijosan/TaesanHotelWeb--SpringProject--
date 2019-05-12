@@ -92,7 +92,7 @@ public class BoardController {
       		vo.setWriter(userVO.getId());
       		vo.setRegDate(new Date());
       		boardService.insertBoard(vo);
-        return "getBoardList.do";
+        return "redirect:getBoardList.do";
     }
  
     // 다중파일업로드
@@ -151,9 +151,9 @@ public class BoardController {
 		
 		UserVO vo = (UserVO)session.getAttribute("user");
 		if(vo != null) {
-			return "write.jsp";
+			return "write";
 		}else {
-			return "loginForm.jsp";
+			return "redirect:loginForm.jsp";
 		}
 	}
 	

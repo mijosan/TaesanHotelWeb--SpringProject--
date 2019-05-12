@@ -5,12 +5,16 @@
 <head>
 <meta charset="EUC-KR">
 <meta name="viewport" content="width=device-width", initial-scale="1">
-<title>Main Page</title>
+<title>회원가입</title>
 <link rel="stylesheet" href="./resources/css/bootstrap.css">
 <!-- <link rel="stylesheet" href="./resources/css/codingBooster.css"> -->
 
 <style type="text/css">
-
+footer{
+		position:absolute;
+		bottom:0;
+		width:100%;
+	}
 
 .panel-login {
 	border-color: #ccc;
@@ -230,7 +234,7 @@
 									</div>
 									
 									<!--로그인 실패했을때-->
-									<c:if test="${msg == 'failure' }">
+									<c:if test="${param.msg == 'failure' }">
 										<p style="color:red;">아이디 또는 비밀번호가 틀렸습니다.</p>
 									</c:if>
 									<!--  -->
@@ -295,8 +299,8 @@
 
 		});
 		
-		//로그인 DIV 부분
-		$("#login-submit").click(function(){
+		/* 로그인  */
+		function login(){
 			var userId = $("#username").val();
 			var userPw = $("#password").val();
 			if(userId == ""){
@@ -312,7 +316,22 @@
 			
 			/* document.login-form.action="login.do"; */
 			$('#login-form')[0].submit();
+		}
+		$("#login-submit").click(function(){
+			login();
 		});
+		
+		/*로그인 엔터키 이벤트*/
+		$("#password").keydown(function(key) {
+            if (key.keyCode == 13) {
+            	login();
+            }
+        });
+		$("#username").keydown(function(key) {
+            if (key.keyCode == 13) {
+            	login();
+            }
+        });
 		
 		//아이디 중복검사 AJAX
 		var idck = 0;
@@ -351,8 +370,9 @@
 		        });
 		    });
 			
-		    //유효성 검사
-		    $("#register-submit").click(function(){
+/* 회원가입  */
+		    
+		    function register(){
 		    	if(idck == 0){
 			    	alert("아이디 중복검사를 하세요.");
 			    	return;
@@ -369,7 +389,7 @@
 					$("#username2").focus();
 					return;
 				}
-			
+				
 				
 				//이메일 유효성 검사
 				if(email == ""){
@@ -420,6 +440,7 @@
 					
 				}
 				
+
 				//비밀번호 똑같은지
 		        if($("#password2").val() != ($("#confirm-password").val())){ 
 		        	alert("비밀번호 확인을 다시입력 하세요. ");
@@ -428,11 +449,34 @@
 			        $("#confirm-password").focus();
 		        return;
 		       }
-			
 				
 				$('#register-form')[0].submit();
 				alert("회원가입이 완료 되었습니다.");
+		    }
+		    //유효성 검사
+		    $("#register-submit").click(function(){
+		    	register();
 			});
+		    $("#username2").keydown(function(key) {
+	            if (key.keyCode == 13) {
+	            	register();
+	            }
+	        });
+		    $("#email").keydown(function(key) {
+	            if (key.keyCode == 13) {
+	            	register();
+	            }
+	        });
+		    $("#password2").keydown(function(key) {
+	            if (key.keyCode == 13) {
+	            	register();
+	            }
+	        });
+		    $("#confirm-password").keydown(function(key) {
+	            if (key.keyCode == 13) {
+	            	register();
+	            }
+	        });
 		    
 		});
 	</script>

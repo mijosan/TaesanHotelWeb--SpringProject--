@@ -5,7 +5,7 @@
 <head>
 <meta charset="EUC-KR">
 <meta name="viewport" content="width=device-width", initial-scale="1">
-<title>Main Page</title>
+<title>TS호텔</title>
 <link rel="stylesheet" href="./resources/css/bootstrap.css">
 <!-- <link rel="stylesheet" href="./resources/css/codingBooster.css"> -->
 

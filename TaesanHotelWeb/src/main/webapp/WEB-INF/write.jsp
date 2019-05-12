@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>글쓰기</title>
 </head>
 <body>
 <%@include file="nav.jsp" %>

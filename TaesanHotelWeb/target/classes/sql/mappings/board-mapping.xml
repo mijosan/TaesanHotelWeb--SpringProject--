@@ -35,6 +35,11 @@
 		FROM BOARD
 	</select>
 	
+	<select id="getBoard" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO" resultType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
+		<![CDATA[
+			select * from board where seq=#{seq}
+		]]>
+	</select>
 	
 	<insert id="insertBoard" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
 		<![CDATA[
@@ -45,21 +50,16 @@
 	
 	<update id="updateBoard" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
 		<![CDATA[
-		update board set title=#{title}, content=#{content} where seq=#{seq}
+			update board set title=#{title}, content=#{content} where seq=#{seq}
 		]]>
 	</update>
 	
 
 	<delete id="deleteBoard" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
 		<![CDATA[
-		delete board where seq=#{seq}
+			delete board where seq=#{seq}
 		]]>
 	</delete>
 
-	<select id="getBoard" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO" resultType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
-		<![CDATA[
-		select * from board where seq=#{seq}
-		]]>
-	</select>
 	
 </mapper>

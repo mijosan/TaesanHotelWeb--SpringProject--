@@ -6,7 +6,7 @@
 <head>
 <meta charset="EUC-KR">
 <meta name="viewport" content="width=device-width", initial-scale="1">
-<title>Main Page</title>
+<title>로그인</title>
 <link rel="stylesheet" href="./resources/css/bootstrap.css">
 <!-- <link rel="stylesheet" href="./resources/css/codingBooster.css"> -->
 
@@ -241,9 +241,14 @@
 									</div>
 									
 									<!--로그인 실패했을때-->
-									<c:if test="${msg == 'failure' }">
+									<c:if test="${param.msg == 'failure' }">
 										<p style="color:red;">아이디 또는 비밀번호가 틀렸습니다.</p>
 									</c:if>
+									<%-- <c:choose>
+										<c:when test="${sessionScope.msg == 'failure' }">
+											<p style="color:red;">아이디 또는 비밀번호가 틀렸습니다.</p>
+										</c:when>
+									</c:choose> --%>
 									<!--  -->
 								</form>
 								<form id="register-form" action="register.do" method="post" role="form" style="display: none;">
@@ -301,7 +306,9 @@
 			});
 
 		});
-		$("#login-submit").click(function(){
+		
+		/* 로그인  */
+		function login(){
 			var userId = $("#username").val();
 			var userPw = $("#password").val();
 			if(userId == ""){
@@ -317,7 +324,23 @@
 			
 			/* document.login-form.action="login.do"; */
 			$('#login-form')[0].submit();
+		}
+		$("#login-submit").click(function(){
+			login();
 		});
+		
+		/*로그인 엔터키 이벤트*/
+		$("#password").keydown(function(key) {
+            if (key.keyCode == 13) {
+            	login();
+            }
+        });
+		$("#username").keydown(function(key) {
+            if (key.keyCode == 13) {
+            	login();
+            }
+        });
+
 		
 		//아이디 중복검사 AJAX
 		var idck = 0;
@@ -357,9 +380,9 @@
 		        });
 		    });
 			
+		    /* 회원가입  */
 		    
-		    //유효성 검사
-		    $("#register-submit").click(function(){
+		    function register(){
 		    	if(idck == 0){
 			    	alert("아이디 중복검사를 하세요.");
 			    	return;
@@ -439,7 +462,31 @@
 				
 				$('#register-form')[0].submit();
 				alert("회원가입이 완료 되었습니다.");
+		    }
+		    //유효성 검사
+		    $("#register-submit").click(function(){
+		    	register();
 			});
+		    $("#username2").keydown(function(key) {
+	            if (key.keyCode == 13) {
+	            	register();
+	            }
+	        });
+		    $("#email").keydown(function(key) {
+	            if (key.keyCode == 13) {
+	            	register();
+	            }
+	        });
+		    $("#password2").keydown(function(key) {
+	            if (key.keyCode == 13) {
+	            	register();
+	            }
+	        });
+		    $("#confirm-password").keydown(function(key) {
+	            if (key.keyCode == 13) {
+	            	register();
+	            }
+	        });
 	});
 	
 	</script>

@@ -11,8 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.TaesanHotelWeb.biz.service.UserService;
 import com.spring.TaesanHotelWeb.biz.vo.UserVO;
@@ -33,13 +33,14 @@ public class UserController {
 
 		//3. 화면 네비게이션
 			if(user !=null){
-				mav.setViewName("index.jsp");
-				mav.addObject("msg","success");
+				mav.setViewName("redirect:index.jsp");
+				//mav.addObject("msg","success");
 				//mav.addObject("user",user.getName()); 바로 getBoardList.jsp로 간다면 쓸수있는데 getBoardList.do에서 새롭게  ModelAndView 객체를 생성해서 쓰기때문에 기존의 MAV와 다르다.
 				session.setAttribute("user", user); //로그인성공시 회원정보 세션등록
 			}else{
-				mav.addObject("msg","failure");
-				mav.setViewName("loginForm.jsp");
+				//mav.addObject("msg","failure");
+				mav.setViewName("redirect:loginForm.jsp?msg=failure");
+
 			}
 		return mav;
 
@@ -51,7 +52,7 @@ public class UserController {
 		System.out.println("로그아웃 처리");
 		
 		session.invalidate();
-		mav.setViewName("index.jsp");
+		mav.setViewName("redirect:index.jsp");
 		return mav;
 	}
 	
