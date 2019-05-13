@@ -33,8 +33,8 @@
 				<td>
 					Ã·ºÎÆÄÀÏ
 				</td>
-				<td  class="text-right">
-					${board.fileName}
+				<td class="text-right">
+					<a href="download.do?originalFileName=${board.originalFileName}">${board.fileName}</a>
 				</td>
 			</tr>
 			<tr>

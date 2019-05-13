@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -14,7 +15,10 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +26,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.spring.TaesanHotelWeb.biz.common.PageMaker;
 import com.spring.TaesanHotelWeb.biz.service.BoardService;
@@ -34,10 +38,13 @@ import com.spring.TaesanHotelWeb.biz.vo.UserVO;
 
 @Controller // Controller 어노테이션을 써야 Command객체가 만들어짐
 @SessionAttributes("board") // Model에 "board"라는 이름으로 저장되는 데이터가 있다면 그 데이터를 세션에도 자동으로 저장하라는 설정이다.
-public class BoardController {
+public class BoardController implements ApplicationContextAware {
 	@Autowired
 	private BoardService boardService;
 
+	private WebApplicationContext context = null;
+	
+	String SAVE_PATH="C:/Spring/TaesanHotelWeb/TaesanHotelWeb/src/main/webapp/resources/files/";
 
 	//검색 조건 목록 설정
 	@ModelAttribute("conditionMap")
@@ -78,23 +85,43 @@ public class BoardController {
 	}
 	
     @RequestMapping(value = "/insertBoard.do", method = RequestMethod.POST)
-    public String insertBoard(String editor, BoardVO vo, HttpSession session) throws IllegalStateException, IOException {
+    public String insertBoard(@RequestParam(value="uploadFile", required = false) MultipartFile mf,String editor, BoardVO vo, HttpSession session) throws IllegalStateException, IOException {
         System.err.println("저장할 내용 : " + editor);
         	//파일 업로드 처리
-      		MultipartFile uploadFile = vo.getUploadFile();
-      		if(!uploadFile.isEmpty()) {
-      			String fileName = uploadFile.getOriginalFilename();
-      			vo.setFileName(fileName);
-      			uploadFile.transferTo(new File("C:/Spring/TaesanHotelWeb/TaesanHotelWeb/src/main/webapp/resources/files/" + fileName));
+      		
+      		if(!mf.isEmpty()) {
+      			String originalFileName = System.currentTimeMillis() + mf.getOriginalFilename();
+      			long fileSize = mf.getSize();
+      			String safeFile = SAVE_PATH + originalFileName; //같은 파일명을 업로드하여도 안겹침
+      			vo.setOriginalFileName(originalFileName);
+      			vo.setFileName(mf.getOriginalFilename());
+      			
+      			mf.transferTo(new File(safeFile));
       		}
-      		System.out.println(vo.getContent());
+
       		UserVO userVO = (UserVO)session.getAttribute("user");
       		vo.setWriter(userVO.getId());
       		vo.setRegDate(new Date());
       		boardService.insertBoard(vo);
         return "redirect:getBoardList.do";
     }
- 
+    
+    @RequestMapping("download.do")
+    public ModelAndView download(HttpServletRequest request, ModelAndView mv) throws UnsupportedEncodingException{
+    	String fullPath = SAVE_PATH+request.getParameter("originalFileName");
+		File file = new File(fullPath);
+		System.out.println(fullPath);
+		return new ModelAndView("download", "downloadFile", file);
+    	}
+
+    @Override
+    public void setApplicationContext(ApplicationContext arg0)
+            throws BeansException {
+         
+        this.context = (WebApplicationContext)arg0;
+         
+    }
+
     // 다중파일업로드
     @RequestMapping(value = "/file_uploader_html5.do",
                   method = RequestMethod.POST)
@@ -132,20 +159,9 @@ public class BoardController {
         }
         return sb.toString();
     }
-	@RequestMapping(value="/insertBoard.do") // HandlerMapping 대체
-	public String insertBoard(BoardVO vo) throws Exception{
-		System.out.println("글 등록 처리");
-		//파일 업로드 처리
-		MultipartFile uploadFile = vo.getUploadFile();
-		if(!uploadFile.isEmpty()) {
-			String fileName = uploadFile.getOriginalFilename();
-			uploadFile.transferTo(new File("C:/Spring/" + fileName));
-		}
+    
 
-		boardService.insertBoard(vo);
-		return "redirect:getBoardList.do";
-		
-	}
+
 	@RequestMapping(value="/writeCheck.do")
 	public String writeCheck(HttpSession session) throws Exception{
 		
@@ -160,6 +176,9 @@ public class BoardController {
 	@RequestMapping(value="/getBoard.do") 
 	public ModelAndView getBoard(BoardVO vo, ModelAndView mav) throws Exception {
 		System.out.println("글 상세 조회 처리");
+		
+		//조회수 증가
+		boardService.updateCnt(vo);
 		
 		mav.addObject("board", boardService.getBoard(vo)); //Model 정보 저장
 		mav.setViewName("getBoard");

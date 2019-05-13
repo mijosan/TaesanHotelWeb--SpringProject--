@@ -40,6 +40,11 @@ public class BoardDAOMybatis extends SqlSessionDaoSupport{
 		return (BoardVO)getSqlSession().selectOne("BoardDAO.getBoard", vo);
 	}
 	
+	public void updateCnt(BoardVO vo) {
+		System.out.println("===> Mybatis로 updateCnt() 기능 처리");
+		getSqlSession().update("BoardDAO.updateCnt", vo);
+	}
+	
 	public List<BoardVO> getBoardList(int pagenum, int contentnum, BoardVO vo) {
 		System.out.println("===> Mybatis로 getBoardList() 기능 처리");
 		HashMap map = new HashMap<String, Object>();

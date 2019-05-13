@@ -29,10 +29,13 @@ public class BoardServiceImpl implements BoardService{
 	}
 	@Override
 	public BoardVO getBoard(BoardVO vo) {
-
 		return boardDAO.getBoard(vo); 
-
 	}
+	@Override
+	public void updateCnt(BoardVO vo) {
+		boardDAO.updateCnt(vo);
+	}
+	
 	@Override
 	public List<BoardVO> getBoardList(int pagenum, int contentnum, BoardVO vo) {
 		return boardDAO.getBoardList(pagenum,contentnum,vo);

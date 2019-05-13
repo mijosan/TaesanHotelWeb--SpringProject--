@@ -10,7 +10,8 @@
 	
 	<!--파일 업로드 설정-->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="maxUploadSize" value="100000"/>
+		<property name="maxUploadSize" value="31457280"/>
+		<property name="defaultEncoding" value="utf-8"/>
 	</bean>
 	
 	<!--어노테이션 기반의 예외 처리-->
@@ -20,5 +21,16 @@
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/"></property>
 		<property name="suffix" value=".jsp"></property>
+		<property name="order" value="1"></property> <!--0에 가까울수록 우선순위가 높음-->
 	</bean>
+	
+	<!--BeanNameViewResolver-->
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="0" />
+	</bean>
+	
+	<!--실질적으로 다운로드가 실행되는곳-->
+	<bean id="download" class="com.spring.TaesanHotelWeb.view.common.DownloadView"> 
+	</bean>
+
 </beans>

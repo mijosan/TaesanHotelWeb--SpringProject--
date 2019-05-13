@@ -19,9 +19,15 @@ public class BoardVO {
 	private String searchCondition;
 	private String searchKeyword;
 	private String fileName;
-	private MultipartFile uploadFile;
+	private String originalFileName;
 	
 	
+	public String getOriginalFileName() {
+		return originalFileName;
+	}
+	public void setOriginalFileName(String originalFileName) {
+		this.originalFileName = originalFileName;
+	}
 	public String getFileName() {
 		return fileName;
 	}
@@ -31,23 +37,12 @@ public class BoardVO {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
-
-	public MultipartFile getUploadFile() {
-		return uploadFile;
-	}
-	public void setUploadFile(MultipartFile uploadFile) {
-		this.uploadFile = uploadFile;
-	}
-	@JsonIgnore
 	public String getSearchCondition() {
 		return searchCondition;
 	}
-	
 	public void setSearchCondition(String searchCondition) {
 		this.searchCondition = searchCondition;
-	}
-	
-	@JsonIgnore
+	}	
 	public String getSearchKeyword() {
 		return searchKeyword;
 	}
