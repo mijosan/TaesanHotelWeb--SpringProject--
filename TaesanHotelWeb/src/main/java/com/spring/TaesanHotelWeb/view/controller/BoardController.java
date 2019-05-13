@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,6 +14,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeansException;
@@ -174,12 +176,16 @@ public class BoardController implements ApplicationContextAware {
 	}
 	
 	@RequestMapping(value="/getBoard.do") 
-	public ModelAndView getBoard(BoardVO vo, ModelAndView mav) throws Exception {
+	public ModelAndView getBoard(BoardVO vo, ModelAndView mav, @RequestParam("message") String message) throws Exception {
 		System.out.println("글 상세 조회 처리");
 		
 		//조회수 증가
 		boardService.updateCnt(vo);
-		
+		if(message.equals("fail2")) {
+			mav.addObject("message","로그인이 필요합니다.");
+		}else if(message.equals("fail1")){
+			mav.addObject("message","삭제 권한이 없습니다.");
+		}
 		mav.addObject("board", boardService.getBoard(vo)); //Model 정보 저장
 		mav.setViewName("getBoard");
 		return mav;
@@ -196,13 +202,24 @@ public class BoardController implements ApplicationContextAware {
 	}
 	
 	@RequestMapping(value="/deleteBoard.do")
-	public ModelAndView deleteBoard(BoardVO vo, ModelAndView mav) throws Exception {
+	public ModelAndView deleteBoard(BoardVO vo, ModelAndView mav, HttpSession session ,HttpServletResponse response) throws Exception {
 		System.out.println("글 삭제 처리");
 		
-		
-		boardService.deleteBoard(vo);
-		mav.setViewName("redirect:getBoardList.do");
-		return mav;
+		UserVO user = (UserVO)session.getAttribute("user");
+		if(user != null) {
+			if(user.getId().equals(vo.getWriter())) {
+				boardService.deleteBoard(vo);
+				mav.setViewName("redirect:getBoardList.do");
+				return mav;
+			}else { //아이디가 틀릴때
+				mav.setViewName("redirect:getBoard.do?seq="+vo.getSeq()+"&message=fail1");
+				return mav;
+			}
+		}else { //로그인을 하지않았을때
+			mav.setViewName("redirect:getBoard.do?seq="+vo.getSeq()+"&message=fail2");
+			return mav;
+		}
+	
 	}
 
 	

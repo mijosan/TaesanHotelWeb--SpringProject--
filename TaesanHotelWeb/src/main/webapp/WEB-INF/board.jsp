@@ -26,7 +26,7 @@
 			<c:forEach items="${boardList}" var="board"><!-- DispatcherServlet객체로 부터 Model을 전달받음 ex)mav.addObject("boardList",boardService.getBoardList(vo)) -->
 			<tr>
 				<td>${board.seq}</td>
-				<td><a href="getBoard.do?seq=${board.seq}"> ${board.title}</a></td>
+				<td><a href="getBoard.do?seq=${board.seq}&message=success"> ${board.title}</a></td>
 				<td>${board.writer}</td>
 				<td>${board.regDate}</td>
 				<td>${board.cnt}</td>

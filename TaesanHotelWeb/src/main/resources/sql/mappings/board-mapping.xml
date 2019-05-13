@@ -63,7 +63,7 @@
 
 	<delete id="deleteBoard" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
 		<![CDATA[
-			delete board where seq=#{seq}
+			delete from board where seq=#{seq}
 		]]>
 	</delete>
 

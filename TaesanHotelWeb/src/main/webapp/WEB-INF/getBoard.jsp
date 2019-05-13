@@ -5,12 +5,13 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title></title>
+<title>${board.title}</title>
+
 </head>
 <body>
 <%@include file="nav.jsp" %>
 	<div class="container">
-		<table class="table table-hover">
+		<table class="table table-hover" style="margin-bottom: 430px;">
 			<tr>
 				<th colspan="2">
 					${board.title }
@@ -38,15 +39,26 @@
 				</td>
 			</tr>
 			<tr>
-				<td></td>
 				<td>
-					<input type="button" class="btn btn-default pull-right" value="목록" onclick="history.back()">
-				</td>	
+					<input type="button" class="btn btn-default pull-left" value="목록" onclick="history.back()">
+				</td>
+				<td>
+					<input type="button" class="btn btn-default pull-right" value="글삭제" onclick="location.href='deleteBoard.do?seq=${board.seq}&writer=${board.writer}'">
+				</td>		
 			</tr>
 		</table>
 	</div>
 	<script src="https://code.jquery.com/jquery-latest.js"></script>
 	<script src="./resources/js/bootstrap.js"></script>
+	<script>
+    $(function(){
+        var responseMessage = "<c:out value="${message}" />";
+        if(responseMessage != ""){
+            alert(responseMessage)
+        }
+    }) 
+	</script>
+
 <%@include file="footer.jsp" %>
 </body>
 </html>
