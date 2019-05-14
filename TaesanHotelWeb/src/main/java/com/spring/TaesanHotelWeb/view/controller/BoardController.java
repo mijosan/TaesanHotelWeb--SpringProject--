@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -124,7 +123,7 @@ public class BoardController implements ApplicationContextAware {
          
     }
 
-    // 다중파일업로드
+    // 다중파일업로드 (사진)
     @RequestMapping(value = "/file_uploader_html5.do",
                   method = RequestMethod.POST)
     @ResponseBody
@@ -176,15 +175,17 @@ public class BoardController implements ApplicationContextAware {
 	}
 	
 	@RequestMapping(value="/getBoard.do") 
-	public ModelAndView getBoard(BoardVO vo, ModelAndView mav, @RequestParam("message") String message) throws Exception {
+	public ModelAndView getBoard(BoardVO vo, ModelAndView mav, @RequestParam(value="message",required=false) String message) throws Exception {
 		System.out.println("글 상세 조회 처리");
 		
 		//조회수 증가
 		boardService.updateCnt(vo);
-		if(message.equals("fail2")) {
-			mav.addObject("message","로그인이 필요합니다.");
-		}else if(message.equals("fail1")){
-			mav.addObject("message","삭제 권한이 없습니다.");
+		if(message !=null) {
+			if(message.equals("fail2")) {
+				mav.addObject("message","로그인이 필요합니다.");
+			}else if(message.equals("fail1")){
+				mav.addObject("message","권한이 없습니다.");
+			}
 		}
 		mav.addObject("board", boardService.getBoard(vo)); //Model 정보 저장
 		mav.setViewName("getBoard");
@@ -192,13 +193,43 @@ public class BoardController implements ApplicationContextAware {
 	}
 	
 	@RequestMapping(value="/updateBoard.do")
-	public ModelAndView updateBoard(@ModelAttribute("board") BoardVO vo, ModelAndView mav) throws Exception {//세션에 있는 BoardVO객체를 먼저 할당되고 그리고 사용자가 입력한 파라미터값을 vo 객체에 할당
+	public ModelAndView updateBoard(@RequestParam(value="uploadFile", required = false) MultipartFile mf, BoardVO vo, ModelAndView mav, HttpSession session, HttpServletRequest request) throws Exception {//세션에 있는 BoardVO객체를 먼저 할당되고 그리고 사용자가 입력한 파라미터값을 vo 객체에 할당
 		System.out.println("글 수정 처리");
-		
-		System.out.println("작성자 이름 : " + vo.getWriter());
-		boardService.updateBoard(vo);
-		mav.setViewName("redirect:getBoardList.do");
-		return mav;
+		String upck = request.getParameter("upck")==null?"":request.getParameter("upck");
+		UserVO user = (UserVO)session.getAttribute("user");
+		if(user != null) {
+			if(user.getId().equals(vo.getWriter())) { //로그인 id와 글쓴 id가 같으면 수정
+				if(upck.equals("upck")) { // 수정할때
+					
+					if(mf != null) {
+		      			String originalFileName = System.currentTimeMillis() + mf.getOriginalFilename();
+		      			long fileSize = mf.getSize();
+		      			String safeFile = SAVE_PATH + originalFileName; //같은 파일명을 업로드하여도 안겹침
+		      			vo.setOriginalFileName(originalFileName);
+		      			vo.setFileName(mf.getOriginalFilename());
+		      			
+		      			mf.transferTo(new File(safeFile));
+		      		}
+	
+					boardService.updateBoard(vo);
+					mav.setViewName("redirect:getBoard.do?seq="+vo.getSeq());
+					return mav;
+					
+				}else { //첫 수정페이지 들어갈때
+					BoardVO boardVO = boardService.getBoard(vo);
+					mav.addObject("boardVO",boardVO);
+					mav.setViewName("update");
+					return mav;
+				}
+			}else { //아이디가 틀릴때 message값을 가지고 getBoard.do로 돌아감
+				mav.setViewName("redirect:getBoard.do?seq="+vo.getSeq()+"&message=fail1");
+				return mav;
+			}
+		}else { //로그인을 하지않았을때
+			mav.setViewName("redirect:getBoard.do?seq="+vo.getSeq()+"&message=fail2");
+			return mav;
+		}
+	
 	}
 	
 	@RequestMapping(value="/deleteBoard.do")
@@ -207,11 +238,11 @@ public class BoardController implements ApplicationContextAware {
 		
 		UserVO user = (UserVO)session.getAttribute("user");
 		if(user != null) {
-			if(user.getId().equals(vo.getWriter())) {
+			if(user.getId().equals(vo.getWriter())) { //로그인 id와 글쓴 id가 같으면 삭제
 				boardService.deleteBoard(vo);
-				mav.setViewName("redirect:getBoardList.do");
+				mav.setViewName("redirect:getBoardList.do"); //삭제후 리스트로
 				return mav;
-			}else { //아이디가 틀릴때
+			}else { //아이디가 틀릴때 message값을 가지고 getBoard.do로 돌아감
 				mav.setViewName("redirect:getBoard.do?seq="+vo.getSeq()+"&message=fail1");
 				return mav;
 			}

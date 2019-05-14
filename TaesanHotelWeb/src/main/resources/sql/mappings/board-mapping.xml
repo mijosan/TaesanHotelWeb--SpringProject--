@@ -56,7 +56,7 @@
 	
 	<update id="updateBoard" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
 		<![CDATA[
-			update board set title=#{title}, content=#{content} where seq=#{seq}
+			update board set title=#{title}, content=#{content}, fileName=#{fileName}, originalFileName=#{originalFileName} where seq=#{seq}
 		]]>
 	</update>
 	

@@ -5,44 +5,58 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>글쓰기</title>
+<title>글수정</title>
+<style>
+
+</style>
 </head>
 <body>
 <%@include file="nav.jsp" %>
+<form id="insertBoardFrm" action="updateBoard.do" method="post" enctype="multipart/form-data">
 	<div class="container">
 		<table class="table table-hover">
-			<form id="insertBoardFrm" action="insertBoard.do" method="post" enctype="multipart/form-data">
              <tr>
                   <th>제목</th>
-                  <td><input style="width: 100%" type="text" id="title" name="title" /></td>
+                  <td><input style="width: 100%" type="text" id="title" name="title" value="${boardVO.title}"/></td>
              </tr>
               <tr>
                    <th>내용</th>
-                   <td><textarea name="content" id="editor" style="width: 100%; height: 400px;"></textarea></td>
+                   <td><textarea name="content" id="editor" style="width: 100%; height: 400px;">${boardVO.content}</textarea></td>
               </tr>
               <tr>
               	<th>
               		업로드
               	</th>
-              	<td>
-              		<span class="btn btn-default btn-file">
-              			<input type="file" name="uploadFile"/>
-              		</span>
+              	<td>       		
+              		<input type="file" name="uploadFile"/>
+              	</td>
+              </tr>
+              <tr>
+              	<th>
+              		기존파일
+             	</th>
+             	<td>
+              		<a href="download.do?originalFileName=${board.originalFileName}">${board.fileName}</a>
               	</td>
               </tr>
 			  <tr>
 					<td>
 					</td>
 					<td>
-						<input class="btn btn-default pull-right" type="button" value="취소"
-						onclick="history.back()"
-						/>
-						<input id="insertBoard" class="btn btn-default pull-right" type="button" value="등록"/>
+						<input class="btn btn-default pull-right" type="button" value="취소" onclick="history.back()"/>
+						<input id="insertBoard" class="btn btn-default pull-right" type="button" value="수정"/>
+						<input type="hidden" name="upck" value="upck">
+						<input type="hidden" name="writer" value="${board.writer}">
+						
+						<!--업로드 하지않았을때 기존의 값 그대로 저장하기 위해-->
+						<input type="hidden" name="fileName" value="${board.fileName}">
+						<input type="hidden" name="originalFileName" value="${board.originalFileName}">
+						<input type="hidden" name="seq" value="${board.seq}">
 					</td>
 				</tr>
-			</form>
          </table>
 	</div>
+	</form>
 	<br><br><br>
 <%@include file="footer.jsp" %>
 <script src="https://code.jquery.com/jquery-latest.js"></script>

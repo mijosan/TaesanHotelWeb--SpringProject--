@@ -10,6 +10,7 @@
 </head>
 <body>
 <%@include file="nav.jsp" %>
+<form id="insertBoardFrm" action="updateBoard.do" method="post" enctype="multipart/form-data"> <!--update.do 에서 MultipartFile로 받을려면 이렇게 설정해줘야한다.-->
 	<div class="container">
 		<table class="table table-hover" style="margin-bottom: 430px;">
 			<tr>
@@ -43,11 +44,18 @@
 					<input type="button" class="btn btn-default pull-left" value="목록" onclick="history.back()">
 				</td>
 				<td>
-					<input type="button" class="btn btn-default pull-right" value="글삭제" onclick="location.href='deleteBoard.do?seq=${board.seq}&writer=${board.writer}'">
+					<input type="button" class="btn btn-default pull-right" value="삭제" onclick="location.href='deleteBoard.do?seq=${board.seq}&writer=${board.writer}'">
+					<input type="submit" class="btn btn-default pull-right" value="수정">
+					<%-- <input type="button" class="btn btn-default pull-right" value="수정" onclick="location.href='updateBoard.do?seq=${board.seq}&writer=${board.writer}'"> --%>
 				</td>		
 			</tr>
 		</table>
 	</div>
+	
+	<!--수정버튼을 눌렀을때 가져가야 할 값들 글번호랑 작성자(수정할려는 ID와 글쓴ID 비교하기위하여 들고감)-->
+	<input type="hidden" name="seq" value="${board.seq}">
+	<input type="hidden" name="writer" value="${board.writer}">
+</form>
 	<script src="https://code.jquery.com/jquery-latest.js"></script>
 	<script src="./resources/js/bootstrap.js"></script>
 	<script>
