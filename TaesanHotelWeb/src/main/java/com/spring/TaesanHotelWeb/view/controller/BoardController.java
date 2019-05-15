@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -87,10 +89,11 @@ public class BoardController implements ApplicationContextAware {
 	}
 	
     @RequestMapping(value = "/insertBoard.do", method = RequestMethod.POST)
-    public String insertBoard(@RequestParam(value="uploadFile", required = false) MultipartFile mf,String editor, BoardVO vo, HttpSession session) throws IllegalStateException, IOException {
-        System.err.println("저장할 내용 : " + editor);
-        	//파일 업로드 처리
-      		
+    public String insertBoard(@RequestParam(value="uploadFile", required = false) MultipartFile mf,String editor, BoardVO vo, HttpSession session,
+    		@RequestParam(value="ck",required=false)String ck) throws IllegalStateException, IOException {
+
+
+    		//파일 업로드 처리
       		if(!mf.isEmpty()) {
       			String originalFileName = System.currentTimeMillis() + mf.getOriginalFilename();
       			DecimalFormat formatter = new DecimalFormat("###,###");
@@ -99,22 +102,35 @@ public class BoardController implements ApplicationContextAware {
       			vo.setFileSize(fileSize);
       			vo.setOriginalFileName(originalFileName);
       			vo.setFileName(mf.getOriginalFilename());
-      			
       			mf.transferTo(new File(safeFile));
       		}
-
+      		//답글이 아닌 본래 글작성일때
+  			if(ck.equals("true")) {
+  				vo.setOriginNo(boardService.getSeq()+1);
+  				vo.setGroupOrd(0);
+  				vo.setGroupLayer(0);
+  			}
+  			
       		UserVO userVO = (UserVO)session.getAttribute("user");
       		vo.setWriter(userVO.getId());
       		vo.setRegDate(new Date());
       		boardService.insertBoard(vo);
         return "redirect:getBoardList.do";
+
     }
     
     @RequestMapping("download.do")
     public ModelAndView download(HttpServletRequest request, ModelAndView mv) throws UnsupportedEncodingException{
+    	String charset[] = {"euc-kr", "ksc5601", "iso-8859-1", "8859_1", "ascii", "UTF-8"}; 
+    	 
+    	 for(int i=0; i<charset.length ; i++){
+    	     System.out.println(charset[i] + " URLEncoder : " + URLEncoder.encode(request.getParameter("originalFileName"), charset[i]));
+    	     System.out.println(charset[i] + " URLDecoder : " + URLDecoder.decode(request.getParameter("originalFileName"), charset[i]));
+    	  }
+
     	String fullPath = SAVE_PATH+request.getParameter("originalFileName");
 		File file = new File(fullPath);
-		System.out.println(fullPath);
+
 		return new ModelAndView("download", "downloadFile", file);
     	}
 
@@ -167,13 +183,16 @@ public class BoardController implements ApplicationContextAware {
 
 
 	@RequestMapping(value="/writeCheck.do")
-	public String writeCheck(HttpSession session) throws Exception{
-		
+	public ModelAndView writeCheck(HttpSession session, BoardVO boardVO, ModelAndView mav) throws Exception{
+	
 		UserVO vo = (UserVO)session.getAttribute("user");
 		if(vo != null) {
-			return "write";
+			mav.addObject("board",boardVO);
+			mav.setViewName("write");
+			return mav;
 		}else {
-			return "redirect:loginForm.jsp";
+			mav.setViewName("redirect:loginForm.jsp");
+			return mav;
 		}
 	}
 	
@@ -206,8 +225,10 @@ public class BoardController implements ApplicationContextAware {
 					
 					if(mf != null) {
 		      			String originalFileName = System.currentTimeMillis() + mf.getOriginalFilename();
-		      			long fileSize = mf.getSize();
 		      			String safeFile = SAVE_PATH + originalFileName; //같은 파일명을 업로드하여도 안겹침
+		      			DecimalFormat formatter = new DecimalFormat("###,###");
+		      			String fileSize = formatter.format(mf.getSize())+"byte";
+		      			vo.setFileSize(fileSize);
 		      			vo.setOriginalFileName(originalFileName);
 		      			vo.setFileName(mf.getOriginalFilename());
 		      			

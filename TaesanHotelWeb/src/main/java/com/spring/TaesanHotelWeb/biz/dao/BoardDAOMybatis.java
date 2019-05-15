@@ -59,4 +59,9 @@ public class BoardDAOMybatis extends SqlSessionDaoSupport{
 		return getSqlSession().selectOne("BoardDAO.getBoardListCnt");
 	}
 	
+	public int getSeq() {
+		System.out.println("===> Mybatis로 getSeq() 기능 처리");
+		return getSqlSession().selectOne("BoardDAO.getSeq");
+	}
+	
 }

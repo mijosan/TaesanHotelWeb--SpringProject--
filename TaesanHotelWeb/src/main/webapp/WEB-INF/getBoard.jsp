@@ -1,5 +1,7 @@
+<%@page import="java.net.URLEncoder"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+
 <!DOCTYPE html>
 <link rel="stylesheet" href="./resources/css/bootstrap.css">
 <html>
@@ -46,23 +48,41 @@
 			<tr>
 				<td>
 					<input type="button" class="btn btn-default pull-left" value="목록" onclick="history.back()">
+					<input type="button" class="btn btn-default pull-left" value="답글" onclick="goForm2()">
+					
 				</td>
 				<td>
 					<input type="button" class="btn btn-default pull-right" value="삭제" onclick="location.href='deleteBoard.do?seq=${board.seq}&writer=${board.writer}'">
-					<input type="submit" class="btn btn-default pull-right" value="수정">
+					<input type="button" class="btn btn-default pull-right" value="수정" onclick="goForm()">
 					<%-- <input type="button" class="btn btn-default pull-right" value="수정" onclick="location.href='updateBoard.do?seq=${board.seq}&writer=${board.writer}'"> --%>
 				</td>		
 			</tr>
+
 		</table>
 	</div>
 	
 	<!--수정버튼을 눌렀을때 가져가야 할 값들 글번호랑 작성자(수정할려는 ID와 글쓴ID 비교하기위하여 들고감)-->
 	<input type="hidden" name="seq" value="${board.seq}">
 	<input type="hidden" name="writer" value="${board.writer}">
+	
+	<!--답글을 쓰기위해 가져가는 값-->
+	<input type="hidden" name="originNo" value="${board.originNo}">
+	<input type="hidden" name="groupOrd" value="${board.groupOrd}">
+	<input type="hidden" name="groupLayer" value="${board.groupLayer}">
+	
 </form>
 	<script src="https://code.jquery.com/jquery-latest.js"></script>
 	<script src="./resources/js/bootstrap.js"></script>
 	<script>
+	function goForm(){
+		var insertBoardFrm = document.getElementById('insertBoardFrm');
+		insertBoardFrm.submit();
+	}
+	function goForm2(){
+		var responseWrite = document.getElementById('insertBoardFrm');
+		responseWrite.action = "writeCheck.do";
+		responseWrite.submit();
+	}
     $(function(){
         var responseMessage = "<c:out value="${message}" />";
         if(responseMessage != ""){

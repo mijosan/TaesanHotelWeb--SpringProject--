@@ -52,6 +52,7 @@
 						<input type="hidden" name="fileName" value="${board.fileName}">
 						<input type="hidden" name="originalFileName" value="${board.originalFileName}">
 						<input type="hidden" name="seq" value="${board.seq}">
+						<input type="hidden" name="fileSize" value="${board.fileSize}">
 					</td>
 				</tr>
          </table>

@@ -40,6 +40,8 @@
 						<input id="insertBoard" class="btn btn-default pull-right" type="button" value="µî·Ï"/>
 					</td>
 				</tr>
+				<input type="hidden" name="ck" value="true">
+				<input type="text" value="${param.originNo}">
 			</form>
          </table>
 	</div>

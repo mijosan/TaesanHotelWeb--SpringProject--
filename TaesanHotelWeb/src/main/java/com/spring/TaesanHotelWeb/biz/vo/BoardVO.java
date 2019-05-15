@@ -22,6 +22,30 @@ public class BoardVO {
 	private String originalFileName;
 	private String fileSize;
 	
+	//계층형 게시판
+	private int originNo; //원글번호
+	private int groupOrd; //원글에 대한 순서
+	private int groupLayer; //답글 계층
+	
+	
+	public int getOriginNo() {
+		return originNo;
+	}
+	public void setOriginNo(int originNo) {
+		this.originNo = originNo;
+	}
+	public int getGroupOrd() {
+		return groupOrd;
+	}
+	public void setGroupOrd(int groupOrd) {
+		this.groupOrd = groupOrd;
+	}
+	public int getGroupLayer() {
+		return groupLayer;
+	}
+	public void setGroupLayer(int groupLayer) {
+		this.groupLayer = groupLayer;
+	}
 	public String getFileSize() {
 		return fileSize;
 	}

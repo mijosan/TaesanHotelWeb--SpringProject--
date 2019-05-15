@@ -26,7 +26,7 @@
 		<if test="BoardVO.searchCondition == 'WRITER'">
 			<![CDATA[ AND WRITER LIKE CONCAT('%', #{BoardVO.searchKeyword},'%') ]]>
 		</if> 
-		ORDER BY SEQ DESC
+		ORDER BY originNo DESC, groupOrd ASC
 		LIMIT #{pagenum}, #{contentnum}
 	</select>
 	
@@ -41,6 +41,12 @@
 		]]>
 	</select>
 	
+	<select id="getSeq" resultType="int">
+		<![CDATA[
+			select max(seq) from board
+		]]>
+	</select>
+	
 	<update id="updateCnt" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
 		<![CDATA[
 			update board set cnt=cnt+1 where seq=#{seq}
@@ -49,14 +55,16 @@
 	
 	<insert id="insertBoard" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
 		<![CDATA[
-			insert into board(seq, title, content, writer, regDate, cnt, fileName, originalFileName, fileSize)
-			values((select ifnull(max(seq) + 1,1) from board b), #{title}, #{content}, #{writer}, #{regDate}, #{cnt}, #{fileName}, #{originalFileName}, #{fileSize})
+			insert into board(seq, title, content, writer, regDate, cnt, fileName, originalFileName, fileSize, originNo, groupOrd, groupLayer)
+			values((select ifnull(max(seq) + 1,1) from board b), #{title}, #{content}, #{writer}, #{regDate}, #{cnt}, #{fileName}, #{originalFileName}, #{fileSize},
+			#{originNo},#{groupOrd},#{groupLayer}
+			)
 		]]>
 	</insert>
 	
 	<update id="updateBoard" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
 		<![CDATA[
-			update board set title=#{title}, content=#{content}, fileName=#{fileName}, originalFileName=#{originalFileName} where seq=#{seq}
+			update board set title=#{title}, content=#{content}, fileName=#{fileName}, originalFileName=#{originalFileName}, fileSize=#{fileSize} where seq=#{seq}
 		]]>
 	</update>
 	

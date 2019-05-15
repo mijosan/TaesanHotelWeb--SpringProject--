@@ -29,5 +29,8 @@ public interface BoardService {
 	//글 목록 갯수
 	int getBoardListCnt();
 	
+	//글 최상위 번호 조회
+	int getSeq();
+	
 	
 }

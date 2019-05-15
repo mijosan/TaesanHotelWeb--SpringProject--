@@ -45,5 +45,9 @@ public class BoardServiceImpl implements BoardService{
 	public int getBoardListCnt() {
 		return boardDAO.getBoardListCnt();
 	}
+	@Override
+	public int getSeq() {
+		return boardDAO.getSeq();
+	}
 	
 }
