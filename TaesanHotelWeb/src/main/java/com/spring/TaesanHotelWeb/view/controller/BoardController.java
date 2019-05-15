@@ -105,12 +105,17 @@ public class BoardController implements ApplicationContextAware {
       			mf.transferTo(new File(safeFile));
       		}
       		//답글이 아닌 본래 글작성일때
-  			if(ck.equals("true")) {
-  				vo.setOriginNo(boardService.getSeq()+1);
-  				vo.setGroupOrd(0);
-  				vo.setGroupLayer(0);
-  			}
+		/*
+		 * if(ck.equals("true")) { vo.setOriginNo(boardService.getSeq()+1); //같은 그룹으로
+		 * 묶기위해 vo.setGroupOrd(0); //그룹내의 순서정하기 ( 원글의 + 1들을 +1씩 vo.setGroupLayer(0); //
+		 * 그룹의 계층( 원글의 + 1 ) }
+		 */
+      		
+      		//같은 층and같은 그룹에서 가장큰 값 + 1 해서 나중에 적은 답글은 가장 밑으로 가게함 > 이후 뒤에있는 groupOrd들을 +1 씩해줘야함 
+  			int groupOrd = boardService.getOrd(vo)+1;
+  			vo.setGroupOrd(groupOrd);
   			
+  			//이후 뒤에있는 groupOrd들을 +1 씩해줘야함 
       		UserVO userVO = (UserVO)session.getAttribute("user");
       		vo.setWriter(userVO.getId());
       		vo.setRegDate(new Date());

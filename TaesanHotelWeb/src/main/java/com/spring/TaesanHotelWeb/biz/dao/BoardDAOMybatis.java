@@ -64,4 +64,9 @@ public class BoardDAOMybatis extends SqlSessionDaoSupport{
 		return getSqlSession().selectOne("BoardDAO.getSeq");
 	}
 	
+	public int getOrd(BoardVO vo) {
+		System.out.println("===> Mybatis로 getOrd() 기능 처리");
+		return getSqlSession().selectOne("BoardDAO.getOrd",vo);
+	}
+	
 }

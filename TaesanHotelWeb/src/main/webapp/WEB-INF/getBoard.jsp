@@ -74,11 +74,11 @@
 	<script src="https://code.jquery.com/jquery-latest.js"></script>
 	<script src="./resources/js/bootstrap.js"></script>
 	<script>
-	function goForm(){
+	function goForm(){ //수정 버튼
 		var insertBoardFrm = document.getElementById('insertBoardFrm');
 		insertBoardFrm.submit();
 	}
-	function goForm2(){
+	function goForm2(){ //답글 버튼(action을 다르게하기 위해 사용)
 		var responseWrite = document.getElementById('insertBoardFrm');
 		responseWrite.action = "writeCheck.do";
 		responseWrite.submit();

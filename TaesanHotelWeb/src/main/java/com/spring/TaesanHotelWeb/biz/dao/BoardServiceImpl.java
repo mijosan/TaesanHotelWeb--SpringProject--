@@ -50,4 +50,9 @@ public class BoardServiceImpl implements BoardService{
 		return boardDAO.getSeq();
 	}
 	
+	@Override
+	public int getOrd(BoardVO vo) {
+		return boardDAO.getOrd(vo);
+	}
+	
 }

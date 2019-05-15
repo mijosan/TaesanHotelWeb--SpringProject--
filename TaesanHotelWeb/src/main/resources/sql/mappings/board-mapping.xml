@@ -47,6 +47,12 @@
 		]]>
 	</select>
 	
+	<select id="getOrd" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO" resultType="int">
+		<![CDATA[
+			select max(groupOrd) from board where originNo=#{originNo} and groupLayer=#{groupLayer}
+		]]>
+	</select>
+	
 	<update id="updateCnt" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
 		<![CDATA[
 			update board set cnt=cnt+1 where seq=#{seq}

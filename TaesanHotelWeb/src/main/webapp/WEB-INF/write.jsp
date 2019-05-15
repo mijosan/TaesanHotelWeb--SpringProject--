@@ -34,14 +34,17 @@
 					<td>
 					</td>
 					<td>
-						<input class="btn btn-default pull-right" type="button" value="취소"
-						onclick="history.back()"
+						<input class="btn btn-default pull-right" type="button" value="취소" onclick="history.back()"
 						/>
 						<input id="insertBoard" class="btn btn-default pull-right" type="button" value="등록"/>
 					</td>
 				</tr>
 				<input type="hidden" name="ck" value="true">
-				<input type="text" value="${param.originNo}">
+				
+				<!--답글 쓰기위해-->
+				<input type="hidden" name="originNo" value="${board.originNo}">
+				<input type="hidden" name="groupOrd" value="${board.groupOrd}">
+				<input type="hidden" name="groupLayer" value="${board.groupLayer+1}">
 			</form>
          </table>
 	</div>

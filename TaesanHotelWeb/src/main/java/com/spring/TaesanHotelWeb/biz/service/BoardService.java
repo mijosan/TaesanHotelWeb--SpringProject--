@@ -32,5 +32,8 @@ public interface BoardService {
 	//글 최상위 번호 조회
 	int getSeq();
 	
+	//같은 계층에서 가장 높은 순서 구하기
+	int getOrd(BoardVO vo);
+	
 	
 }
