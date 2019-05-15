@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -92,8 +93,10 @@ public class BoardController implements ApplicationContextAware {
       		
       		if(!mf.isEmpty()) {
       			String originalFileName = System.currentTimeMillis() + mf.getOriginalFilename();
-      			long fileSize = mf.getSize();
+      			DecimalFormat formatter = new DecimalFormat("###,###");
+      			String fileSize = formatter.format(mf.getSize())+"byte";
       			String safeFile = SAVE_PATH + originalFileName; //같은 파일명을 업로드하여도 안겹침
+      			vo.setFileSize(fileSize);
       			vo.setOriginalFileName(originalFileName);
       			vo.setFileName(mf.getOriginalFilename());
       			

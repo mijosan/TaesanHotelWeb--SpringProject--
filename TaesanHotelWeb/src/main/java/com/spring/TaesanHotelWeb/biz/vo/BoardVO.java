@@ -20,8 +20,14 @@ public class BoardVO {
 	private String searchKeyword;
 	private String fileName;
 	private String originalFileName;
+	private String fileSize;
 	
-	
+	public String getFileSize() {
+		return fileSize;
+	}
+	public void setFileSize(String fileSize) {
+		this.fileSize = fileSize;
+	}
 	public String getOriginalFileName() {
 		return originalFileName;
 	}

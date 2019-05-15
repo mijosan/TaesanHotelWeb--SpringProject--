@@ -49,8 +49,8 @@
 	
 	<insert id="insertBoard" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
 		<![CDATA[
-			insert into board(seq, title, content, writer, regDate, cnt, fileName, originalFileName)
-			values((select ifnull(max(seq) + 1,1) from board b), #{title}, #{content}, #{writer}, #{regDate}, #{cnt}, #{fileName}, #{originalFileName})
+			insert into board(seq, title, content, writer, regDate, cnt, fileName, originalFileName, fileSize)
+			values((select ifnull(max(seq) + 1,1) from board b), #{title}, #{content}, #{writer}, #{regDate}, #{cnt}, #{fileName}, #{originalFileName}, #{fileSize})
 		]]>
 	</insert>
 	

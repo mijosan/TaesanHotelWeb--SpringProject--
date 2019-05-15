@@ -6,7 +6,11 @@
 <head>
 <meta charset="EUC-KR">
 <title>${board.title}</title>
-
+	<style>
+		.co{
+			color:blue;
+		}
+	</style>
 </head>
 <body>
 <%@include file="nav.jsp" %>
@@ -36,7 +40,7 @@
 					첨부파일
 				</td>
 				<td class="text-right">
-					<a href="download.do?originalFileName=${board.originalFileName}">${board.fileName}</a>
+					<a href="download.do?originalFileName=${board.originalFileName}">${board.fileName}(<span class="co">${board.fileSize}</span>)</a>
 				</td>
 			</tr>
 			<tr>
