@@ -69,6 +69,7 @@
 	<input type="hidden" name="originNo" value="${board.originNo}">
 	<input type="hidden" name="groupOrd" value="${board.groupOrd}">
 	<input type="hidden" name="groupLayer" value="${board.groupLayer}">
+	<input type="hidden" name="ck" value="responseWrite">
 	
 </form>
 	<script src="https://code.jquery.com/jquery-latest.js"></script>

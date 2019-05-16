@@ -59,6 +59,13 @@
 		]]>
 	</update>
 	
+	<!--updateOrd-->
+	<update id="updateOrd" parameterType="int">
+		<![CDATA[
+			update board set groupOrd=groupOrd+1 where #{groupOrd}<=groupOrd;
+		]]>
+	</update>
+	
 	<insert id="insertBoard" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
 		<![CDATA[
 			insert into board(seq, title, content, writer, regDate, cnt, fileName, originalFileName, fileSize, originNo, groupOrd, groupLayer)

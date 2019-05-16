@@ -35,5 +35,7 @@ public interface BoardService {
 	//같은 계층에서 가장 높은 순서 구하기
 	int getOrd(BoardVO vo);
 	
+	//groupOrd + 1 쿼리
+	void updateOrd(int groupOrd);
 	
 }

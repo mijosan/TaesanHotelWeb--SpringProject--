@@ -39,12 +39,21 @@
 						<input id="insertBoard" class="btn btn-default pull-right" type="button" value="등록"/>
 					</td>
 				</tr>
-				<input type="hidden" name="ck" value="true">
+				
+				<!--답글인지 글쓰기인지 체크용(답글이라면 getBoard에서 값(responseWrite)을 가져옴)-->
+				<c:choose>
+				    <c:when test="${empty responseWrite}">
+				    
+				    </c:when>
+				    <c:otherwise>
+						<input type="hidden" name="ck" value="${responseWrite}">	
+				    </c:otherwise>
+				</c:choose>
 				
 				<!--답글 쓰기위해-->
 				<input type="hidden" name="originNo" value="${board.originNo}">
 				<input type="hidden" name="groupOrd" value="${board.groupOrd}">
-				<input type="hidden" name="groupLayer" value="${board.groupLayer+1}">
+				<input type="hidden" name="groupLayer" value="${board.groupLayer}">
 			</form>
          </table>
 	</div>

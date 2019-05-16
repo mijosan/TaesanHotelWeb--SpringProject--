@@ -55,4 +55,9 @@ public class BoardServiceImpl implements BoardService{
 		return boardDAO.getOrd(vo);
 	}
 	
+	@Override
+	public void updateOrd(int groupOrd) {
+		boardDAO.updateOrd(groupOrd);
+	}
+	
 }
