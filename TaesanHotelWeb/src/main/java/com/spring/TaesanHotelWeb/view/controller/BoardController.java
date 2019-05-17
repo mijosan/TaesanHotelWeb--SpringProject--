@@ -107,21 +107,19 @@ public class BoardController implements ApplicationContextAware {
       		
       		//같은 층and같은 그룹에서 가장큰 값 + 1 해서 나중에 적은 답글은 가장 밑으로 가게함 > 이후 뒤에있는 groupOrd들을 +1 씩해줘야함 
       		
-      		if(ck != null) { //답글일떄
+      		if(ck != null) { //답글일때
       			
-      			if(boardService.getOrd(vo)==0) { //다음에 해결할일 : 
-      				vo.setGroupLayer(vo.getGroupLayer()+1);
-      				
+      			boardService.updateOrd(vo);
+      			String re = "";
+      			for(int i=0;i<vo.getGroupLayer();i++) {
+      				re = re + "　";
       			}
-      			int groupOrd = boardService.getOrd(vo)+1;
-      			boardService.updateOrd(groupOrd);
-      			vo.setGroupOrd(groupOrd);
+      			vo.setTitle(re+"└─"+vo.getTitle());
       		}else { //글쓰기일때
       			vo.setOriginNo(boardService.getSeq()+1);
       			vo.setGroupOrd(0);
-      			vo.setGroupLayer(0);	
+      			vo.setGroupLayer(0);
       		}
-
       		UserVO userVO = (UserVO)session.getAttribute("user");
       		vo.setWriter(userVO.getId());
       		vo.setRegDate(new Date());

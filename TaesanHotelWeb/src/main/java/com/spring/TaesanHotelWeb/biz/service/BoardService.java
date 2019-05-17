@@ -36,6 +36,6 @@ public interface BoardService {
 	int getOrd(BoardVO vo);
 	
 	//groupOrd + 1 Äõ¸®
-	void updateOrd(int groupOrd);
+	void updateOrd(BoardVO vo);
 	
 }

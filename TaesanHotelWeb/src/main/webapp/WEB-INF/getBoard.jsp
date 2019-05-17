@@ -21,7 +21,7 @@
 		<table class="table table-hover" style="margin-bottom: 430px;">
 			<tr>
 				<th colspan="2">
-					${board.title }
+					${board.title}
 				</th>
 			</tr>
 			<tr>
@@ -67,8 +67,8 @@
 	
 	<!--답글을 쓰기위해 가져가는 값-->
 	<input type="hidden" name="originNo" value="${board.originNo}">
-	<input type="hidden" name="groupOrd" value="${board.groupOrd}">
-	<input type="hidden" name="groupLayer" value="${board.groupLayer}">
+	<input type="hidden" name="groupOrd" value="${board.groupOrd+1}">
+	<input type="hidden" name="groupLayer" value="${board.groupLayer+1}">
 	<input type="hidden" name="ck" value="responseWrite">
 	
 </form>

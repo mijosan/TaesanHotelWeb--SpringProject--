@@ -69,9 +69,9 @@ public class BoardDAOMybatis extends SqlSessionDaoSupport{
 		return getSqlSession().selectOne("BoardDAO.getOrd",vo);
 	}
 	
-	public void updateOrd(int groupOrd) {
+	public void updateOrd(BoardVO vo) {
 		System.out.println("===> Mybatis로 updateOrd() 기능 처리");
-		getSqlSession().update("BoardDAO.updateOrd",groupOrd);
+		getSqlSession().update("BoardDAO.updateOrd",vo);
 	}
 	
 }

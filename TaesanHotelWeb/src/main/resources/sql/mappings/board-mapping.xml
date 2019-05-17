@@ -43,13 +43,7 @@
 	
 	<select id="getSeq" resultType="int">
 		<![CDATA[
-			select max(seq) from board
-		]]>
-	</select>
-	
-	<select id="getOrd" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO" resultType="int">
-		<![CDATA[
-			select max(groupOrd) from board where originNo=#{originNo} and groupLayer=#{groupLayer}
+			select ifnull(max(seq) + 1,1) from board b
 		]]>
 	</select>
 	
@@ -60,9 +54,9 @@
 	</update>
 	
 	<!--updateOrd-->
-	<update id="updateOrd" parameterType="int">
+	<update id="updateOrd" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
 		<![CDATA[
-			update board set groupOrd=groupOrd+1 where #{groupOrd}<=groupOrd;
+			update board set groupOrd=groupOrd+1 where originNo=#{originNo} and #{groupOrd}<=groupOrd;
 		]]>
 	</update>
 	
