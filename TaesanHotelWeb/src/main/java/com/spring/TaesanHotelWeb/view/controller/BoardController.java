@@ -59,14 +59,17 @@ public class BoardController implements ApplicationContextAware {
 	public void insertComment(@RequestBody CommentVO vo, HttpSession session) {
 		UserVO userVO = (UserVO)session.getAttribute("user");
 		vo.setC_writer(userVO.getId());
-		vo.setC_regdate(new Date());
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String c_regdate = sdf.format(date);
+		vo.setC_regdate(c_regdate);
 		boardService.insertComment(vo);
 	}
 	
 	//´ñ±Û ¸®½ºÆ®
 	@ResponseBody
 	@RequestMapping(value = "/commentList.do", method = RequestMethod.GET)
-	public List<CommentVO> getComment(@RequestParam(defaultValue="1")int curPage, @RequestParam("b_seq")int b_seq){
+	public List<CommentVO> getComment(@RequestParam("b_seq")int b_seq){
 		return boardService.getComment(b_seq,1,10);
 	}
 	

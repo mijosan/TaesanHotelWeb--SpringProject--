@@ -39,9 +39,9 @@ public class CommentVO {
 		
 		return c_regdate;
 	}
-	public void setC_regdate(Date c_regdate) {
-		SimpleDateFormat test = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-		this.c_regdate = test.format(c_regdate);
+	public void setC_regdate(String c_regdate) {
+		//SimpleDateFormat test = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+		this.c_regdate = c_regdate;
 	}
 	
 }

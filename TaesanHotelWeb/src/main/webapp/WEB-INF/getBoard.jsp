@@ -132,7 +132,6 @@ function comment(){
         url : "commentInsert.do",
         data: JSON.stringify(param),//JSON 문자열 형식으로 바꿈
         contentType : "application/json", //서버에 데이터를 보낼때
-        dataType: "json", // 서버에서 리턴해주는 데이터 유형
         success : function(data){
            alert("댓글이 등록 되었습니다.");
            listReply();
@@ -149,8 +148,9 @@ function listReply(){
 		type:'get',
 		url: "commentList.do?b_seq=${board.seq}",
 	    contentType : "application/json",
+	    dataType: "json", // 서버에서 리턴해주는 데이터 유형
 	    success : function(result){
-	        var output="<table>";
+	        var output="<table class='table table-hover'>";
 	        for(var i in result){
 	        	output += "<tr>";
 	        	output += "<td class='col-md-2'>"+"<mark>"+result[i].c_writer+"</mark>";
