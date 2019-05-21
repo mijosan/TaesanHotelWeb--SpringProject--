@@ -29,6 +29,18 @@
 		ORDER BY originNo DESC, groupOrd ASC
 		LIMIT #{pagenum}, #{contentnum}
 	</select>
+	<select id="getComment"  parameterType="HashMap" resultType="com.spring.TaesanHotelWeb.biz.vo.CommentVO">
+		SELECT * 
+		FROM COMMENT
+		WHERE B_SEQ = #{b_seq}
+		ORDER BY c_seq
+	</select>
+	<insert id="insertComment" parameterType="com.spring.TaesanHotelWeb.biz.vo.CommentVO">
+	<![CDATA[
+		insert into comment(c_seq,b_seq,c_content,c_writer,c_regdate)
+		values((select ifnull(max(c_seq) + 1,1) from comment b),#{b_seq},#{c_content},#{c_writer},#{c_regdate})
+	]]>
+	</insert>
 	
 	<select id="getBoardListCnt" resultType="int">
 		SELECT count(*) 

@@ -12,6 +12,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -25,6 +26,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,6 +39,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spring.TaesanHotelWeb.biz.common.PageMaker;
 import com.spring.TaesanHotelWeb.biz.service.BoardService;
 import com.spring.TaesanHotelWeb.biz.vo.BoardVO;
+import com.spring.TaesanHotelWeb.biz.vo.CommentVO;
 import com.spring.TaesanHotelWeb.biz.vo.UserVO;
 
 
@@ -50,6 +53,23 @@ public class BoardController implements ApplicationContextAware {
 	
 	String SAVE_PATH="C:/Spring/TaesanHotelWeb/TaesanHotelWeb/src/main/webapp/resources/files/";
 
+	//댓글 삽입
+	@ResponseBody
+	@RequestMapping(value = "/commentInsert.do", method = RequestMethod.POST)
+	public void insertComment(@RequestBody CommentVO vo, HttpSession session) {
+		UserVO userVO = (UserVO)session.getAttribute("user");
+		vo.setC_writer(userVO.getId());
+		vo.setC_regdate(new Date());
+		boardService.insertComment(vo);
+	}
+	
+	//댓글 리스트
+	@ResponseBody
+	@RequestMapping(value = "/commentList.do", method = RequestMethod.GET)
+	public List<CommentVO> getComment(@RequestParam(defaultValue="1")int curPage, @RequestParam("b_seq")int b_seq){
+		return boardService.getComment(b_seq,1,10);
+	}
+	
 	//검색 조건 목록 설정
 	@ModelAttribute("conditionMap")
 	public Map<String, String> searchConditionMap(){
@@ -208,6 +228,7 @@ public class BoardController implements ApplicationContextAware {
 	public ModelAndView getBoard(BoardVO vo, ModelAndView mav, @RequestParam(value="message",required=false) String message) throws Exception {
 		System.out.println("글 상세 조회 처리");
 		
+		
 		//조회수 증가
 		boardService.updateCnt(vo);
 		if(message !=null) {
@@ -284,6 +305,9 @@ public class BoardController implements ApplicationContextAware {
 		}
 	
 	}
+	
+
+	
 
 	
 }

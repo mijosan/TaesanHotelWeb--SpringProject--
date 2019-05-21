@@ -2,12 +2,14 @@ package com.spring.TaesanHotelWeb.biz.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.TaesanHotelWeb.biz.service.BoardService;
 import com.spring.TaesanHotelWeb.biz.vo.BoardVO;
+import com.spring.TaesanHotelWeb.biz.vo.CommentVO;
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService{
@@ -60,4 +62,15 @@ public class BoardServiceImpl implements BoardService{
 		boardDAO.updateOrd(vo);
 	}
 	
+	//´ñ±Û
+	@Override
+	public List<CommentVO> getComment(int b_seq, int start, int end) {
+		return boardDAO.getComment(b_seq,start,end);
+	}
+	
+	@Override
+	public void insertComment(CommentVO vo) {
+		boardDAO.insertComment(vo);
+		
+	}
 }

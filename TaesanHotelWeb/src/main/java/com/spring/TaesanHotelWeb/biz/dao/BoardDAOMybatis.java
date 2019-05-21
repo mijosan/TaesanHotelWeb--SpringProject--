@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.TaesanHotelWeb.biz.vo.BoardVO;
+import com.spring.TaesanHotelWeb.biz.vo.CommentVO;
 
 
 
@@ -55,6 +56,16 @@ public class BoardDAOMybatis extends SqlSessionDaoSupport{
 		return getSqlSession().selectList("BoardDAO.getBoardList", map);
 	}
 	
+	public List<CommentVO> getComment(int b_seq, int start, int end) {
+		System.out.println("===> Mybatis로 getComment() 기능 처리");
+		HashMap map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("b_seq", b_seq);
+		
+		return getSqlSession().selectList("BoardDAO.getComment", map);
+	}
+	
 	public int getBoardListCnt() {
 		return getSqlSession().selectOne("BoardDAO.getBoardListCnt");
 	}
@@ -72,6 +83,12 @@ public class BoardDAOMybatis extends SqlSessionDaoSupport{
 	public void updateOrd(BoardVO vo) {
 		System.out.println("===> Mybatis로 updateOrd() 기능 처리");
 		getSqlSession().update("BoardDAO.updateOrd",vo);
+	}
+	
+	//댓글
+	public void insertComment(CommentVO vo) {
+		System.out.println("===> Mybatis로 insertComment() 기능 처리");
+		getSqlSession().update("BoardDAO.insertComment",vo);
 	}
 	
 }
