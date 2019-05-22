@@ -1,7 +1,7 @@
 <%@page import="java.net.URLEncoder"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <link rel="stylesheet" href="./resources/css/bootstrap.css">
 <html>
@@ -152,9 +152,15 @@ function listReply(){
 	    success : function(result){
 	        var output="<table class='table table-hover'>";
 	        for(var i in result){
+	        	console.log(result);
+	        	//ÁÙ¹Ù²Þ Ã³¸® + ¶ç¾î¾²±â
+	        	var comment = result[i].c_content;
+	        	comment = comment.replace(/\n/gi,"<br>");
+	        	comment = comment.replace(/  /gi,"&nbsp;&nbsp;");
+	        	
 	        	output += "<tr>";
 	        	output += "<td class='col-md-2'>"+"<mark>"+result[i].c_writer+"</mark>";
-	        	output += "<td class='col-md-10'>"+result[i].c_content+"<br><small>"+result[i].c_regdate+"</small></td>";
+	        	output += "<td class='col-md-10'>"+comment+"<br><small>"+result[i].c_regdate+"</small></td>";
 	        	output += "</tr>";	
 	        }
 	        output +="</table>";
