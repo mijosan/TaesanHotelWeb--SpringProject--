@@ -29,9 +29,11 @@
 				
 				<td>
 					<a href="getBoard.do?seq=${board.seq}&message=success"> 
-
+						
 						${board.title}
-					
+						<c:if test="${board.c_cnt>0}">
+							<span style="color:red">[${board.c_cnt}]</span>
+						</c:if>
 					</a>
 				</td>
 				

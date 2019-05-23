@@ -36,6 +36,8 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.TaesanHotelWeb.biz.common.PageMaker;
 import com.spring.TaesanHotelWeb.biz.service.BoardService;
 import com.spring.TaesanHotelWeb.biz.vo.BoardVO;
@@ -72,6 +74,17 @@ public class BoardController implements ApplicationContextAware {
 	public List<CommentVO> getComment(@RequestParam("b_seq")int b_seq){
 		return boardService.getComment(b_seq,1,10);
 	}
+	//댓글 삭제
+	@ResponseBody
+	@RequestMapping("deleteComment.do")
+	public void deleteComment(@RequestBody Map<String, Object> c_seq,HttpServletResponse response) throws JsonProcessingException, IOException {
+		ObjectMapper mapper = new ObjectMapper();//Jackson 라이브러리의 ObjectMapper를 사용하여 객체를 Json 형식의 문자열로 만든다.
+		boardService.deleteComment(Integer.valueOf((String) (c_seq.get("c_seq"))));
+		response.getWriter().print(mapper.writeValueAsString("success"));
+	}
+	//댓글 수정
+	//댓글 답변
+	//댓글 페이징
 	
 	//검색 조건 목록 설정
 	@ModelAttribute("conditionMap")

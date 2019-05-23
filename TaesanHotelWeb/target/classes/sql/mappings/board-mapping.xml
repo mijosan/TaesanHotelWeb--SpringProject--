@@ -14,8 +14,8 @@
 	</resultMap> -->
 	
 	<select id="getBoardList" parameterType="HashMap" resultType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
-		SELECT * 
-		FROM BOARD
+		SELECT *,(select count(*) from comment where b_seq = b.seq) c_cnt
+		FROM BOARD as b
 		WHERE 1=1
 		<if test="BoardVO.searchCondition == 'TITLE'">
 			<![CDATA[ AND TITLE LIKE CONCAT('%', #{BoardVO.searchKeyword},'%') ]]>
@@ -30,7 +30,7 @@
 		LIMIT #{pagenum}, #{contentnum}
 	</select>
 	<select id="getComment"  parameterType="HashMap" resultType="com.spring.TaesanHotelWeb.biz.vo.CommentVO">
-		SELECT * 
+		SELECT *,(select count(*) from comment where b_seq = #{b_seq}) c_cnt
 		FROM COMMENT
 		WHERE B_SEQ = #{b_seq}
 		ORDER BY c_seq
@@ -93,6 +93,12 @@
 			delete from board where seq=#{seq}
 		]]>
 	</delete>
-
+	
+	<!--댓글 삭제-->
+	<delete id="deleteComment">
+		<![CDATA[
+			delete from comment where c_seq=#{c_seq}
+		]]>
+	</delete>
 	
 </mapper>

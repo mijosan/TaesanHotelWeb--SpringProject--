@@ -9,7 +9,15 @@ public class CommentVO {
 	private String c_content;
 	private String c_writer;
 	private String c_regdate;
+	private int c_cnt;
 	
+	
+	public int getC_cnt() {
+		return c_cnt;
+	}
+	public void setC_cnt(int c_cnt) {
+		this.c_cnt = c_cnt;
+	}
 	public int getC_seq() {
 		return c_seq;
 	}

@@ -20,7 +20,7 @@ public interface BoardService {
 
 	//글 삭제
 	void deleteBoard(BoardVO vo);
-
+	
 	//글 상세 조회
 	BoardVO getBoard(BoardVO vo);
 	
@@ -29,9 +29,6 @@ public interface BoardService {
 
 	//글 목록 조회
 	List<BoardVO> getBoardList(int pagenum, int contentnum, BoardVO vo);
-	
-	//댓글 가져오기
-	List<CommentVO> getComment(int b_seq, int start, int end);
 	
 	//글 목록 갯수
 	int getBoardListCnt();
@@ -45,6 +42,10 @@ public interface BoardService {
 	//groupOrd + 1 쿼리
 	void updateOrd(BoardVO vo);
 
+	//댓글 
 	
+	//댓글 가져오기
+	List<CommentVO> getComment(int b_seq, int start, int end);
 	
+	void deleteComment(int c_seq);
 }

@@ -21,7 +21,15 @@ public class BoardVO {
 	private String fileName;
 	private String originalFileName;
 	private String fileSize;
+	private int c_cnt;
 	
+	public int getC_cnt() {
+		return c_cnt;
+	}
+	public void setC_cnt(int c_cnt) {
+		this.c_cnt = c_cnt;
+	}
+
 	//계층형 게시판
 	private int originNo; //원글번호
 	private int groupOrd; //원글에 대한 순서

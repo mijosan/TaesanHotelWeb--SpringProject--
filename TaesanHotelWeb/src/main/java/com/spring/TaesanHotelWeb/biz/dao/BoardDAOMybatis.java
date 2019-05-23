@@ -91,4 +91,9 @@ public class BoardDAOMybatis extends SqlSessionDaoSupport{
 		getSqlSession().update("BoardDAO.insertComment",vo);
 	}
 	
+	public void deleteComment(int c_seq) {
+		System.out.println("===> Mybatis로 deleteComment() 기능 처리");
+		getSqlSession().delete("BoardDAO.deleteComment",c_seq);
+	}
+	
 }

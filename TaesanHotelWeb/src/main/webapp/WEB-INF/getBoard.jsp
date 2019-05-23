@@ -29,7 +29,7 @@
 					${board.writer} ｜${board.regDate }
 				</td>
 				<td class="text-right">
-					조회 ${board.cnt} ｜ 댓글 ${cCnt}
+					조회 ${board.cnt} ｜ 댓글 <span class="c_cnt"></span>
 				</td>
 			</tr>
 			<tr>
@@ -61,7 +61,7 @@
 			<!--댓글 작성-->
 			<tr>
 				<td colspan="2">
-					<strong>Comments</strong><span id="cCnt"> ${cCnt}</span>
+					<strong>Comments</strong>&nbsp;<span class="c_cnt"></span>
 				</td>
 			</tr>
 			<c:if test="${sessionScope.user !=null }">
@@ -101,24 +101,50 @@
 			comment();
 			listReply();
 		});
+		
+	});
+	
+	//댓글 삭제
+	$(document).on('click', "#deleteComment", function(){
+		if(confirm("정말 삭제 하시겠습니까 ?") == true){
+			var c_seq = $(this).attr("alt");
+			var param = {"c_seq":c_seq};
+			$.ajax({
+	        	type : 'post',
+	        	url : 'deleteComment.do',
+	        	data: JSON.stringify(param),//JSON 문자열 형식으로 바꿈
+	        	contentType : "application/json",
+	        	dataType : "json",
+	        	 success : function(result){
+	        		if(result == "success"){
+	        		 	alert("댓글이 삭제 되었습니다.");
+	        		 	listReply();
+	        		}else{
+	        			alert("댓글이 삭제되지 않았습니다.");
+	        		}
+	        	},
+	        	error : function(request,status,error){
+	        		alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+	        		alert("댓글이 삭제되지 않았습니다");
+	        	}
+	        	
+	        });
+	    }
+	    else{
+	        return ;
+	    }
+	});
+	
+	//댓글 수정
+	$(document).on('click', "#updateComment", function(){
+		if(confirm("정말 수정 하시겠습니까 ?") == true){
+	        
+	    }
+	    else{
+	        return ;
+	    }
 	});
 		
-	function goForm(){ //수정 버튼
-		var insertBoardFrm = document.getElementById('insertBoardFrm');
-		insertBoardFrm.submit();
-	}
-	function goForm2(){ //답글 버튼(action을 다르게하기 위해 사용)
-		var responseWrite = document.getElementById('insertBoardFrm');
-		responseWrite.action = "writeCheck.do";
-		responseWrite.submit();
-	}
-    $(function(){
-        var responseMessage = "<c:out value="${message}" />";
-        if(responseMessage != ""){
-            alert(responseMessage)
-        }
-    }) 
-    
  /*
  * 댓글 등록하기(Ajax)
  */
@@ -150,6 +176,7 @@ function listReply(){
 	    contentType : "application/json",
 	    dataType: "json", // 서버에서 리턴해주는 데이터 유형
 	    success : function(result){
+	    	$(".c_cnt").html(result[0].c_cnt);
 	        var output="<table class='table table-hover'>";
 	        for(var i in result){
 	        	console.log(result);
@@ -160,7 +187,8 @@ function listReply(){
 	        	
 	        	output += "<tr>";
 	        	output += "<td class='col-md-2'>"+"<mark>"+result[i].c_writer+"</mark>";
-	        	output += "<td class='col-md-10'>"+comment+"<br><small>"+result[i].c_regdate+"</small></td>";
+	        	output += "<td class='col-md-9'>"+comment+"<br><small>"+result[i].c_regdate+"</small><img src='./resources/images/replyIcon.png'></td>";
+	        	output += "<td class='col-md-3'><img src='./resources/images/pen.png' id='updateComment'>&nbsp;<img src='./resources/images/trash.png' id='deleteComment' alt='"+result[i].c_seq+"'></td>";
 	        	output += "</tr>";	
 	        }
 	        output +="</table>";
@@ -171,7 +199,22 @@ function listReply(){
 	    }
 	});
 } 
-    
+
+function goForm(){ //수정 버튼
+	var insertBoardFrm = document.getElementById('insertBoardFrm');
+	insertBoardFrm.submit();
+}
+function goForm2(){ //답글 버튼(action을 다르게하기 위해 사용)
+	var responseWrite = document.getElementById('insertBoardFrm');
+	responseWrite.action = "writeCheck.do";
+	responseWrite.submit();
+}
+$(function(){
+    var responseMessage = "<c:out value="${message}" />";
+    if(responseMessage != ""){
+        alert(responseMessage)
+    }
+}) 
 </script>
 
 <%@include file="footer.jsp" %>

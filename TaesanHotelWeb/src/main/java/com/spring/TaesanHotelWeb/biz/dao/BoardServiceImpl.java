@@ -73,4 +73,10 @@ public class BoardServiceImpl implements BoardService{
 		boardDAO.insertComment(vo);
 		
 	}
+	
+	@Override
+	public void deleteComment(int c_seq) {
+		boardDAO.deleteComment(c_seq);
+		
+	}
 }
