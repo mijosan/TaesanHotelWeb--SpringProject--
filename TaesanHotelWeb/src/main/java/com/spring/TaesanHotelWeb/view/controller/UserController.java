@@ -76,9 +76,9 @@ public class UserController {
 	@RequestMapping(value="/register.do")
 	public ModelAndView register(UserVO vo, ModelAndView mav) throws Exception {
 		System.out.println("회원가입 처리");
-		
+
 		userService.register(vo);
-		mav.setViewName("loginForm.jsp");
+		mav.setViewName("redirect:loginForm.jsp");
 		return mav;
 	}
 

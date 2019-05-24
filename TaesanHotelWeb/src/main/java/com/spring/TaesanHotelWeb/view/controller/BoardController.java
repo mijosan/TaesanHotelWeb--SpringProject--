@@ -77,10 +77,20 @@ public class BoardController implements ApplicationContextAware {
 	//댓글 삭제
 	@ResponseBody
 	@RequestMapping("deleteComment.do")
-	public void deleteComment(@RequestBody Map<String, Object> c_seq,HttpServletResponse response) throws JsonProcessingException, IOException {
+	public void deleteComment(@RequestBody Map<String, Object> json,HttpServletResponse response, HttpSession session) throws JsonProcessingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();//Jackson 라이브러리의 ObjectMapper를 사용하여 객체를 Json 형식의 문자열로 만든다.
-		boardService.deleteComment(Integer.valueOf((String) (c_seq.get("c_seq"))));
-		response.getWriter().print(mapper.writeValueAsString("success"));
+		
+		UserVO vo = (UserVO)session.getAttribute("user");
+		if(vo != null) {
+			if(vo.getId().equals((String)json.get("c_writer"))) {
+				boardService.deleteComment(Integer.valueOf((String) (json.get("c_seq"))));
+				response.getWriter().print(mapper.writeValueAsString("success"));
+			}else {
+				response.getWriter().print(mapper.writeValueAsString("fail2"));
+			}
+		}else {
+			response.getWriter().print(mapper.writeValueAsString("fail1"));
+		}
 	}
 	//댓글 수정
 	//댓글 답변

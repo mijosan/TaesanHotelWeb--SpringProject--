@@ -108,7 +108,9 @@
 	$(document).on('click', "#deleteComment", function(){
 		if(confirm("정말 삭제 하시겠습니까 ?") == true){
 			var c_seq = $(this).attr("alt");
-			var param = {"c_seq":c_seq};
+			var c_writer = $(this).attr("alt").split(':');
+
+			var param = {"c_seq":c_seq,"c_writer":c_writer[1]};
 			$.ajax({
 	        	type : 'post',
 	        	url : 'deleteComment.do',
@@ -119,8 +121,11 @@
 	        		if(result == "success"){
 	        		 	alert("댓글이 삭제 되었습니다.");
 	        		 	listReply();
+	        		}else if(result == "fail1"){
+	        			alert("로그인이 필요합니다.");
+	        			$(location).attr("href","loginForm.jsp");
 	        		}else{
-	        			alert("댓글이 삭제되지 않았습니다.");
+	        			alert("삭제할 권한이 없습니다.");
 	        		}
 	        	},
 	        	error : function(request,status,error){
@@ -188,7 +193,7 @@ function listReply(){
 	        	output += "<tr>";
 	        	output += "<td class='col-md-2'>"+"<mark>"+result[i].c_writer+"</mark>";
 	        	output += "<td class='col-md-9'>"+comment+"<br><small>"+result[i].c_regdate+"</small><img src='./resources/images/replyIcon.png'></td>";
-	        	output += "<td class='col-md-3'><img src='./resources/images/pen.png' id='updateComment'>&nbsp;<img src='./resources/images/trash.png' id='deleteComment' alt='"+result[i].c_seq+"'></td>";
+	        	output += "<td class='col-md-3'><img src='./resources/images/pen.png' id='updateComment'>&nbsp;<img src='./resources/images/trash.png' id='deleteComment' alt='"+result[i].c_seq+":"+result[i].c_writer+"'></td>";
 	        	output += "</tr>";	
 	        }
 	        output +="</table>";

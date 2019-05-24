@@ -22,7 +22,7 @@
 	<insert id="register" parameterType="com.spring.TaesanHotelWeb.biz.vo.UserVO">
 		<![CDATA[
 			insert into tbluser(id, password, email) 
-			values(#{id}, #{email}, #{password});
+			values(#{id}, #{password}, #{email});
 		]]>
 	</insert>
 </mapper>
