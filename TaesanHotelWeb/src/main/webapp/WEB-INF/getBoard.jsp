@@ -107,10 +107,9 @@
 	//댓글 삭제
 	$(document).on('click', "#deleteComment", function(){
 		if(confirm("정말 삭제 하시겠습니까 ?") == true){
-			var c_seq = $(this).attr("alt");
 			var c_writer = $(this).attr("alt").split(':');
 
-			var param = {"c_seq":c_seq,"c_writer":c_writer[1]};
+			var param = {"c_seq":c_writer[0],"c_writer":c_writer[1]};
 			$.ajax({
 	        	type : 'post',
 	        	url : 'deleteComment.do',
@@ -141,14 +140,22 @@
 	});
 	
 	//댓글 수정
-	$(document).on('click', "#updateComment", function(){
+	function updateComment(param){
 		if(confirm("정말 수정 하시겠습니까 ?") == true){
-	        
+		var c_seq = param.split(':')[0];
+		var comment = param.split(':')[1]; 
+
+		var	output  = "<tr>"; //수정폼으로 만들때 위치를 찾을려고 ID등록했음
+        	output += "<td class='col-md-2'>"+"<mark>"+"admin"+"</mark></td>";
+        	output += "<td class='col-md-9'> <textarea></textarea></td>";
+        	output += "</tr>";
+		    $("#"+c_seq).replaceWith(output);
 	    }
 	    else{
 	        return ;
 	    }
-	});
+	}
+	
 		
  /*
  * 댓글 등록하기(Ajax)
@@ -184,16 +191,17 @@ function listReply(){
 	    	$(".c_cnt").html(result[0].c_cnt);
 	        var output="<table class='table table-hover'>";
 	        for(var i in result){
-	        	console.log(result);
 	        	//줄바꿈 처리 + 띄어쓰기
 	        	var comment = result[i].c_content;
 	        	comment = comment.replace(/\n/gi,"<br>");
 	        	comment = comment.replace(/  /gi,"&nbsp;&nbsp;");
 	        	
-	        	output += "<tr>";
+	        	var param = result[i].c_seq+":"+comment;
+	        	
+	        	output += "<tr id='"+result[i].c_seq+"'>"; //수정폼으로 만들때 위치를 찾을려고 ID등록했음
 	        	output += "<td class='col-md-2'>"+"<mark>"+result[i].c_writer+"</mark>";
 	        	output += "<td class='col-md-9'>"+comment+"<br><small>"+result[i].c_regdate+"</small><img src='./resources/images/replyIcon.png'></td>";
-	        	output += "<td class='col-md-3'><img src='./resources/images/pen.png' id='updateComment'>&nbsp;<img src='./resources/images/trash.png' id='deleteComment' alt='"+result[i].c_seq+":"+result[i].c_writer+"'></td>";
+	        	output += "<td class='col-md-3'><a onclick='updateComment(\""+param+"\")'><img src='./resources/images/pen.png' id='updateComment'></a>&nbsp;<img src='./resources/images/trash.png' id='deleteComment' alt='"+result[i].c_seq+":"+result[i].c_writer+"'></td>";
 	        	output += "</tr>";	
 	        }
 	        output +="</table>";
@@ -219,7 +227,7 @@ $(function(){
     if(responseMessage != ""){
         alert(responseMessage)
     }
-}) 
+})
 </script>
 
 <%@include file="footer.jsp" %>
