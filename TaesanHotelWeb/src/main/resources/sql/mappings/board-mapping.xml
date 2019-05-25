@@ -101,4 +101,10 @@
 		]]>
 	</delete>
 	
+	<!--댓글 수정 -->
+	<update id="updateComment" parameterType="com.spring.TaesanHotelWeb.biz.vo.CommentVO">
+		<![CDATA[
+			update comment set c_content=#{c_content} where c_seq=#{c_seq}
+		]]>
+	</update>
 </mapper>

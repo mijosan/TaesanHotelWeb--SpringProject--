@@ -93,6 +93,23 @@ public class BoardController implements ApplicationContextAware {
 		}
 	}
 	//댓글 수정
+	@ResponseBody
+	@RequestMapping("updateComment.do")
+	public void updateComment(@RequestBody CommentVO vo,HttpServletResponse response, HttpSession session) throws JsonProcessingException, IOException {
+		ObjectMapper mapper = new ObjectMapper();//Jackson 라이브러리의 ObjectMapper를 사용하여 객체를 Json 형식의 문자열로 만든다.
+		
+		UserVO userVO = (UserVO)session.getAttribute("user");
+		if(userVO != null) {
+			if(userVO.getId().equals(vo.getC_writer())) {
+				boardService.updateComment(vo);
+				response.getWriter().print(mapper.writeValueAsString("success"));
+			}else {
+				response.getWriter().print(mapper.writeValueAsString("fail2"));
+			}
+		}else {
+			response.getWriter().print(mapper.writeValueAsString("fail1"));
+		}
+	}
 	//댓글 답변
 	//댓글 페이징
 	

@@ -144,16 +144,52 @@
 		if(confirm("정말 수정 하시겠습니까 ?") == true){
 		var c_seq = param.split(':')[0];
 		var comment = param.split(':')[1]; 
+		var c_writer = param.split(':')[2];
+		var param2 = c_seq +":"+ c_writer;
+		
+		//띄어쓰기, 줄바꿈 변환 (태그->적용)
+		comment = comment.replace(/<br>/gi,"\r\n");
+	    comment = comment.replace(/\u0020/gi," ");
 
 		var	output  = "<tr>"; //수정폼으로 만들때 위치를 찾을려고 ID등록했음
-        	output += "<td class='col-md-2'>"+"<mark>"+"admin"+"</mark></td>";
-        	output += "<td class='col-md-9'> <textarea></textarea></td>";
+        	output += "<td class='col-md-2'>"+"<mark>"+c_writer+"</mark></td>";
+        	output += "<td class='col-md-9'> <textarea id='cTextarea' style='width:100%'>"+comment+"</textarea></td>";
+        	output += "<td class='col-md-2'><a onclick='updateComment2(\""+param2+"\")'>수정</a><br><a onClick='listReply()'>취소</a></td>"
         	output += "</tr>";
 		    $("#"+c_seq).replaceWith(output);
 	    }
 	    else{
 	        return ;
 	    }
+	}
+	function updateComment2(param){
+		var c_seq = param.split(':')[0]; //수정할 댓글번호
+		var c_writer = param.split(':')[1];
+		var c_content = $("#cTextarea").val(); //수정할 댓글내용
+		var param2 = {"c_seq":c_seq,"c_content":c_content,"c_writer":c_writer};
+		
+		$.ajax({
+			type : 'post',
+			url : "updateComment.do",
+			contentType : "application/json",
+			data : JSON.stringify(param2),
+			dataType : "json",
+			success : function(result){
+        		if(result == "success"){
+        		 	alert("댓글이 수정 되었습니다.");
+        		 	listReply();
+        		}else if(result == "fail1"){
+        			alert("로그인이 필요합니다.");
+        			$(location).attr("href","loginForm.jsp");
+        		}else{
+        			alert("수정할 권한이 없습니다.");
+        		}
+        	},
+        	error : function(request,status,error){
+        		alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+        		alert("댓글이 수정 되지 않았습니다");
+        	}
+		});
 	}
 	
 		
@@ -181,6 +217,7 @@ function comment(){
     });
 }
 
+//댓글 불러오기
 function listReply(){
 	$.ajax({
 		type:'get',
@@ -196,7 +233,7 @@ function listReply(){
 	        	comment = comment.replace(/\n/gi,"<br>");
 	        	comment = comment.replace(/  /gi,"&nbsp;&nbsp;");
 	        	
-	        	var param = result[i].c_seq+":"+comment;
+	        	var param = result[i].c_seq+":"+comment+":"+result[i].c_writer;
 	        	
 	        	output += "<tr id='"+result[i].c_seq+"'>"; //수정폼으로 만들때 위치를 찾을려고 ID등록했음
 	        	output += "<td class='col-md-2'>"+"<mark>"+result[i].c_writer+"</mark>";

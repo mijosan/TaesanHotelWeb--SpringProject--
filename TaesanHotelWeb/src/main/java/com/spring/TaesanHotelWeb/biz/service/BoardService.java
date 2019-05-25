@@ -42,10 +42,14 @@ public interface BoardService {
 	//groupOrd + 1 Äõ¸®
 	void updateOrd(BoardVO vo);
 
-	//´ñ±Û 
+	//////////////////////////////////////´ñ±Û//////////////////////////////////////////// 
 	
 	//´ñ±Û °¡Á®¿À±â
 	List<CommentVO> getComment(int b_seq, int start, int end);
 	
+	//´ñ±Û »èÁ¦
 	void deleteComment(int c_seq);
+	
+	//´ñ±Û ¼öÁ¤
+	void updateComment(CommentVO vo);
 }

@@ -79,4 +79,8 @@ public class BoardServiceImpl implements BoardService{
 		boardDAO.deleteComment(c_seq);
 		
 	}
+	@Override
+	public void updateComment(CommentVO vo) {
+		boardDAO.updateComment(vo);
+	}
 }
