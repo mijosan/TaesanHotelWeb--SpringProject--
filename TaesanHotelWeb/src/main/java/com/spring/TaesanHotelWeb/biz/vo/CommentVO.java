@@ -10,8 +10,37 @@ public class CommentVO {
 	private String c_writer;
 	private String c_regdate;
 	private int c_cnt;
+	private String cm; //댓글, 대댓글 구분자
 	
+	public String getCm() {
+		return cm;
+	}
+	public void setCm(String cm) {
+		this.cm = cm;
+	}
+	//계층형 게시판
+	private int originNo; //원글번호
+	private int groupOrd; //원글에 대한 순서
+	private int groupLayer; //답글 계층
 	
+	public int getOriginNo() {
+		return originNo;
+	}
+	public void setOriginNo(int originNo) {
+		this.originNo = originNo;
+	}
+	public int getGroupOrd() {
+		return groupOrd;
+	}
+	public void setGroupOrd(int groupOrd) {
+		this.groupOrd = groupOrd;
+	}
+	public int getGroupLayer() {
+		return groupLayer;
+	}
+	public void setGroupLayer(int groupLayer) {
+		this.groupLayer = groupLayer;
+	}
 	public int getC_cnt() {
 		return c_cnt;
 	}

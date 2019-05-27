@@ -68,7 +68,7 @@
 			<tr>
 				<td style="width: 100%" colspan="2">
                     <textarea style="width: 100%" rows="3" cols="30" id="commentArea" name="commentArea" placeholder="댓글을 입력하세요"></textarea>
-                	<input type="button" class="btn pull-right btn-success" value="등록" id="commentBtn">
+                	<input type="button" class="btn pull-right btn-success" value="등록" id="commentBtn" onclick="comment('cm1')">
                 </td>
 			</tr>
 			</c:if>
@@ -94,16 +94,32 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<script src="./resources/js/bootstrap.js"></script>
 	<script>
+	var userID;
 	$(document).ready(function(){
 		listReply();
+		getSession(); //현재 접속한 로그인 세션정보를 가져옴
 		//댓글 쓰기
-		$("#commentBtn").click(function(){
+		/* $("#commentBtn").click(function(){
 			comment();
 			listReply();
-		});
-		
+		}); */
 	});
-	
+	function getSession(){
+		$.ajax({
+			url : "getSession.do",
+			contentType : "json",
+			success : function(result){
+				if(result != null){
+					userID = result.id;
+				}else{
+					alert("세션 을 불러오지 못했습니다.");
+				}
+			},
+			error : function(request,status,error){
+        		alert("세션 을 불러오지 못했습니다.[error]");
+        	}
+		})
+	}
 	//댓글 삭제
 	$(document).on('click', "#deleteComment", function(){
 		if(confirm("정말 삭제 하시겠습니까 ?") == true){
@@ -138,7 +154,63 @@
 	        return ;
 	    }
 	});
+	//대댓글
+	function replyComment(replyParam){
+		
+		var replyParam = replyParam + ":cm2";
+
+		if(userID != null){
+			var output  = "<tr>";
+				output += 	"<td>&nbsp;&nbsp;&nbsp;└─<mark>"+userID+"</mark></td>";
+				output += 	"<td style='width: 100%' colspan='2'>"
+				output += 		"<textarea style='width: 100%' rows='3' cols='30' id='replyComment2' placeholder='댓글을 입력하세요'></textarea>"
+				output += 		"<input type='button' class='btn pull-right btn-success' value='등록' onclick='comment(\""+replyParam+"\")'>"
+				output +=	"</td>"
+				output += "</tr>";
 	
+			$("#"+replyParam.split(':')[0]).after(output);
+		}else{
+			alert("로그인이 필요합니다.");
+			$(location).attr("href","loginForm.jsp");
+		}
+	}
+	 /*
+	 * 댓글 등록하기(Ajax)
+	 */
+	function comment(replyParam){
+	    var c_content;
+	    var param;
+	    var b_seq="${board.seq}";
+
+	    if(replyParam != "cm1"){ //대댓글
+	    	c_content = $("#replyComment2").val();
+	    	var originNo = replyParam.split(':')[3];
+		    var groupOrd = replyParam.split(':')[1];
+		    var groupLayer = replyParam.split(':')[2];
+		    var cm = replyParam.split(':')[4];
+		    param = {"c_content": c_content,"b_seq":b_seq,"originNo":originNo,"groupOrd":groupOrd,"groupLayer":groupLayer,"cm":cm};//json 형식
+	    }else{ //댓글
+	    	c_content = $("#commentArea").val();
+	    	param = {"c_content": c_content,"b_seq":b_seq,"cm":replyParam};//json 형식
+	    }
+
+	    $.ajax({
+	        type:'POST',
+	        url : "commentInsert.do",
+	        data: JSON.stringify(param),//JSON 문자열 형식으로 바꿈
+	        contentType : "application/json", //서버에 데이터를 보낼때
+	        success : function(data){
+	           alert("댓글이 등록 되었습니다.");
+	           $("#commentArea").val(""); //댓글 등록후 초기화 처리
+	           listReply();
+	           
+	        },
+	        error:function(request,status,error){
+	        	alert("댓글이 등록되지 않았습니다.");
+	       }
+	        
+	    });
+	}
 	//댓글 수정
 	function updateComment(param){
 		if(confirm("정말 수정 하시겠습니까 ?") == true){
@@ -167,7 +239,7 @@
 		var c_writer = param.split(':')[1];
 		var c_content = $("#cTextarea").val(); //수정할 댓글내용
 		var param2 = {"c_seq":c_seq,"c_content":c_content,"c_writer":c_writer};
-		
+
 		$.ajax({
 			type : 'post',
 			url : "updateComment.do",
@@ -192,30 +264,6 @@
 		});
 	}
 	
-		
- /*
- * 댓글 등록하기(Ajax)
- */
-function comment(){
-    var c_content=$("#commentArea").val();
-    var b_seq="${board.seq}";
-    var param = {"c_content": c_content,"b_seq":b_seq};//json 형식
-
-    $.ajax({
-        type:'POST',
-        url : "commentInsert.do",
-        data: JSON.stringify(param),//JSON 문자열 형식으로 바꿈
-        contentType : "application/json", //서버에 데이터를 보낼때
-        success : function(data){
-           alert("댓글이 등록 되었습니다.");
-           listReply();
-        },
-        error:function(request,status,error){
-        	alert("댓글이 등록되지 않았습니다.");
-       }
-        
-    });
-}
 
 //댓글 불러오기
 function listReply(){
@@ -234,10 +282,11 @@ function listReply(){
 	        	comment = comment.replace(/  /gi,"&nbsp;&nbsp;");
 	        	
 	        	var param = result[i].c_seq+":"+comment+":"+result[i].c_writer;
+	        	var replyParam = result[i].c_seq+":"+result[i].groupOrd+":"+result[i].groupLayer+":"+result[i].originNo;
 	        	
 	        	output += "<tr id='"+result[i].c_seq+"'>"; //수정폼으로 만들때 위치를 찾을려고 ID등록했음
 	        	output += "<td class='col-md-2'>"+"<mark>"+result[i].c_writer+"</mark>";
-	        	output += "<td class='col-md-9'>"+comment+"<br><small>"+result[i].c_regdate+"</small><img src='./resources/images/replyIcon.png'></td>";
+	        	output += "<td class='col-md-9'>"+comment+"<br><small>"+result[i].c_regdate+"</small><a onclick='replyComment(\""+replyParam+"\")'><img src='./resources/images/replyIcon.png'></a></td>";
 	        	output += "<td class='col-md-3'><a onclick='updateComment(\""+param+"\")'><img src='./resources/images/pen.png' id='updateComment'></a>&nbsp;<img src='./resources/images/trash.png' id='deleteComment' alt='"+result[i].c_seq+":"+result[i].c_writer+"'></td>";
 	        	output += "</tr>";	
 	        }

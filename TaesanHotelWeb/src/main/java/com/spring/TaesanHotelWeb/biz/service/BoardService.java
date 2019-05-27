@@ -12,9 +12,6 @@ public interface BoardService {
 	//±Û »ğÀÔ
 	void insertBoard(BoardVO vo);
 	
-	//´ñ±Û »ğÀÔ
-	void insertComment(CommentVO vo);
-	
 	//±Û ¼öÁ¤
 	void updateBoard(BoardVO vo);
 
@@ -52,4 +49,13 @@ public interface BoardService {
 	
 	//´ñ±Û ¼öÁ¤
 	void updateComment(CommentVO vo);
+	
+	//´ñ±Û »ğÀÔ
+	void insertComment(CommentVO vo);
+	
+	//´ñ±Û ÃÖ»óÀ§ ¹øÈ£ Á¶È¸
+	int getC_seq();
+	
+	//groupOrd + 1 Äõ¸®
+	void commentUpdateOrd(CommentVO vo);
 }

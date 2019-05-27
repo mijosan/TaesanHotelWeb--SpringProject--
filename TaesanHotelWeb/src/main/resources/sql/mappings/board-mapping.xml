@@ -33,12 +33,12 @@
 		SELECT *,(select count(*) from comment where b_seq = #{b_seq}) c_cnt
 		FROM COMMENT
 		WHERE B_SEQ = #{b_seq}
-		ORDER BY c_seq
+		ORDER BY originNo asc, groupOrd ASC
 	</select>
 	<insert id="insertComment" parameterType="com.spring.TaesanHotelWeb.biz.vo.CommentVO">
 	<![CDATA[
-		insert into comment(c_seq,b_seq,c_content,c_writer,c_regdate)
-		values((select ifnull(max(c_seq) + 1,1) from comment b),#{b_seq},#{c_content},#{c_writer},#{c_regdate})
+		insert into comment(c_seq,b_seq,c_content,c_writer,c_regdate,originNo,groupOrd,groupLayer)
+		values((select ifnull(max(c_seq) + 1,1) from comment b),#{b_seq},#{c_content},#{c_writer},#{c_regdate},#{originNo},#{groupOrd},#{groupLayer})
 	]]>
 	</insert>
 	
@@ -59,6 +59,12 @@
 		]]>
 	</select>
 	
+	<select id="getC_seq" resultType="int">
+		<![CDATA[
+			select ifnull(max(c_seq) + 1,1) from comment b
+		]]>
+	</select>
+	
 	<update id="updateCnt" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
 		<![CDATA[
 			update board set cnt=cnt+1 where seq=#{seq}
@@ -69,6 +75,13 @@
 	<update id="updateOrd" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
 		<![CDATA[
 			update board set groupOrd=groupOrd+1 where originNo=#{originNo} and #{groupOrd}<=groupOrd;
+		]]>
+	</update>
+	
+	<!--updateOrd2 댓글-->
+	<update id="commentUpdateOrd" parameterType="com.spring.TaesanHotelWeb.biz.vo.CommentVO">
+		<![CDATA[
+			update comment set groupOrd=groupOrd+1 where originNo=#{originNo} and #{groupOrd}<groupOrd;
 		]]>
 	</update>
 	

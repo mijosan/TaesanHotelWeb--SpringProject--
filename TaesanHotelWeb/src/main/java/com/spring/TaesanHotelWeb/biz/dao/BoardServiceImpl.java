@@ -83,4 +83,12 @@ public class BoardServiceImpl implements BoardService{
 	public void updateComment(CommentVO vo) {
 		boardDAO.updateComment(vo);
 	}
+	@Override
+	public int getC_seq() {
+		return boardDAO.getC_seq();
+	}
+	@Override
+	public void commentUpdateOrd(CommentVO vo) {
+		boardDAO.commentUpdateOrd(vo);
+	}
 }

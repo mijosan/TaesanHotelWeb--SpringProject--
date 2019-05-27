@@ -101,4 +101,13 @@ public class BoardDAOMybatis extends SqlSessionDaoSupport{
 		getSqlSession().update("BoardDAO.updateComment",vo);
 	}
 	
+	public int getC_seq() {
+		System.out.println("===> Mybatis로 getC_seq() 기능 처리");
+		return getSqlSession().selectOne("BoardDAO.getC_seq");
+	}
+	public void commentUpdateOrd(CommentVO vo) {
+		System.out.println("===> Mybatis로 commentUpdateOrd() 기능 처리");
+		getSqlSession().update("BoardDAO.commentUpdateOrd",vo);
+	}
+	
 }

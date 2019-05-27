@@ -54,7 +54,17 @@ public class BoardController implements ApplicationContextAware {
 	private WebApplicationContext context = null;
 	
 	String SAVE_PATH="C:/Spring/TaesanHotelWeb/TaesanHotelWeb/src/main/webapp/resources/files/";
+	//ººº« ∞°¡Æø¿±‚
+	@ResponseBody
+	@RequestMapping("getSession.do")
+	public UserVO getSession(HttpSession session, HttpServletResponse response) throws JsonProcessingException, IOException {
+		UserVO vo = (UserVO)session.getAttribute("user");
 
+		if(vo != null) {
+			return vo;
+		}
+		return null;
+	}
 	//¥Ò±€ ª¿‘
 	@ResponseBody
 	@RequestMapping(value = "/commentInsert.do", method = RequestMethod.POST)
@@ -65,6 +75,21 @@ public class BoardController implements ApplicationContextAware {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String c_regdate = sdf.format(date);
 		vo.setC_regdate(c_regdate);
+		if(vo.getCm().equals("cm1")) {//¥Ò±€ ¿œ∂ß
+			vo.setOriginNo(boardService.getC_seq());
+			vo.setGroupOrd(0);
+			vo.setGroupLayer(0);
+		}else if(vo.getCm().equals("cm2")) { //¥Î¥Ò±€ ¿œ∂ß
+			boardService.commentUpdateOrd(vo);
+			String re = "";
+  			for(int i=0;i<vo.getGroupLayer();i++) {
+  				re = re + "°°";
+  			}
+  			vo.setC_writer(re+"¶¶¶°"+userVO.getId());
+			vo.setGroupOrd(vo.getGroupOrd()+1);
+			vo.setGroupLayer(vo.getGroupLayer()+1);
+		}
+		
 		boardService.insertComment(vo);
 	}
 	
