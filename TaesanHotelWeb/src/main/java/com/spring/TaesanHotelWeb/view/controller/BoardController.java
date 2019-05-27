@@ -81,11 +81,10 @@ public class BoardController implements ApplicationContextAware {
 			vo.setGroupLayer(0);
 		}else if(vo.getCm().equals("cm2")) { //¥Î¥Ò±€ ¿œ∂ß
 			boardService.commentUpdateOrd(vo);
-			String re = "";
-  			for(int i=0;i<vo.getGroupLayer();i++) {
-  				re = re + "°°";
-  			}
-  			vo.setC_writer(re+"¶¶¶°"+userVO.getId());
+			/*
+			 * String re = ""; for(int i=0;i<vo.getGroupLayer();i++) { re = re + "°°"; }
+			 * vo.setC_writer(re+"¶¶¶°"+userVO.getId());
+			 */
 			vo.setGroupOrd(vo.getGroupOrd()+1);
 			vo.setGroupLayer(vo.getGroupLayer()+1);
 		}

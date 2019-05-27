@@ -95,6 +95,7 @@
 	<script src="./resources/js/bootstrap.js"></script>
 	<script>
 	var userID;
+	var flag;
 	$(document).ready(function(){
 		listReply();
 		getSession(); //현재 접속한 로그인 세션정보를 가져옴
@@ -158,7 +159,7 @@
 	function replyComment(replyParam){
 		
 		var replyParam = replyParam + ":cm2";
-
+		
 		if(userID != null){
 			var output  = "<tr>";
 				output += 	"<td>&nbsp;&nbsp;&nbsp;└─<mark>"+userID+"</mark></td>";
@@ -167,12 +168,14 @@
 				output += 		"<input type='button' class='btn pull-right btn-success' value='등록' onclick='comment(\""+replyParam+"\")'>"
 				output +=	"</td>"
 				output += "</tr>";
-	
+				
 			$("#"+replyParam.split(':')[0]).after(output);
+		
 		}else{
 			alert("로그인이 필요합니다.");
 			$(location).attr("href","loginForm.jsp");
 		}
+		
 	}
 	 /*
 	 * 댓글 등록하기(Ajax)
@@ -276,6 +279,12 @@ function listReply(){
 	    	$(".c_cnt").html(result[0].c_cnt);
 	        var output="<table class='table table-hover'>";
 	        for(var i in result){
+	        	//댓글 깊이 공백 만들기
+	        	var re = "";
+	  			for(var j=0;j<result[i].groupLayer;j++) {
+	  				re = re + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+	  			}
+				
 	        	//줄바꿈 처리 + 띄어쓰기
 	        	var comment = result[i].c_content;
 	        	comment = comment.replace(/\n/gi,"<br>");
@@ -285,7 +294,11 @@ function listReply(){
 	        	var replyParam = result[i].c_seq+":"+result[i].groupOrd+":"+result[i].groupLayer+":"+result[i].originNo;
 	        	
 	        	output += "<tr id='"+result[i].c_seq+"'>"; //수정폼으로 만들때 위치를 찾을려고 ID등록했음
-	        	output += "<td class='col-md-2'>"+"<mark>"+result[i].c_writer+"</mark>";
+	        	if(re == ""){
+	        		output += "<td class='col-md-2'>"+"<mark>"+result[i].c_writer+"</mark>";
+	        	}else{
+	        		output += "<td class='col-md-2'>"+"<mark>"+re+"└─"+result[i].c_writer+"</mark>";
+	        	}
 	        	output += "<td class='col-md-9'>"+comment+"<br><small>"+result[i].c_regdate+"</small><a onclick='replyComment(\""+replyParam+"\")'><img src='./resources/images/replyIcon.png'></a></td>";
 	        	output += "<td class='col-md-3'><a onclick='updateComment(\""+param+"\")'><img src='./resources/images/pen.png' id='updateComment'></a>&nbsp;<img src='./resources/images/trash.png' id='deleteComment' alt='"+result[i].c_seq+":"+result[i].c_writer+"'></td>";
 	        	output += "</tr>";	
