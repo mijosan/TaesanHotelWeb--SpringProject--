@@ -13,7 +13,7 @@
 <body>
 	<%@include file="nav.jsp" %>
 	<!--게시판 테이블-->
-<div class="container">
+<div class="container" >
 <h1>고객센터</h1><br>
 	<table class="table table table-striped table-bordered table-hover">
 		<tr>
