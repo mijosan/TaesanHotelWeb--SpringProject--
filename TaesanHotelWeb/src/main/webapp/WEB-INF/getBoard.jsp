@@ -3,7 +3,7 @@
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
-<link rel="stylesheet" href="./resources/css/bootstrap.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <html>
 <head>
 <meta charset="EUC-KR">
@@ -93,6 +93,8 @@
 	<input type="hidden" name="groupLayer" value="${board.groupLayer+1}">
 	<input type="hidden" name="ck" value="responseWrite">
 	
+	<input type="hidden" id="boardId" value="${board.writer}">
+	
 </form>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<script src="./resources/js/bootstrap.js"></script>
@@ -100,6 +102,7 @@
 
 	var userID;
 	var flag;
+
 	$(document).ready(function(){
 		listReply();
 		getSession(); //현재 접속한 로그인 세션정보를 가져옴
@@ -298,7 +301,12 @@ function listReply(){
 	        	var param = result[i].c_seq+":"+comment+":"+result[i].c_writer;
 	        	var replyParam = result[i].c_seq+":"+result[i].groupOrd+":"+result[i].groupLayer+":"+result[i].originNo;
 	        	
-	        	output += "<tr id='"+result[i].c_seq+"'>"; //수정폼으로 만들때 위치를 찾을려고 ID등록했음
+	        	if($("#boardId").val() == result[i].c_writer){//작성자의 댓글에 색을넣음
+	        		output += "<tr id='"+result[i].c_seq+"' class='success'>"; //수정폼으로 만들때 위치를 찾을려고 ID등록했음
+	        	}else{
+	        		output += "<tr id='"+result[i].c_seq+"'>"; //수정폼으로 만들때 위치를 찾을려고 ID등록했음
+	        	}
+	  
 	        	if(re == ""){
 	        		output += "<td class='col-md-2'>"+"<mark>"+result[i].c_writer+"</mark>";
 	        	}else{

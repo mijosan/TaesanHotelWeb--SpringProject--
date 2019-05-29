@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
-<link rel="stylesheet" href="./resources/css/bootstrap.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <html>
 <head>
 <meta charset="EUC-KR">
@@ -17,8 +17,8 @@
 <h1>고객센터</h1><br>
 	<table class="table table table-striped table-bordered table-hover">
 		<tr>
-			<th style="width:20%">번호</th>
-			<th style="width:20%">제목</th>
+			<th style="width:5%">번호</th>
+			<th style="width:60%">제목</th>
 			<th>작성자</th>
 			<th>날짜</th>
 			<th>조회수</th>

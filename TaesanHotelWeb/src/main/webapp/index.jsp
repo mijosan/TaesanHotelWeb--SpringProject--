@@ -426,7 +426,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 					
 					</div>
 					<div class="media-body">
-						<h2 class="media-heading"><a href="lecture.jsp?lectureName=Android">&nbsp;&nbsp;&nbsp;고객센터</a>&nbsp;<span class="label label-info">HELP</span> </h4>
+						<h2 class="media-heading"><a href="getBoardList.do">&nbsp;&nbsp;&nbsp;고객센터</a>&nbsp;<span class="label label-info">HELP</span> </h4>
 						<br><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TS호텔의 관리자에게 문의하기</h4>
 					</div>
 				</div>
