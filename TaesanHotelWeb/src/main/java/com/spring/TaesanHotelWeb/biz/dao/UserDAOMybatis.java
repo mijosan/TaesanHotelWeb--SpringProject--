@@ -30,4 +30,11 @@ public class UserDAOMybatis extends SqlSessionDaoSupport{
 		System.out.println("===> Mybatis로 register() 기능 처리");
 		getSqlSession().insert("UserDAO.register", vo);
 	}
+	
+	//회원정보 변경
+	public void updateMember(UserVO vo) {
+		System.out.println("===> Mybatis로 updateMember() 기능 처리");
+		getSqlSession().update("UserDAO.updateMember", vo);
+	}
+	
 }

@@ -24,4 +24,8 @@ public class UserVO {
 		this.email = email;
 	}
 	
+	@Override
+	public String toString() {
+		return "UserVO [id=" + id + ", password=" + password + ", email=" + email;
+	}
 }

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.TaesanHotelWeb.biz.service.UserService;
 import com.spring.TaesanHotelWeb.biz.vo.UserVO;
@@ -70,6 +69,19 @@ public class UserController {
 		map.put("cnt", count);
 		
 		return map;
+	}
+	
+	@RequestMapping("member.do")
+	public ModelAndView member(ModelAndView mav) {
+		mav.setViewName("member");
+		return mav;
+	}
+	//회원정보 변경
+	@RequestMapping("updateMember.do")
+	@ResponseBody
+	public void updateMember(@RequestBody UserVO vo) {
+		System.out.println("회원정보 변경");
+		userService.updateMember(vo);
 	}
 	
 	//회원가입

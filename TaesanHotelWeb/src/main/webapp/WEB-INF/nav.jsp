@@ -81,7 +81,7 @@
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
 								aria-haspopup="true" aria-expanded="false">${user.id} 님<span class="caret"></span></a>
 								<ul class="dropdown-menu">
-								<li><a href="loginForm.jsp">회원정보</a></li>
+								<li><a href="member.do">회원정보</a></li>
 								<li><a href="registerForm.jsp">객실예약 현황</a></li>
 								<li role="presentation" class="divider"></li>
 								<li><a href="logout.do">로그아웃</a></li>

@@ -25,4 +25,11 @@
 			values(#{id}, #{password}, #{email});
 		]]>
 	</insert>
+	
+	<!--회원정보 수정-->
+	<update id="updateMember" parameterType="com.spring.TaesanHotelWeb.biz.vo.UserVO">
+		<![CDATA[
+			update tbluser set email=#{email}, password=#{password} where id=#{id};
+		]]>
+	</update>
 </mapper>

@@ -30,4 +30,10 @@ public class UserServiceImpl implements UserService{
 	public void register(UserVO vo) {
 		userDAO.register(vo);
 	}
+	
+	//회원정보 변경
+	@Override
+	public void updateMember(UserVO vo) {
+		userDAO.updateMember(vo);	
+	}
 }

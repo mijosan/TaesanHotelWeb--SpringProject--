@@ -14,7 +14,8 @@
 	<%@include file="nav.jsp" %>
 	<!--게시판 테이블-->
 <div class="container">
-	<table class="table table-hover">
+<h1>고객센터</h1><br>
+	<table class="table table table-striped table-bordered table-hover">
 		<tr>
 			<th style="width:20%">번호</th>
 			<th style="width:20%">제목</th>
@@ -96,7 +97,6 @@
 	</form>
 </div>
 
-<br><br><br>
 	<!--게시판 테이블-->
 	<%@include file="footer.jsp" %>
 	

@@ -13,5 +13,8 @@ public interface UserService {
 		
 		//회원가입
 		void register(UserVO vo);
+		
+		//회원정보 변경
+		void updateMember(UserVO vo);
 
 }

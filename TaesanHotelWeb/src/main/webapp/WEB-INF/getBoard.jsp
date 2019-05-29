@@ -18,7 +18,7 @@
 <%@include file="nav.jsp" %>
 <form id="insertBoardFrm" action="updateBoard.do" method="post" enctype="multipart/form-data"> <!--update.do 에서 MultipartFile로 받을려면 이렇게 설정해줘야한다.-->
 	<div class="container">
-		<table class="table table-hover">
+		<table class="table table table-striped table-bordered table-hover">
 			<tr>
 				<th colspan="2">
 					${board.title}
@@ -42,7 +42,9 @@
 					첨부파일
 				</td>
 				<td class="text-right">
-					<a href="download.do?originalFileName=${board.originalFileName}">${board.fileName}(<span class="co">${board.fileSize}</span>)</a>
+					<c:if test="${board.originalFileName !=null}">
+						<a href="download.do?originalFileName=${board.originalFileName}">${board.fileName}(<span class="co">${board.fileSize}</span>)</a>
+					</c:if>
 				</td>
 			</tr>
 			<tr>
@@ -73,11 +75,12 @@
 			</tr>
 			</c:if>
 			
-			<!--댓글 창-->
+		<!--댓글 창-->
 		</table>
-		<div id="commentList">
-		
+		<div id="commentList" style="margin-bottom: 390px;">
+
 		</div>
+
 	</div>
 	
 	<!--수정버튼을 눌렀을때 가져가야 할 값들 글번호랑 작성자(수정할려는 ID와 글쓴ID 비교하기위하여 들고감)-->
@@ -94,6 +97,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<script src="./resources/js/bootstrap.js"></script>
 	<script>
+
 	var userID;
 	var flag;
 	$(document).ready(function(){
@@ -237,6 +241,7 @@
 	        return ;
 	    }
 	}
+	
 	function updateComment2(param){
 		var c_seq = param.split(':')[0]; //수정할 댓글번호
 		var c_writer = param.split(':')[1];
