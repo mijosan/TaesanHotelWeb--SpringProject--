@@ -74,7 +74,7 @@ public class EmailController {
 	  @ResponseBody
 	  @RequestMapping(value = "/idSearch.do")
 	  public Map<Object, Object> idSearch() {
-		 List<String> list = userService.idSearch(emailDept);
+		 List<UserVO> list = userService.idSearch(emailDept);
 		 HashMap<Object,Object> map = new HashMap<Object,Object>();
 		 map.put("list", list);
 		 

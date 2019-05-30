@@ -22,6 +22,6 @@ public interface UserService {
 		//이메일 체크
 		int emailCheck(String email);
 		
-		//아이디 검색
-		List<String> idSearch(String email);
+		//회원정보 검색
+		List<UserVO> idSearch(String email);
 }

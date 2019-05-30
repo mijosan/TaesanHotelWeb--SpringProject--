@@ -46,8 +46,8 @@ public class UserDAOMybatis extends SqlSessionDaoSupport{
 	}
 	
 	//이메일체크
-	public List<String> idSearch(String email) {
-		System.out.println("===> Mybatis로 emailCheck() 기능 처리");
+	public List<UserVO> idSearch(String email) {
+		System.out.println("===> Mybatis로 idSearch() 기능 처리");
 		return getSqlSession().selectList("UserDAO.idSearch", email);
 	}
 }

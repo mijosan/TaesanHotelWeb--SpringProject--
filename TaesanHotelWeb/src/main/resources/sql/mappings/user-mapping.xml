@@ -43,9 +43,9 @@
 	</select>
 	
 	<!--아이디 찾기-->
-	<select id="idSearch" parameterType="String" resultType="String">
+	<select id="idSearch" parameterType="String" resultType="com.spring.TaesanHotelWeb.biz.vo.UserVO">
 		<![CDATA[
-			select id
+			select id, password
 			from tbluser 
 			where email=#{email};
 		]]>

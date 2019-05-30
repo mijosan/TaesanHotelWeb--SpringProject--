@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService{
 	
 	//아이디 검색
 	@Override
-	public List<String> idSearch(String email) {
+	public List<UserVO> idSearch(String email) {
 		return userDAO.idSearch(email);
 	}
 }

@@ -63,7 +63,7 @@
 </div>  
 
 <div class="panel panel-default">
-	<div class="panel-heading">아이디 찾기</div>
+	<div class="panel-heading">아이디/비밀번호 찾기</div>
 	<div class="panel-body">
 		<table class="table table table-striped table-bordered table-hover">
 			<tr>
@@ -72,20 +72,13 @@
 			</tr>
 			<tr>
 				<td></td>
-				<td><input type="text" id="numText" placeholder="인증번호 6자리 숫자 입력" style="width:87%"> <input type="button" id="confirmBtn"value="확인" class="btn btn-success"></td>
+				<td><input type="text" id="numText" placeholder="인증번호 5자리 숫자 입력" style="width:87%"> <input type="button" id="confirmBtn"value="확인" class="btn btn-success"></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td><input type="text" id="password" style="width:87%" disabled></td>
 			</tr>
 		</table>
-	</div>
-</div>
-
-<div class="panel panel-default">
-	<div class="panel-heading">비밀번호 찾기</div>
-	<div class="panel-body">
-	
 	</div>
 </div>
 
@@ -165,7 +158,7 @@
 						contentType : "application/json",
 						success : function(data){
 							for(var i=0;i<data.list.length;i++){
-								$("#password").val($("#password").val()+", "+data.list[i]);
+								$("#password").val("ID:"+data.list[i].id+" PW:"+data.list[i].password +" & "+$("#password").val());
 							}
 			        	},
 			        	beforeSend:function(){
