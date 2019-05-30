@@ -1,5 +1,7 @@
 package com.spring.TaesanHotelWeb.biz.service;
 
+import java.util.List;
+
 import com.spring.TaesanHotelWeb.biz.vo.UserVO;
 
 
@@ -16,5 +18,10 @@ public interface UserService {
 		
 		//회원정보 변경
 		void updateMember(UserVO vo);
-
+		
+		//이메일 체크
+		int emailCheck(String email);
+		
+		//아이디 검색
+		List<String> idSearch(String email);
 }

@@ -32,4 +32,22 @@
 			update tbluser set email=#{email}, password=#{password} where id=#{id};
 		]]>
 	</update>
+	
+	<!--이메일 찾기-->
+	<select id="emailCheck" parameterType="String" resultType="Integer">
+		<![CDATA[
+			select count(*) 
+			from tbluser 
+			where email=#{email};
+		]]>
+	</select>
+	
+	<!--아이디 찾기-->
+	<select id="idSearch" parameterType="String" resultType="String">
+		<![CDATA[
+			select id
+			from tbluser 
+			where email=#{email};
+		]]>
+	</select>
 </mapper>

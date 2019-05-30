@@ -1,5 +1,7 @@
 package com.spring.TaesanHotelWeb.biz.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,4 +39,15 @@ public class UserDAOMybatis extends SqlSessionDaoSupport{
 		getSqlSession().update("UserDAO.updateMember", vo);
 	}
 	
+	//이메일체크
+	public int emailCheck(String email) {
+		System.out.println("===> Mybatis로 emailCheck() 기능 처리");
+		return (Integer)getSqlSession().selectOne("UserDAO.emailCheck", email);
+	}
+	
+	//이메일체크
+	public List<String> idSearch(String email) {
+		System.out.println("===> Mybatis로 emailCheck() 기능 처리");
+		return getSqlSession().selectList("UserDAO.idSearch", email);
+	}
 }

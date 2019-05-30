@@ -1,5 +1,7 @@
 package com.spring.TaesanHotelWeb.biz.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,5 +37,17 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void updateMember(UserVO vo) {
 		userDAO.updateMember(vo);	
+	}
+	
+	//이메일 체크
+	@Override
+	public int emailCheck(String email) {
+		return userDAO.emailCheck(email);
+	}
+	
+	//아이디 검색
+	@Override
+	public List<String> idSearch(String email) {
+		return userDAO.idSearch(email);
 	}
 }

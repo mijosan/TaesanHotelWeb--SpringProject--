@@ -69,8 +69,10 @@
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
 								aria-haspopup="true" aria-expanded="false">접속하기<span class="caret"></span></a>
 								<ul class="dropdown-menu">
-								<li><a href="loginForm.jsp">로그인</a></li>
+								<li><a href="find.jsp">아이디/비밀번호 찾기</a></li>
 								<li><a href="registerForm.jsp">회원가입</a></li>
+								<li role="presentation" class="divider"></li>
+								<li><a href="loginForm.jsp">로그인</a></li>
 							</ul>
 							</li>
 						</ul>
