@@ -47,7 +47,7 @@
 				<ul class="nav navbar-nav">
 					<li><a href="location.jsp">위치<span class="sr-only"></span></a></li>
 					<li><a href="introduce.jsp">이용안내</a></li>
-					<li><a href="instructor.jsp">객실예약</a></li>
+					<li><a href="registerForm.jsp">객실예약</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
 						aria-haspopup="true" aria-expanded="false">고객센터<span class="caret"></span></a>
@@ -84,7 +84,7 @@
 								aria-haspopup="true" aria-expanded="false">${user.id} 님<span class="caret"></span></a>
 								<ul class="dropdown-menu">
 								<li><a href="member.do">회원정보</a></li>
-								<li><a href="registerForm.jsp">객실예약 현황</a></li>
+								<li><a href="#">객실예약 현황</a></li>
 								<li role="presentation" class="divider"></li>
 								<li><a href="logout.do">로그아웃</a></li>
 							</ul>

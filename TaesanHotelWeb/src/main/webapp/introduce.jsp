@@ -201,7 +201,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 	}
 
 	body{
-		font-family:"GoodFont";
+		font-family:"Helvetica";
 		background-color:#e7e2f5;
 	}
 	footer{
@@ -218,6 +218,9 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
   min-height: 100%;
   z-index:-5;
 }
+.container{
+		font-family:"GoodFont";
+	}
 
 	</style>
 </head>

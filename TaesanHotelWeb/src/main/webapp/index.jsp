@@ -202,7 +202,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 	}
 
 	body{
-		font-family:"GoodFont";
+		font-family:"Helvetica";
 		background-color:#e7e2f5;
 	}
 	h1{
@@ -216,6 +216,10 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
   min-height: 100%;
   z-index:-5;
 }
+	.container{
+		font-family:"GoodFont";
+	}
+
 	</style>
 </head>
 <body>
@@ -224,6 +228,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 	</video>
 	
 	<%@include file="./WEB-INF/nav.jsp" %>
+	
 	<!--//////////////////////////////////////////////////////////////////  -->
 	<div class="container">
 		<div class="jumbotron">
@@ -405,7 +410,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 					</div>
 					
 					<div class="media-body">
-						<h2 class="media-heading"><a href="introduce.jsp?lectureName=C">&nbsp;&nbsp;&nbsp;이용안내</a>&nbsp;<span class="label label-primary">INFO</span> </h4>
+						<h2 class="media-heading"><a href="introduce.jsp">&nbsp;&nbsp;&nbsp;이용안내</a>&nbsp;<span class="label label-primary">INFO</span> </h2>
 						<br><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TS호텔을 100%즐기는 방법</h4>
 					</div>
 				</div>
@@ -415,7 +420,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 						<a href="#"><img class="scale" src="./resources/images/reservation.jpg" alt="예약"></a>
 					</div>
 					<div class="media-body">
-						<h2 class="media-heading"><a href="lecture.jsp?lectureName=Java">&nbsp;&nbsp;&nbsp;객실예약</a>&nbsp;<span class="label label-danger">HOT</span> </h4>
+						<h2 class="media-heading"><a href="reservation.jsp">&nbsp;&nbsp;&nbsp;객실예약</a>&nbsp;<span class="label label-danger">HOT</span> </h2>
 						<br><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;최고의 TS호텔 객실예약 하러가기</h4>
 					</div>
 				</div>
@@ -426,7 +431,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 					
 					</div>
 					<div class="media-body">
-						<h2 class="media-heading"><a href="getBoardList.do">&nbsp;&nbsp;&nbsp;고객센터</a>&nbsp;<span class="label label-info">HELP</span> </h4>
+						<h2 class="media-heading"><a href="getBoardList.do">&nbsp;&nbsp;&nbsp;고객센터</a>&nbsp;<span class="label label-info">HELP</span> </h2>
 						<br><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TS호텔의 관리자에게 문의하기</h4>
 					</div>
 				</div>
@@ -434,7 +439,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 		</div>
 	</div>
 <br>
-	
+
 	<!--////////////////////////////////////////////////////////////////////  -->
 	<%@include file="./WEB-INF/footer.jsp" %>
 	

@@ -168,7 +168,7 @@
 	}
 
 	body{
-		font-family:"GoodFont";
+		font-family:"Helvetica";
 		background-color:#e7e2f5;
 	}
 	footer{
@@ -234,7 +234,7 @@
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="text-center">
-													<a href="https://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
+													<a href="find.jsp" tabindex="5" class="forgot-password">아이디/비밀번호 찾기</a>
 												</div>
 											</div>
 										</div>

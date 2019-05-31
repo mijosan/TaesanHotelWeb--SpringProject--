@@ -79,7 +79,7 @@
 	}
 
 	body{
-		font-family:"GoodFont";
+		font-family:"Helvetica";
 		background-color:#e7e2f5;
 	}
 	footer{
@@ -96,6 +96,9 @@
   min-height: 100%;
   z-index:-5;
 }
+.container{
+font-family:"GoodFont";
+}
 	
 	</style>
 </head>
@@ -106,7 +109,7 @@
 	
 	
 	<%@include file="./WEB-INF/nav.jsp" %>
-	
+
 	<!--//////////////////////////////////////////////////////////////////  -->
 	<div class="container">
 		<div class="jumbotron">
@@ -149,7 +152,7 @@
 						<a href="#"><img class="scale" src="./resources/images/train.jpg" alt="철도편"></a>
 					</div>
 					<div class="media-body">
-						<h2 class="media-heading">&nbsp;&nbsp;&nbsp;철도편&nbsp;</h4>
+						<h2 class="media-heading">&nbsp;&nbsp;&nbsp;철도편&nbsp;</h2>
 						<br><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;서울 → 부산(2시간 30분 소요)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;부산역에서 지하철 이용 시 약 30분 소요<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1호선 - 2호선 : 서면역 환승 - 센텀시티역 하자 - 3번 출구)</h4>
 					</div>
 				</div>
@@ -160,7 +163,7 @@
 					
 					</div>
 					<div class="media-body">
-						<h2 class="media-heading">&nbsp;&nbsp;&nbsp;고속도로&nbsp;</h4>
+						<h2 class="media-heading">&nbsp;&nbsp;&nbsp;고속도로&nbsp;</h2>
 						<br><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1) 서울 → 원동 IC(5시간 20분 소요) → BEXCO(20분 소요)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2) 마산, 창원 → 동서고가도로(40분 소요) →BEXCO(50분 소요)</h4>
 					</div>
 				</div>
@@ -171,7 +174,7 @@
 					
 					</div>
 					<div class="media-body">
-						<h2 class="media-heading">&nbsp;&nbsp;&nbsp;시내교통&nbsp;</h4>
+						<h2 class="media-heading">&nbsp;&nbsp;&nbsp;시내교통&nbsp;</h2>
 						<br><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;지하철 2호선 센텀시티역(3번 출구 앞 건물/벡스코 정류소 하차)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;대중버스 : 5-1, 39, 40, 63, 115, 141, 155, 181, 307, 1001, 1002, 1007, 139</h4>
 						
 					</div>

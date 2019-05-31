@@ -20,8 +20,8 @@ html {
 body {
   margin: 0;
 }
-body {
-  font-family: "GoodFont", Helvetica, Arial, sans-serif;
+body {GoodFont
+  font-family: "Helvetica", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
@@ -1096,7 +1096,7 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #337ab7;
+  color: #333333;
   text-decoration: none;
 }
 a:hover,
