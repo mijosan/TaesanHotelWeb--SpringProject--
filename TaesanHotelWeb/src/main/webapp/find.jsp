@@ -77,20 +77,20 @@ body{
 </div>  
 
 <div class="panel panel-default">
-	<div class="panel-heading">아이디/비밀번호 찾기</div>
+	<div class="panel-heading"><h3>아이디/비밀번호 찾기</h3></div>
 	<div class="panel-body">
 		<table class="table table table-striped table-bordered table-hover">
 			<tr>
 				<th>이메일 주소</th>
-				<td><input type="text" id="email" placeholder="가입시 사용하였던 이메일을 적어주세요" style="width:87%"> <input type="button" id="emailBtn" value="인증번호 받기" class="btn btn-success"></td>
+				<td><input type="text" id="email" placeholder="가입시 사용하였던 이메일을 적어주세요" style="width:87%" class="form-control"> <input type="button" id="emailBtn" value="인증번호 받기" class="btn btn-success"></td>
 			</tr>
 			<tr>
 				<th>인증 번호</th>
-				<td><input type="text" id="numText" placeholder="인증번호 5자리 숫자 입력" style="width:87%"> <input type="button" id="confirmBtn"value="확인" class="btn btn-success"></td>
+				<td><input type="text" class="form-control" id="numText" placeholder="인증번호 5자리 숫자 입력" style="width:87%"> <input type="button" id="confirmBtn"value="확인" class="btn btn-success"></td>
 			</tr>
 			<tr>
 				<th>회원 정보</th>
-				<td><input type="text" id="password" style="width:87%" disabled></td>
+				<td><input type="text" class="form-control" id="password" style="width:87%" disabled></td>
 			</tr>
 		</table>
 	</div>

@@ -10,11 +10,6 @@
 <!-- <link rel="stylesheet" href="./resources/css/codingBooster.css"> -->
 
 <style type="text/css">
-footer{
-		position:absolute;
-		bottom:0;
-		width:100%;
-	}
 
 .panel-login {
 	border-color: #ccc;
@@ -192,7 +187,7 @@ footer{
 	<%@include file="./WEB-INF/nav.jsp" %>
 	<!--//////////////////////////////////////////////////////////////////  -->
 	<div class="container">
-		   	<div class="row">
+		   	<div class="row" style="margin-bottom: 107px;">
 			<div class="col-md-6 col-md-offset-3">
 				<div class="panel panel-login">
 					<div class="panel-heading">
@@ -272,7 +267,7 @@ footer{
 	
 	
 	<!--////////////////////////////////////////////////////////////////////  -->
-<br><br><br><br><br><br><br><br><br>
+
 	<%@include file="./WEB-INF/footer.jsp" %>
 
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>

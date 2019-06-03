@@ -47,7 +47,17 @@
 				<ul class="nav navbar-nav">
 					<li><a href="location.jsp">위치<span class="sr-only"></span></a></li>
 					<li><a href="introduce.jsp">이용안내</a></li>
-					<li><a href="registerForm.jsp">객실예약</a></li>
+					
+					<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+							aria-haspopup="true" aria-expanded="false">객실예약<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+							<li><a href="standard.jsp">Standard Room</a></li>
+							<li><a href="deluxe.jsp">Deluxe Room</a></li>
+							<li><a href="premier.jsp">Premier Room</a></li>
+							<li><a href="terrace.jsp">Terrace Room</a></li>
+					</ul>
+		
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
 						aria-haspopup="true" aria-expanded="false">고객센터<span class="caret"></span></a>

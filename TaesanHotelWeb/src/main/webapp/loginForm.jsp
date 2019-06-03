@@ -111,12 +111,6 @@
 }
 /* login Form */
 
-	footer{
-		position:absolute;
-		bottom:0;
-		width:100%;
-	}
-
 	/*hover ±â´É*/
 	.scale {
 	  transform: scale(1);
@@ -199,7 +193,7 @@
 	<!--//////////////////////////////////////////////////////////////////  -->
 
 	<div class="container">
-		   	<div class="row">
+		   	<div class="row" style="margin-bottom: 226px;">
 			<div class="col-md-6 col-md-offset-3">
 				<div class="panel panel-login">
 					<div class="panel-heading">
@@ -283,6 +277,7 @@
 	</div>
 	
 	<!--////////////////////////////////////////////////////////////////////  -->
+	
 	<%@include file="./WEB-INF/footer.jsp" %>
 
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>

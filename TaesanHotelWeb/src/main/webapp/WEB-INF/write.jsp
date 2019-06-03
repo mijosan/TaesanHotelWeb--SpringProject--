@@ -14,7 +14,7 @@
 			<form id="insertBoardFrm" action="insertBoard.do" method="post" enctype="multipart/form-data">
              <tr>
                   <th>제목</th>
-                  <td><input style="width: 100%" type="text" id="title" name="title" /></td>
+                  <td><input class="form-control" style="width: 100%" type="text" id="title" name="title" /></td>
              </tr>
               <tr>
                    <th>내용</th>

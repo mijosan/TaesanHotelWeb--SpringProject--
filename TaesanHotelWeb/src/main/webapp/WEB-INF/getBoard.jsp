@@ -69,7 +69,7 @@
 			<c:if test="${sessionScope.user !=null }">
 			<tr>
 				<td style="width: 100%" colspan="2">
-                    <textarea style="width: 100%" rows="3" cols="30" id="commentArea" name="commentArea" placeholder="댓글을 입력하세요"></textarea>
+                    <textarea class="form-control" style="width: 100%" rows="3" cols="30" id="commentArea" name="commentArea" placeholder="댓글을 입력하세요"></textarea>
                 	<input type="button" class="btn pull-right btn-success" value="등록" id="commentBtn" onclick="comment('cm1')">
                 </td>
 			</tr>
