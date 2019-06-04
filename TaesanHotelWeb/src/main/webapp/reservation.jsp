@@ -50,7 +50,7 @@
  	    var room;
  	    var people;
  	    var peoplePrice;
-	    
+ 	  	var price;
 	
 	    $("#confirm").click(function(){
 	    	from = new Date($("#from").val());
@@ -71,8 +71,6 @@
 	 	    	peoplePrice = 20;
 	 	    }
 
-	 	    	
-	 	    var price;
 	 	    var picture;
 	 	    if(room == "standard"){
 	 	    	price = 20 * days + peoplePrice;
@@ -108,8 +106,9 @@
 	    
 	    $(document).on('click', "#payBtn", function(){
 	    	$(".modal-body").append("<input type='hidden' name='r_date' value='"+$('#from').val()+" ~ "+$('#to').val()+"("+days+"ÀÏ"+")'>");
+	    	$(".modal-body").append("<input type='hidden' name='r_price' value='"+price+"'>");
 	    	$("#reservationForm").submit();
-	    })
+	    });
 	   
 	    
 	  });

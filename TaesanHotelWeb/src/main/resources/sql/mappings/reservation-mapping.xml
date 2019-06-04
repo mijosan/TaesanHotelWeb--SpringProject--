@@ -3,18 +3,17 @@
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="ReservationDAO">
-	<select id="loginCheck" parameterType="com.spring.TaesanHotelWeb.biz.vo.UserVO" resultType="com.spring.TaesanHotelWeb.biz.vo.UserVO">
-		<![CDATA[
-			select * 
-			from tbluser 
-			where id=#{id} and password=#{password};
-		]]>
+	<select id="getReservation"  parameterType="String" resultType="com.spring.TaesanHotelWeb.biz.vo.ReservationVO">
+		SELECT *
+		FROM Reservation
+		WHERE id = #{id}
+		order by r_seq desc
 	</select>
 	
 	<insert id="insertReservation" parameterType="com.spring.TaesanHotelWeb.biz.vo.ReservationVO">
 		<![CDATA[
-			insert into reservation(r_seq,id,r_date,r_name,r_people)
-			values((select ifnull(max(r_seq) + 1,1) from reservation b), #{id}, #{r_date}, #{r_name}, #{r_people});
+			insert into reservation(r_seq,id,r_date,r_name,r_people,r_price)
+			values((select ifnull(max(r_seq) + 1,1) from reservation b), #{id}, #{r_date}, #{r_name}, #{r_people},#{r_price});
 		]]>
 	</insert>
 	

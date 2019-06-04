@@ -1,5 +1,7 @@
 package com.spring.TaesanHotelWeb.view.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +28,17 @@ public class ReservationController {
 			UserVO userVO = (UserVO)session.getAttribute("user");
 			vo.setId(userVO.getId());
 			reservationService.insertReservation(vo);
-			mav.setViewName("redirect:index.jsp");
+			mav.setViewName("redirect:reservationStatus.do");
 			return mav;
 		}
+	}
+	
+	@RequestMapping("reservationStatus.do")
+	public ModelAndView getReservation(HttpSession session,ModelAndView mav){
+		UserVO userVO = (UserVO)session.getAttribute("user");
+		List<ReservationVO> vo = reservationService.getReservation(userVO.getId());
+		mav.addObject("reservationList", vo);
+		mav.setViewName("reservationStatus");
+		return mav;
 	}
 }

@@ -6,7 +6,14 @@ public class ReservationVO {
 	private String r_date;
 	private String r_name;
 	private String r_people;
+	private int r_price;
 	
+	public int getR_price() {
+		return r_price;
+	}
+	public void setR_price(int r_price) {
+		this.r_price = r_price;
+	}
 	public int getR_seq() {
 		return r_seq;
 	}

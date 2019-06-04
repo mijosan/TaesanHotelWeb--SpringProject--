@@ -1,5 +1,7 @@
 package com.spring.TaesanHotelWeb.biz.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,11 @@ public class ReservationImpl implements ReservationService{
 	@Override
 	public void insertReservation(ReservationVO vo) {
 		reservationDAO.insertReservation(vo);
+	}
+	
+	@Override
+	public List<ReservationVO> getReservation(String id) {
+		return reservationDAO.getReservation(id);
 	}
 	
 }
