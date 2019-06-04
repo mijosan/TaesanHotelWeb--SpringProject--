@@ -15,5 +15,6 @@
 	<mappers>
 		<mapper resource="sql/mappings/user-mapping.xml"/>
 		<mapper resource="sql/mappings/board-mapping.xml"/>
+		<mapper resource="sql/mappings/reservation-mapping.xml"/>
 	</mappers>
 </configuration>

@@ -12,7 +12,6 @@ import com.spring.TaesanHotelWeb.biz.vo.BoardVO;
 import com.spring.TaesanHotelWeb.biz.vo.CommentVO;
 
 
-
 @Repository
 public class BoardDAOMybatis extends SqlSessionDaoSupport{
 	
