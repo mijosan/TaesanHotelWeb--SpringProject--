@@ -1,6 +1,6 @@
 [TS호텔 주소](http://125.135.9.241:8080/TaesanHotelWeb/index.jsp)
 
-가상의 호텔 홈페이지를 만들어 보았습니다.
+## 가상의 호텔 홈페이지
 
 * 사용기술
   * SpringFramework
