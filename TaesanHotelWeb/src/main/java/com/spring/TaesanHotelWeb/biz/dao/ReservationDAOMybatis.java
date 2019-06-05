@@ -27,6 +27,9 @@ public class ReservationDAOMybatis extends SqlSessionDaoSupport{
 		return getSqlSession().selectList("ReservationDAO.getReservation", id);
 	}
 	
-	
+	public void deleteReservation(int r_seq) {
+		System.out.println("===> Mybatis로 deleteReservation() 기능 처리");
+		getSqlSession().selectList("ReservationDAO.deleteReservation", r_seq);
+	}
 	
 }

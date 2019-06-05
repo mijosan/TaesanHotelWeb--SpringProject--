@@ -420,7 +420,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 						<a href="#"><img class="scale" src="./resources/images/reservation.jpg" alt="예약"></a>
 					</div>
 					<div class="media-body">
-						<h2 class="media-heading"><a href="reservation.jsp">&nbsp;&nbsp;&nbsp;객실예약</a>&nbsp;<span class="label label-danger">HOT</span> </h2>
+						<h2 class="media-heading"><a href="standard.jsp">&nbsp;&nbsp;&nbsp;객실예약</a>&nbsp;<span class="label label-danger">HOT</span> </h2>
 						<br><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;최고의 TS호텔 객실예약 하러가기</h4>
 					</div>
 				</div>
@@ -444,24 +444,6 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 	<%@include file="./WEB-INF/footer.jsp" %>
 	
 	<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
-	<!--modal-->
-	<!-- <div class="row">
-		<div class="modal" id="modal" tabindex="-1">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						최고의 쉐프
-						<button class="close" data-dismiss="modal">&times;</button>
-					</div>
-					<div class="modal-body" style="text-align; center;">
-						끊임없이 매일 연구하고<br>
-						고민합니다.<br>
-						<img src="images/chefs.jpg" id="imagepreview" style="width:256px; height:256px;">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> -->
 	
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="./resources/js/bootstrap.js"></script>

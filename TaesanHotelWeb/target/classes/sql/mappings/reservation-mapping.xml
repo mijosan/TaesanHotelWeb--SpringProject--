@@ -10,6 +10,11 @@
 		order by r_seq desc
 	</select>
 	
+	<delete id="deleteReservation">
+		<![CDATA[
+			delete from reservation where r_seq = #{r_seq}
+		]]>
+	</delete>
 	<insert id="insertReservation" parameterType="com.spring.TaesanHotelWeb.biz.vo.ReservationVO">
 		<![CDATA[
 			insert into reservation(r_seq,id,r_date,r_name,r_people,r_price)
@@ -17,12 +22,14 @@
 		]]>
 	</insert>
 	
-	<!--회원정보 수정-->
+
 	<update id="updateMember" parameterType="com.spring.TaesanHotelWeb.biz.vo.UserVO">
 		<![CDATA[
 			update tbluser set email=#{email}, password=#{password} where id=#{id};
 		]]>
 	</update>
+	
+	
 	
 	
 </mapper>

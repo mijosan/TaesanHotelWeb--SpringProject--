@@ -8,4 +8,6 @@ public interface ReservationService {
 	public void insertReservation(ReservationVO vo);
 	
 	public List<ReservationVO> getReservation(String id);
+	
+	public void deleteReservation(int r_seq);
 }

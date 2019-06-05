@@ -23,4 +23,9 @@ public class ReservationImpl implements ReservationService{
 		return reservationDAO.getReservation(id);
 	}
 	
+	@Override
+	public void deleteReservation(int r_seq) {
+		reservationDAO.deleteReservation(r_seq);
+	}
+	
 }

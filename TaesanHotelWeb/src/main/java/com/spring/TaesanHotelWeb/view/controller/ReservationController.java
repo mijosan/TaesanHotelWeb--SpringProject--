@@ -6,7 +6,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.TaesanHotelWeb.biz.service.ReservationService;
@@ -40,5 +42,11 @@ public class ReservationController {
 		mav.addObject("reservationList", vo);
 		mav.setViewName("reservationStatus");
 		return mav;
+	}
+	
+	@RequestMapping("deleteReservation.do")
+	@ResponseBody
+	public void getReservation(@RequestBody ReservationVO vo){
+		reservationService.deleteReservation(vo.getR_seq());
 	}
 }
