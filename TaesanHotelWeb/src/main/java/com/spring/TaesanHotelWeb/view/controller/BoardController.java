@@ -225,19 +225,15 @@ public class BoardController implements ApplicationContextAware {
 			return mav;
 		}
 	}
+	
     @RequestMapping("download.do")
-    public ModelAndView download(HttpServletRequest request, ModelAndView mv) throws UnsupportedEncodingException{
-    	String charset[] = {"euc-kr", "ksc5601", "iso-8859-1", "8859_1", "ascii", "UTF-8"}; 
-    	 
-    	 for(int i=0; i<charset.length ; i++){
-    	     System.out.println(charset[i] + " URLEncoder : " + URLEncoder.encode(request.getParameter("originalFileName"), charset[i]));
-    	     System.out.println(charset[i] + " URLDecoder : " + URLDecoder.decode(request.getParameter("originalFileName"), charset[i]));
-    	  }
+    public ModelAndView download(HttpServletRequest request, ModelAndView mv){
 
-    	String fullPath = SAVE_PATH+request.getParameter("originalFileName");
-		File file = new File(fullPath);
-
-		return new ModelAndView("download", "downloadFile", file);
+	    	String fullPath = SAVE_PATH+request.getParameter("originalFileName");
+	    	System.out.println(fullPath);
+			File file = new File(fullPath);
+	
+			return new ModelAndView("download", "downloadFile", file);
     	}
 
     @Override

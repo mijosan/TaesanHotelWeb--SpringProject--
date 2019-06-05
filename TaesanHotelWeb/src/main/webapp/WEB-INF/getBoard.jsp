@@ -43,7 +43,7 @@
 				</td>
 				<td class="text-right">
 					<c:if test="${board.originalFileName !=null}">
-						<a href="download.do?originalFileName=${board.originalFileName}">${board.fileName}(<span class="co">${board.fileSize}</span>)</a>
+						<a onclick="downloadFun()">${board.fileName}(<span class="co">${board.fileSize}</span>)</a>
 					</c:if>
 				</td>
 			</tr>
@@ -95,6 +95,9 @@
 	
 	<input type="hidden" id="boardId" value="${board.writer}">
 	
+	<!--다운로드 값-->
+	<input type="hidden" name="originalFileName" value="${board.originalFileName}">
+	
 </form>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<script src="./resources/js/bootstrap.js"></script>
@@ -106,12 +109,15 @@
 	$(document).ready(function(){
 		listReply();
 		getSession(); //현재 접속한 로그인 세션정보를 가져옴
-		//댓글 쓰기
-		/* $("#commentBtn").click(function(){
-			comment();
-			listReply();
-		}); */
+		
+
 	});
+	
+	function downloadFun(){
+		$("#insertBoardFrm").attr("action","download.do");
+		$("#insertBoardFrm").submit();
+	}
+	
 	function getSession(){
 		$.ajax({
 			url : "getSession.do",
