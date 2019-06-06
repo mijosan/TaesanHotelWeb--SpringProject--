@@ -163,10 +163,21 @@ public class BoardController implements ApplicationContextAware {
 		if(vo.getSearchKeyword() == null) vo.setSearchKeyword("");
 		
 		//정보 저장
-		mav.addObject("boardList",boardService.getBoardList((pagemaker.getPagenum()-1)*10,pagemaker.getContentnum(), vo)); //0~10, 11~21
+		List<BoardVO> list = boardService.getBoardList((pagemaker.getPagenum()-1)*10,pagemaker.getContentnum(), vo);
+		mav.addObject("boardList",list); //0~10, 11~21
 		mav.addObject("page", pagemaker);
 		mav.setViewName("board");
-
+		
+		ObjectMapper mapper = new ObjectMapper();
+			
+		String json = "";
+		try {
+			json = mapper.writeValueAsString(list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		mav.addObject("list", json);
 		return mav;     
 		
 	}

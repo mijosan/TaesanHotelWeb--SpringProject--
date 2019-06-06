@@ -32,9 +32,13 @@
 					<a href="getBoard.do?seq=${board.seq}&message=success"> 
 						
 						${board.title}
+						<c:if test="${board.fileName != null}">
+							<img src="./resources/images/fileIcon.png">
+						</c:if>
 						<c:if test="${board.c_cnt>0}">
 							<span style="color:red">[${board.c_cnt}]</span>
 						</c:if>
+						<span id="newIcon${board.seq}"></span>
 					</a>
 				</td>
 				
@@ -99,14 +103,59 @@
 
 	<!--게시판 테이블-->
 	<%@include file="footer.jsp" %>
-	
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="./resources/js/bootstrap.js"></script>
 	<script>
+	
 		function page(idx){
 			var pagenum = idx;
 			location.href="getBoardList.do?pagenum="+pagenum;
 		}
+	$(document).ready(function(){
+		var list = ${list};
+		var boardList = new Array();
+		
+		$.each(list, function( index, value ) {
+			boardList[index] = value
+		});
+		
+		/* 오늘 날짜계산(day) */
+		var now = new Date();
+
+	      var year= now.getFullYear();
+	      var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
+	      var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
+	              
+	      var nowDays = new Date(year,mon,day);
+	      
+	      /* 오늘 날짜계산(day) */
+	     
+	      
+	      
+	      /* 게시판 날짜계산(day) */
+	     
+	      var boardRegdate = new Array();
+	      
+	      
+	      var list2 = ${list};
+	      $.each(list2, function( index, value ) {
+	    	  
+	    	  boardRegdate[index] = new Date(value.regDate.substring(0,4),value.regDate.substring(5,7),value.regDate.substring(8,10));
+	    	  boardRegdate[index] = nowDays.getTime() - boardRegdate[index].getTime();
+	    	  boardRegdate[index] = boardRegdate[index] / (1000*60*60*24);
+			  
+			});
+		  
+	   
+	     //new Icon 추가
+	     for(var i=0;i<boardRegdate.length;i++){
+	    	 if(boardRegdate[i]<8){
+	    		 $("#newIcon"+boardList[i].seq).html("<img src='./resources/images/newIcon.png'>");
+	    	 }
+	     }
+		
+		
+	});
 	</script>
 </body>
 </html>
