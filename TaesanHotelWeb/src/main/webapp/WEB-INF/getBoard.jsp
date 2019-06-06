@@ -18,7 +18,7 @@
 <%@include file="nav.jsp" %>
 <form id="insertBoardFrm" action="updateBoard.do" method="post" enctype="multipart/form-data"> <!--update.do 에서 MultipartFile로 받을려면 이렇게 설정해줘야한다.-->
 	<div class="container">
-		<table class="table table table-striped table-bordered table-hover">
+		<table class="table table table-striped table-hover">
 			<tr>
 				<th colspan="2">
 					${board.title}

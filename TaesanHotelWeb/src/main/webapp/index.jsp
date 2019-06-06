@@ -228,7 +228,6 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 	</video>
 	
 	<%@include file="./WEB-INF/nav.jsp" %>
-	
 	<!--//////////////////////////////////////////////////////////////////  -->
 	<div class="container">
 		<div class="jumbotron">
