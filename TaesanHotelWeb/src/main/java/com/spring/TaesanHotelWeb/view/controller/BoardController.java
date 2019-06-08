@@ -48,6 +48,7 @@ import com.spring.TaesanHotelWeb.biz.vo.UserVO;
 @Controller // Controller 어노테이션을 써야 Command객체가 만들어짐
 @SessionAttributes("board") // Model에 "board"라는 이름으로 저장되는 데이터가 있다면 그 데이터를 세션에도 자동으로 저장하라는 설정이다.
 public class BoardController implements ApplicationContextAware {
+	
 	@Autowired
 	private BoardService boardService;
 

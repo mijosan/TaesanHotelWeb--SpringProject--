@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>400 error</title>
+<title>500 error</title>
 <style>
 	* {
   margin: 0;
@@ -93,8 +93,8 @@ body {
 	<section class="error_section">
       <p class="error_section_subtitle">잘못된 요청입니다. 관리자에게 문의하세요.-TS호텔-</p>
       <h1 class="error_title">
-        <p>400</p>
-        400
+        <p>500</p>
+        500
       </h1>
       <a href="index.jsp" class="btn">홈으로 가기</a>
     </section>

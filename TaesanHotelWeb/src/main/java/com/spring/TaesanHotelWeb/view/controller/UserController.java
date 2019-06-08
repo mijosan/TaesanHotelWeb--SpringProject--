@@ -29,13 +29,14 @@ public class UserController {
 		System.out.println("로그인 처리");
 		
 		UserVO user = userService.loginCheck(vo);
-
+		
 		//3. 화면 네비게이션
 			if(user !=null){
 				mav.setViewName("redirect:index.jsp");
 				//mav.addObject("msg","success");
 				//mav.addObject("user",user.getName()); 바로 getBoardList.jsp로 간다면 쓸수있는데 getBoardList.do에서 새롭게  ModelAndView 객체를 생성해서 쓰기때문에 기존의 MAV와 다르다.
 				session.setAttribute("user", user); //로그인성공시 회원정보 세션등록
+
 			}else{
 				//mav.addObject("msg","failure");
 				mav.setViewName("redirect:loginForm.jsp?msg=failure");
@@ -50,7 +51,7 @@ public class UserController {
 	public ModelAndView logout(HttpSession session, ModelAndView mav) throws Exception {
 		System.out.println("로그아웃 처리");
 		
-		session.invalidate();
+		session.removeAttribute("user");
 		mav.setViewName("redirect:index.jsp");
 		return mav;
 	}

@@ -15,11 +15,6 @@
   min-height: 100%;
   z-index:-5;
 }
-footer{
-		position:absolute;
-		bottom:0;
-		width:100%;
-}
 .wrap-loading{ /*화면 전체를 어둡게 합니다.*/
 
     position: fixed;
@@ -65,7 +60,7 @@ footer{
 <body>
 <%@include file="nav.jsp"%>
 
-<div class="container">
+<div class="container" style="margin-bottom: 239px;">
 <h1>회원정보</h1><br>
 <div class="wrap-loading display-none">
 
