@@ -13,6 +13,11 @@
 			color:blue;
 		}
 	</style>
+	  <meta property="og:url"           content="http://121.158.221.161:8080/TaesanHotelWeb/getBoard.do?seq=${board.seq}&message=success" />
+	  <meta property="og:type"          content="website" />
+	  <meta property="og:title"         content="${board.title}" />
+	  <meta property="og:description"   content="게시판 글 내용입니다." />
+	  <meta property="og:image"         content="https://www.shillahotels.com/images/upload/spofrpack/170508/FILEca0f21da22966b1f.jpg" />
 </head>
 <body>
 <%@include file="nav.jsp" %>
@@ -59,7 +64,15 @@
 					<%-- <input type="button" class="btn btn-default pull-right" value="수정" onclick="location.href='updateBoard.do?seq=${board.seq}&writer=${board.writer}'"> --%>
 				</td>		
 			</tr>
-			
+			<tr>
+				<th>
+					공유하기
+				</th>
+				<td class="text-right" style="cursor:pointer">
+					<!-- <img src="./resources/images/facebook.PNG"  id="facebookShare"> -->
+					  <div class="fb-share-button" data-href="http://121.158.221.161:8080/TaesanHotelWeb/getBoard.do?seq=${board.seq}&message=success" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">공유하기</a></div>
+				</td>
+			</tr>
 			<!--댓글 작성-->
 			<tr>
 				<td colspan="2">
@@ -101,16 +114,24 @@
 </form>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<script src="./resources/js/bootstrap.js"></script>
+	<!-- 페이스북 공유 -->
 	<script>
+	(function(d, s, id) {
+	    var js, fjs = d.getElementsByTagName(s)[0];
+	    if (d.getElementById(id)) return;
+	    js = d.createElement(s); js.id = id;
+	    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+	    fjs.parentNode.insertBefore(js, fjs);
+	  }(document, 'script', 'facebook-jssdk'));
+	</script>
 
+	<script>
 	var userID;
 	var flag;
 
 	$(document).ready(function(){
 		listReply();
 		getSession(); //현재 접속한 로그인 세션정보를 가져옴
-		
-
 	});
 	
 	function downloadFun(){
