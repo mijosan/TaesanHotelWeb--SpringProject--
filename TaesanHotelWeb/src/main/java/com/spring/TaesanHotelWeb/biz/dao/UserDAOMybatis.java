@@ -50,4 +50,13 @@ public class UserDAOMybatis extends SqlSessionDaoSupport{
 		System.out.println("===> Mybatis로 idSearch() 기능 처리");
 		return getSqlSession().selectList("UserDAO.idSearch", email);
 	}
+	
+	//회원탈퇴
+	public void deleteMember(UserVO vo) {
+		System.out.println("===> Mybatis로 deleteMember() 기능 처리");
+		getSqlSession().delete("UserDAO.deleteMember", vo);
+		getSqlSession().delete("UserDAO.deleteBoard", vo);
+		getSqlSession().delete("UserDAO.deleteComment", vo);
+		getSqlSession().delete("UserDAO.deleteReservation", vo);
+	}
 }

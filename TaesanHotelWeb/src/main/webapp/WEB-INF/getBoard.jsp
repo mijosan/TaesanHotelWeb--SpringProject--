@@ -206,7 +206,7 @@
 		    var cm = replyParam.split(':')[4];
 		    param = {"c_content": c_content,"b_seq":b_seq,"originNo":originNo,"groupOrd":groupOrd,"groupLayer":groupLayer,"cm":cm};//json 형식
 	    }else{ //댓글
-	    	c_content = $("#commentArea").val();
+	    	c_content = $("#commentArea").val().replace(/<(\/)?([a-zA-Z]*)(\s[a-zA-Z]*=[^>]*)?(\s)*(\/)?>/ig, "");
 	    	param = {"c_content": c_content,"b_seq":b_seq,"cm":replyParam};//json 형식
 	    }
 

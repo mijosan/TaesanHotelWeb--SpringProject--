@@ -41,6 +41,14 @@
 		values((select ifnull(max(c_seq) + 1,1) from comment b),#{b_seq},#{c_content},#{c_writer},#{c_regdate},#{originNo},#{groupOrd},#{groupLayer})
 	]]>
 	</insert>
+
+	<!-- <insert id="insertComment" parameterType="com.spring.TaesanHotelWeb.biz.vo.CommentVO">
+	<![CDATA[
+		insert into comment(c_seq,b_seq,c_content,c_writer,c_regdate,originNo,groupOrd,groupLayer)
+		values(#{c_seq},#{b_seq},#{c_content},#{c_writer},#{c_regdate},#{originNo},#{groupOrd},#{groupLayer})
+	]]>
+	</insert> -->
+	
 	
 	<select id="getBoardListCnt" resultType="int">
 		SELECT count(*) 

@@ -94,5 +94,23 @@ public class UserController {
 		mav.setViewName("redirect:loginForm.jsp");
 		return mav;
 	}
+	
+	//È¸¿øÅ»Åð
+	@RequestMapping("deleteMember.do")
+	@ResponseBody
+	public HashMap<String,String> deleteMember(@RequestBody UserVO vo, HttpSession session ) {
+		System.out.println("È¸¿øÅ»Åð");
+		UserVO userVO = (UserVO)session.getAttribute("user");
+		HashMap<String, String> map = new HashMap<String,String>();
+		if(userVO.getPassword().equals(vo.getPassword())) {
+			userService.deleteMember(vo);
+			session.removeAttribute("user");
+			map.put("result","success");
+			return map;
+		}else {
+			map.put("result","fail");
+			return map;
+		}
+	}
 
 }

@@ -24,4 +24,7 @@ public interface UserService {
 		
 		//회원정보 검색
 		List<UserVO> idSearch(String email);
+		
+		//회원 탈퇴
+		void deleteMember(UserVO vo);
 }

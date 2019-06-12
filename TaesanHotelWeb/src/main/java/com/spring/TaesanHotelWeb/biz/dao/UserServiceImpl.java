@@ -50,4 +50,10 @@ public class UserServiceImpl implements UserService{
 	public List<UserVO> idSearch(String email) {
 		return userDAO.idSearch(email);
 	}
+
+	//È¸¿øÅ»Åð
+	@Override
+	public void deleteMember(UserVO vo) {
+		userDAO.deleteMember(vo);
+	}
 }

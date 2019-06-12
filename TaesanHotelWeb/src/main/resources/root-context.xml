@@ -43,7 +43,16 @@
 		<property name="password" value="${jdbc.password}"/>
 	</bean>
 	
-	 <!-- file Upload -->
+	<!--트랜잭션 관리자-->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- @Transactional 애노테이션을 sacn하기 위한 설정 -->
+	<!-- <tx:annotation-driven transaction-manager="transactionManager"/> -->
+
+
+	<!-- file Upload -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- max upload size in bytes -->
         <property name="maxUploadSize" value="20971520" /> <!-- 20MB -->

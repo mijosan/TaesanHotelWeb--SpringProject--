@@ -33,6 +33,33 @@
 		]]>
 	</update>
 	
+	<!--회원탈퇴-->
+	<delete id="deleteMember" parameterType="com.spring.TaesanHotelWeb.biz.vo.UserVO">
+		<![CDATA[
+			delete from tbluser where id=#{id} and password=#{password};
+		]]>
+	</delete>
+	
+	<delete id="deleteBoard" parameterType="com.spring.TaesanHotelWeb.biz.vo.UserVO">
+		<![CDATA[
+			delete from board where writer=#{id};
+		]]>
+	</delete>
+	
+	<delete id="deleteComment" parameterType="com.spring.TaesanHotelWeb.biz.vo.UserVO">
+		<![CDATA[
+			delete from comment where c_writer=#{id};
+		]]>
+	</delete>
+	
+	<delete id="deleteReservation" parameterType="com.spring.TaesanHotelWeb.biz.vo.UserVO">
+		<![CDATA[
+			delete from reservation where id=#{id};
+		]]>
+	</delete>
+	
+	
+	
 	<!--이메일 찾기-->
 	<select id="emailCheck" parameterType="String" resultType="Integer">
 		<![CDATA[
