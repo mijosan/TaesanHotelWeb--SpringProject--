@@ -195,16 +195,20 @@
 		var replyParam = replyParam + ":cm2";
 		
 		if(userID != null){
-			var output  = "<tr>";
-				output += 	"<td>&nbsp;&nbsp;&nbsp;└─<mark>"+userID+"</mark></td>";
-				output += 	"<td style='width: 100%' colspan='2'>"
-				output += 		"<textarea style='width: 100%' rows='3' cols='30' id='replyComment2' placeholder='댓글을 입력하세요'></textarea>"
-				output += 		"<input type='button' class='btn pull-right btn-success' value='등록' onclick='comment(\""+replyParam+"\")'>"
-				output +=	"</td>"
-				output += "</tr>";
+
+				$(".rm").remove(); //그전에 생긴 대댓글 창 제거 
+
+				var output  = "<tr class='rm'>";
+					output += 	"<td>&nbsp;&nbsp;&nbsp;└─<mark>"+userID+"</mark></td>";
+					output += 	"<td style='width: 100%' colspan='2'>"
+					output += 		"<textarea style='width: 100%' rows='3' cols='30' id='replyComment2' placeholder='댓글을 입력하세요'></textarea>"
+					output += 		"<input type='button' class='btn pull-right btn-success' value='등록' onclick='comment(\""+replyParam+"\")'>"
+					output +=	"</td>"
+					output += "</tr>";
+					
+				$("#"+replyParam.split(':')[0]).after(output);
 				
-			$("#"+replyParam.split(':')[0]).after(output);
-		
+
 		}else{
 			alert("로그인이 필요합니다.");
 			$(location).attr("href","loginForm.jsp");
