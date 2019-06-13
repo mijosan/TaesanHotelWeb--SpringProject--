@@ -118,6 +118,7 @@
 </div>  
 	<%@include file="nav.jsp" %>
 	<!--게시판 테이블-->
+	
 	<div class="container" >
 	<ul class="nav nav-tabs">
 	  <li><a href="getMyBoardList.do">내가 쓴 글 보기</a></li>
