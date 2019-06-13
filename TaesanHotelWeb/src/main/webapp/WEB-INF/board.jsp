@@ -17,11 +17,11 @@
 <h1>고객센터</h1><br>
 	<table class="table table table-striped table-bordered table-hover">
 		<tr>
-			<th style="width:5%">번호</th>
-			<th style="width:60%">제목</th>
-			<th>작성자</th>
-			<th>날짜</th>
-			<th>조회수</th>
+			<th style="width:5%" class="text-center">번호</th>
+			<th style="width:60%" class="text-center">제목</th>
+			<th class="text-center">작성자</th>
+			<th class="text-center">날짜</th>
+			<th class="text-center">조회수</th>
 		</tr>
 		<tbody>
 		<c:forEach items="${boardList}" var="board"><!-- DispatcherServlet객체로 부터 Model을 전달받음 ex)mav.addObject("boardList",boardService.getBoardList(vo)) -->
@@ -42,9 +42,9 @@
 					</a>
 				</td>
 				
-				<td>${board.writer}</td>
-				<td>${board.regDate}</td>
-				<td>${board.cnt}</td>
+				<td class="text-center">${board.writer}</td>
+				<td class="text-center">${board.regDate}</td>
+				<td class="text-center">${board.cnt}</td>
 			</tr>
 		</c:forEach>
 		</tbody>
@@ -72,7 +72,7 @@
 		<!--다음페이지-->
 		<c:if test="${page.next}">
 			 <li class="page-item">
-     			<a class="page-link" href="javascript:page(${page.endPage+1})" aria-label="Next" onClick="fn_paging('${pagination.pageCnt }')">
+     			<a class="page-link" href="javascript:page(${page.endPage+1})" aria-label="Next">
         			<span aria-hidden="true">&raquo;</span>
         			<span class="sr-only">Next</span>
      			</a>

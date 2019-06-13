@@ -5,9 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -182,6 +179,70 @@ public class BoardController implements ApplicationContextAware {
 		return mav;     
 		
 	}
+	//내가 쓴 글 가져오기
+	@RequestMapping(value="getMyBoardList.do")
+	public ModelAndView getMyBoard(@RequestParam(value="pagenum", defaultValue="1") int pagenum, BoardVO vo, ModelAndView mav, HttpSession session) throws Exception {
+		UserVO userVO = (UserVO)session.getAttribute("user");
+		PageMaker pagemaker = new PageMaker();
+
+		pagemaker.setTotalcount(boardService.getMyBoardListCnt(userVO.getId()));//전체 게시글 개수
+		pagemaker.setPagenum(pagenum);//현재 페이지를 페이지 객체에 저장
+		pagemaker.setContentnum(10);//한 페이지에 몇개씩 게시글을 보여줄지 지정한다.
+		pagemaker.setCurrentblock(pagenum);//현재 페이지 블록이 몇번인지 현재 페이지 번호를 통해서 지정한다.
+		pagemaker.setLastblock(pagemaker.getTotalcount());//마지막 블록 번호를 전체 게시글 수를 통해서 정한다.
+		
+		pagemaker.prevnext(pagenum);//현재 페이지 번호로 화살표를 나타낼지 정한다
+		pagemaker.setStartPage(pagemaker.getCurrentblock());//시작 페이지를 페이지 블록 번호로 정한다.
+		pagemaker.setEndPage(pagemaker.getLastblock(), pagemaker.getCurrentblock());//마지막 페이지를 마지막 페이지 블록과 현재 페이지 블록 번호로 정한다.
+
+		//정보 저장
+		vo.setWriter(userVO.getId());
+		List<BoardVO> list = boardService.getMyBoardList((pagemaker.getPagenum()-1)*10,pagemaker.getContentnum(), vo);
+		mav.addObject("boardList",list); //0~10, 11~21
+		mav.addObject("page", pagemaker);
+		mav.setViewName("myBoard");
+		
+		//ModelAndView 에서 보낸 List 객체 JQuery 에서 받기
+		ObjectMapper mapper = new ObjectMapper();
+			
+		String json = "";
+		try {
+			json = mapper.writeValueAsString(list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		mav.addObject("list", json);
+		return mav;     
+		
+	}
+	
+	//내가 쓴 댓글 가져오기
+		@RequestMapping(value="getMyCommentList.do")
+		public ModelAndView getMyCommentList(@RequestParam(value="pagenum", defaultValue="1") int pagenum, CommentVO vo, ModelAndView mav, HttpSession session) throws Exception {
+			UserVO userVO = (UserVO)session.getAttribute("user");
+			PageMaker pagemaker = new PageMaker();
+			
+			pagemaker.setTotalcount(boardService.getMyCommentListCnt(userVO.getId()));//전체 게시글 개수
+			pagemaker.setPagenum(pagenum);//현재 페이지를 페이지 객체에 저장
+			pagemaker.setContentnum(10);//한 페이지에 몇개씩 게시글을 보여줄지 지정한다.
+			pagemaker.setCurrentblock(pagenum);//현재 페이지 블록이 몇번인지 현재 페이지 번호를 통해서 지정한다.
+			pagemaker.setLastblock(pagemaker.getTotalcount());//마지막 블록 번호를 전체 게시글 수를 통해서 정한다.
+			
+			pagemaker.prevnext(pagenum);//현재 페이지 번호로 화살표를 나타낼지 정한다
+			pagemaker.setStartPage(pagemaker.getCurrentblock());//시작 페이지를 페이지 블록 번호로 정한다.
+			pagemaker.setEndPage(pagemaker.getLastblock(), pagemaker.getCurrentblock());//마지막 페이지를 마지막 페이지 블록과 현재 페이지 블록 번호로 정한다.
+
+			//정보 저장
+			vo.setC_writer(userVO.getId());
+			List<CommentVO> list = boardService.getMyCommentList((pagemaker.getPagenum()-1)*10,pagemaker.getContentnum(), vo);
+			mav.addObject("commentList",list); //0~10, 11~21
+			mav.addObject("page", pagemaker);
+			mav.setViewName("myComment");
+			
+			return mav;     
+			
+		}
 	
     @RequestMapping(value = "/insertBoard.do", method = RequestMethod.POST)
     public String insertBoard(@RequestParam(value="uploadFile", required = false) MultipartFile mf,String editor, BoardVO vo, HttpSession session,
@@ -375,6 +436,22 @@ public class BoardController implements ApplicationContextAware {
 			return mav;
 		}
 	
+	}
+	
+	//내가 쓴 글 삭제하기
+	@ResponseBody
+	@RequestMapping(value="deleteMyBoard.do")
+	public void deleteMyBoard(@RequestBody BoardVO vo, ModelAndView mav, HttpSession session) throws Exception {
+		System.out.println("내가 쓴 글 삭제 처리");
+		boardService.deleteBoard(vo);
+	}
+	
+	//내가 쓴 댓글 삭제하기
+	@ResponseBody
+	@RequestMapping(value="deleteMyComment.do")
+	public void deleteMyComment(@RequestBody CommentVO vo, ModelAndView mav, HttpSession session) throws Exception {
+		System.out.println("내가 쓴 댓글 삭제 처리");
+		boardService.deleteComment(vo.getC_seq());
 	}
 	
 

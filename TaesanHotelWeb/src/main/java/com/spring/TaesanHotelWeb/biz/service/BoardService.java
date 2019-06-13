@@ -27,8 +27,21 @@ public interface BoardService {
 	//글 목록 조회
 	List<BoardVO> getBoardList(int pagenum, int contentnum, BoardVO vo);
 	
+	//내가 쓴 글 목록 조회
+	List<BoardVO> getMyBoardList(int pagenum, int contentnum, BoardVO vo);
+	
+	//내가 쓴 댓글 목록 조회
+	List<CommentVO> getMyCommentList(int pagenum, int contentnum, CommentVO vo);
+	
 	//글 목록 갯수
 	int getBoardListCnt();
+	
+	//댓글 목록 갯수
+	int getMyCommentListCnt(String id);
+	
+	
+	//내가 쓴 글 목록 갯수
+	int getMyBoardListCnt(String id);
 	
 	//글 최상위 번호 조회
 	int getSeq();
@@ -58,4 +71,7 @@ public interface BoardService {
 	
 	//groupOrd + 1 쿼리
 	void commentUpdateOrd(CommentVO vo);
+
+	
+
 }

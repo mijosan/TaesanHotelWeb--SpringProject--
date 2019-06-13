@@ -42,11 +42,32 @@ public class BoardServiceImpl implements BoardService{
 	public List<BoardVO> getBoardList(int pagenum, int contentnum, BoardVO vo) {
 		return boardDAO.getBoardList(pagenum,contentnum,vo);
 	}
+	
+	@Override
+	public List<BoardVO> getMyBoardList(int pagenum, int contentnum, BoardVO vo) {
+		return boardDAO.getMyBoardList(pagenum,contentnum,vo);
+	}
+	
+	@Override
+	public List<CommentVO> getMyCommentList(int pagenum, int contentnum, CommentVO vo) {
+		return boardDAO.getMyCommentList(pagenum,contentnum,vo);
+	}
 
 	@Override
 	public int getBoardListCnt() {
 		return boardDAO.getBoardListCnt();
 	}
+	
+	@Override
+	public int getMyBoardListCnt(String id) {
+		return boardDAO.getMyBoardListCnt(id);
+	}
+	
+	@Override
+	public int getMyCommentListCnt(String id) {
+		return boardDAO.getMyCommentListCnt(id);
+	}
+	
 	@Override
 	public int getSeq() {
 		return boardDAO.getSeq();

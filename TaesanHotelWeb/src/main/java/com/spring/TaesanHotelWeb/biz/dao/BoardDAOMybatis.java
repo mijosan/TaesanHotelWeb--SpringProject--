@@ -55,6 +55,28 @@ public class BoardDAOMybatis extends SqlSessionDaoSupport{
 		return getSqlSession().selectList("BoardDAO.getBoardList", map);
 	}
 	
+	//내가 쓴 글 목록 리스트 가져오기
+	public List<BoardVO> getMyBoardList(int pagenum, int contentnum, BoardVO vo) {
+		System.out.println("===> Mybatis로 getMyBoardList() 기능 처리");
+		HashMap map = new HashMap<String, Object>();
+		
+		map.put("pagenum",pagenum);
+		map.put("contentnum",contentnum);
+		map.put("BoardVO",vo);
+		return getSqlSession().selectList("BoardDAO.getMyBoardList", map);
+	}
+	
+	//내가 쓴 글 목록 리스트 가져오기
+	public List<CommentVO> getMyCommentList(int pagenum, int contentnum, CommentVO vo) {
+		System.out.println("===> Mybatis로 getMyCommentList() 기능 처리");
+		HashMap map = new HashMap<String, Object>();
+			
+		map.put("pagenum",pagenum);
+		map.put("contentnum",contentnum);
+		map.put("CommentVO",vo);
+		return getSqlSession().selectList("BoardDAO.getMyCommentList", map);
+	}
+	
 	public List<CommentVO> getComment(int b_seq, int start, int end) {
 		System.out.println("===> Mybatis로 getComment() 기능 처리");
 		HashMap map = new HashMap<String, Object>();
@@ -67,6 +89,14 @@ public class BoardDAOMybatis extends SqlSessionDaoSupport{
 	
 	public int getBoardListCnt() {
 		return getSqlSession().selectOne("BoardDAO.getBoardListCnt");
+	}
+	
+	public int getMyCommentListCnt(String id) {
+		return getSqlSession().selectOne("BoardDAO.getMyCommentListCnt",id);
+	}
+	
+	public int getMyBoardListCnt(String id) {
+		return getSqlSession().selectOne("BoardDAO.getMyBoardListCnt",id);
 	}
 	
 	public int getSeq() {

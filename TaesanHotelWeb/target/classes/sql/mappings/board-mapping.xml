@@ -29,6 +29,27 @@
 		ORDER BY originNo DESC, groupOrd ASC
 		LIMIT #{pagenum}, #{contentnum}
 	</select>
+	
+	
+	<!--내가 쓴 글 목록 리스트-->
+	<select id="getMyBoardList" parameterType="HashMap" resultType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
+		SELECT *,(select count(*) from comment where b_seq = b.seq) c_cnt
+		FROM BOARD as b
+		WHERE writer = #{BoardVO.writer}
+		ORDER BY originNo DESC, groupOrd ASC
+		LIMIT #{pagenum}, #{contentnum}
+	</select>
+	
+	<!--내가 쓴 댓글 목록 리스트-->
+	<select id="getMyCommentList" parameterType="HashMap" resultType="com.spring.TaesanHotelWeb.biz.vo.CommentVO">
+		SELECT *
+		FROM Comment
+		WHERE c_writer = #{CommentVO.c_writer}
+		ORDER BY originNo DESC, groupOrd ASC
+		LIMIT #{pagenum}, #{contentnum}
+	</select>
+	
+	
 	<select id="getComment"  parameterType="HashMap" resultType="com.spring.TaesanHotelWeb.biz.vo.CommentVO">
 		SELECT *,(select count(*) from comment where b_seq = #{b_seq}) c_cnt
 		FROM COMMENT
@@ -53,6 +74,20 @@
 	<select id="getBoardListCnt" resultType="int">
 		SELECT count(*) 
 		FROM BOARD
+	</select>
+	
+	<!--내가 쓴 전체 게시글 수-->
+	<select id="getMyBoardListCnt" resultType="int">
+		SELECT count(*) 
+		FROM BOARD
+		WHERE WRITER = #{id}
+	</select>
+	
+	<!--내가 쓴 전체 댓글 수-->
+	<select id="getMyCommentListCnt" resultType="int">
+		SELECT count(*) 
+		FROM Comment
+		WHERE C_WRITER = #{id}
 	</select>
 	
 	<select id="getBoard" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO" resultType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
