@@ -14,7 +14,7 @@
 	</resultMap> -->
 	
 	<select id="getBoardList" parameterType="HashMap" resultType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
-		SELECT *,(select count(*) from comment where b_seq = b.seq) c_cnt
+		SELECT *,(select count(*) from comment where b_seq = b.seq) c_cnt,(select count(*) from tshotel.like where b_seq = b.seq) like_cnt
 		FROM BOARD as b
 		WHERE 1=1
 		<if test="BoardVO.searchCondition == 'TITLE'">

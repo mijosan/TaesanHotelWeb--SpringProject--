@@ -37,6 +37,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.TaesanHotelWeb.biz.common.PageMaker;
 import com.spring.TaesanHotelWeb.biz.service.BoardService;
+import com.spring.TaesanHotelWeb.biz.service.LikeService;
 import com.spring.TaesanHotelWeb.biz.vo.BoardVO;
 import com.spring.TaesanHotelWeb.biz.vo.CommentVO;
 import com.spring.TaesanHotelWeb.biz.vo.UserVO;
@@ -48,6 +49,9 @@ public class BoardController implements ApplicationContextAware {
 	
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private LikeService likeService;
 
 	private WebApplicationContext context = null;
 	
@@ -371,6 +375,7 @@ public class BoardController implements ApplicationContextAware {
 			}
 		}
 		mav.addObject("board", boardService.getBoard(vo)); //Model 정보 저장
+		mav.addObject("likeCnt",likeService.getLike(vo.getSeq()));
 		mav.setViewName("getBoard");
 		return mav;
 	}

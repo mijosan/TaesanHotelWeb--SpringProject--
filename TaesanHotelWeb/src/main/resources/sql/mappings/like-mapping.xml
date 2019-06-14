@@ -9,6 +9,12 @@
 		WHERE b_seq = #{b_seq} and id = #{id} 
 	</select>
 	
+	<select id="getLike" resultType="Integer">
+		SELECT count(*)
+		FROM tshotel.like
+		WHERE b_seq = #{b_seq}
+	</select>
+	
 	<delete id="deleteLike" parameterType="com.spring.TaesanHotelWeb.biz.vo.LikeVO">
 		<![CDATA[
 			delete from tshotel.like where b_seq = #{b_seq} and id = #{id}
@@ -21,5 +27,7 @@
 			values((select ifnull(max(l_seq) + 1,1) from tshotel.like b), #{b_seq}, #{id});
 		]]>
 	</insert>
+	
+	
 
 </mapper>

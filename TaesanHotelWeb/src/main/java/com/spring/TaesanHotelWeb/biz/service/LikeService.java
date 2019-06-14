@@ -12,4 +12,7 @@ public interface LikeService {
 	
 	//좋아요 추가
 	public void addLike(LikeVO vo);
+	
+	//좋아요 카운트
+	public int getLike(int b_seq);
 }

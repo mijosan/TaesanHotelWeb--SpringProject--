@@ -57,7 +57,7 @@
 					${board.writer} ｜${board.regDate }
 				</td>
 				<td class="text-right">
-					조회 ${board.cnt} ｜ 댓글 <span class="c_cnt"></span>
+					조회 ${board.cnt} ｜ 댓글 <span class="c_cnt"></span> ｜ <img src="./resources/images/heart.PNG"> <span class="likeCnt">${likeCnt}</span>
 				</td>
 			</tr>
 			<tr>
@@ -174,15 +174,17 @@
 			    type : 'post',
 	        	url : 'updateLike.do',
 	        	data: JSON.stringify({"b_seq":${board.seq},"id":userID}),//JSON 문자열 형식으로 바꿈
-	        	contentType : "application/json",
-	        	dataType : "json",
+	        	contentType : "application/json", //서버에서 데이터를 보낼때
+	        	dataType : "json", //서버에서 데이터를 받을때
 	        	 success : function(result){
 	        		if(result.result == "up"){
 	        		 	/*동적으로 좋아요 수바꿔야함*/
 	        		 	swal("추천 등록되었습니다.", "", "success");
+	        		 	$(".likeCnt").html(result.likeCnt);
 	        		}else if(result.result == "down"){
 	        			/*동적으로 좋아요 수바꿔야함*/
-	        			swal("추천이 취소되었습니다.", "", "error");			
+	        			swal("추천이 취소되었습니다.", "", "error");
+	        			$(".likeCnt").html(result.likeCnt);
 	        		}else if(result.result == "login"){
 	        			/*로그인을 하지 않았을때*/
 	        			$(location).attr("href","loginForm.jsp");
@@ -231,8 +233,8 @@
 	        	type : 'post',
 	        	url : 'deleteComment.do',
 	        	data: JSON.stringify(param),//JSON 문자열 형식으로 바꿈
-	        	contentType : "application/json",
-	        	dataType : "json",
+	        	contentType : "application/json", //서버에 데이터를 보낼때
+	        	dataType : "json", //서버에서 데이터를 받을때
 	        	 success : function(result){
 	        		if(result == "success"){
 	        		 	alert("댓글이 삭제 되었습니다.");

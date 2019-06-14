@@ -29,4 +29,10 @@ public class LikeImpl implements LikeService{
 	public void addLike(LikeVO vo) {
 		likeDAO.addLike(vo);		
 	}
+	
+	//좋아요 가져오기
+	@Override
+	public int getLike(int b_seq) {
+		return likeDAO.getLike(b_seq);
+	}
 }

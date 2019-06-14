@@ -27,4 +27,9 @@ public class LikeDAOMybatis extends SqlSessionDaoSupport{
 		System.out.println("===> Mybatis로 addLike() 기능 처리");
 		getSqlSession().insert("LikeDAO.addLike", vo);
 	}
+	
+	public int getLike(int b_seq){
+		System.out.println("===> Mybatis로 getLike() 기능 처리");
+		return getSqlSession().selectOne("LikeDAO.getLike", b_seq);
+	}
 }

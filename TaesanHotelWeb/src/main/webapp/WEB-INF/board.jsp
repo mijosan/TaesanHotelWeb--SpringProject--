@@ -22,6 +22,7 @@
 			<th class="text-center">작성자</th>
 			<th class="text-center">날짜</th>
 			<th class="text-center">조회수</th>
+			<th class="text-center">좋아요</th>
 		</tr>
 		<tbody>
 		<c:forEach items="${boardList}" var="board"><!-- DispatcherServlet객체로 부터 Model을 전달받음 ex)mav.addObject("boardList",boardService.getBoardList(vo)) -->
@@ -45,6 +46,7 @@
 				<td class="text-center">${board.writer}</td>
 				<td class="text-center">${board.regDate}</td>
 				<td class="text-center">${board.cnt}</td>
+				<td class="text-center"><img src="./resources/images/heart.PNG"> ${board.like_cnt}</td>
 			</tr>
 		</c:forEach>
 		</tbody>

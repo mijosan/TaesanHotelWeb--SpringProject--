@@ -23,9 +23,9 @@ public class LikeController {
 
 		@ResponseBody
 		@RequestMapping(value = "updateLike.do")
-		public Map<String, String> updateLike(@RequestBody LikeVO vo, HttpSession session) {
+		public Map<Object, Object> updateLike(@RequestBody LikeVO vo, HttpSession session) {
 		 
-		Map<String, String> map = new HashMap<String, String>();
+		Map<Object, Object> map = new HashMap<Object, Object>();
 		
 		// 1. 로그인 여부 확인
 		// 2. 해당 아이디가 좋아요 하였는지 여부 판단
@@ -38,10 +38,17 @@ public class LikeController {
 		}else if(checkLike>=1) {
 			likeService.deleteLike(vo);
 			map.put("result", "down");
+			map.put("likeCnt",getLike(vo.getB_seq())); //좋아요 갯수도 map에 담아서 가져감
 		}else if(checkLike==0) {
 			likeService.addLike(vo);
 			map.put("result", "up");
+			map.put("likeCnt",getLike(vo.getB_seq()));
 		}
 		return map;  
-	}
+		}
+		
+		public int getLike(int b_seq) {
+			return likeService.getLike(b_seq);
+		}
+		
 }
