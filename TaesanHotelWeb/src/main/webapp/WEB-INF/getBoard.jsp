@@ -12,6 +12,29 @@
 		.co{
 			color:blue;
 		}
+	/*좋아요 애니메이션*/
+.heart {
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+  background-image:url( 'https://abs.twimg.com/a/1446542199/img/t1/web_heart_animation.png');
+  background-position: left;
+  background-repeat:no-repeat;
+  background-size:2900%;
+}
+
+.heart:hover {
+  background-position:right;
+}
+
+.is_animating {
+  animation: heart-burst .8s steps(28) 1;
+}
+
+@keyframes heart-burst {
+  from {background-position:left;}
+  to { background-position:right;}
+}
 	</style>
 	  <meta property="og:url"           content="http://121.158.221.161:8080/TaesanHotelWeb/getBoard.do?seq=${board.seq}&message=success" />
 	  <meta property="og:type"          content="website" />
@@ -43,9 +66,9 @@
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<th>
 					첨부파일
-				</td>
+				</th>
 				<td class="text-right">
 					<c:if test="${board.originalFileName !=null}">
 						<a onclick="downloadFun()">${board.fileName}(<span class="co">${board.fileSize}</span>)</a>
@@ -65,7 +88,15 @@
 				</td>		
 			</tr>
 			<tr>
-				<th>
+				<th style="vertical-align: middle;">
+					좋아요
+				</th>
+				<td style="text-align:right;">
+					<div class="heart" style="float: right;" align="right"></div>
+				</td>
+			</tr>
+			<tr>
+				<th style="vertical-align: middle;">
 					공유하기
 				</th>
 				<td class="text-right" style="cursor:pointer">
@@ -114,6 +145,7 @@
 </form>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<script src="./resources/js/bootstrap.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<!-- 페이스북 공유 -->
 	<script>
 	(function(d, s, id) {
@@ -123,17 +155,51 @@
 	    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
 	    fjs.parentNode.insertBefore(js, fjs);
 	  }(document, 'script', 'facebook-jssdk'));
+
 	</script>
 
 	<script>
 	var userID;
 	var flag;
-
+	
 	$(document).ready(function(){
 		listReply();
 		getSession(); //현재 접속한 로그인 세션정보를 가져옴
 	});
-	
+	/*좋아요 기능 처리*/
+	$(".heart").on('click touchstart', function(){
+		  $(this).toggleClass('is_animating');
+
+		 	$.ajax({
+			    type : 'post',
+	        	url : 'updateLike.do',
+	        	data: JSON.stringify({"b_seq":${board.seq},"id":userID}),//JSON 문자열 형식으로 바꿈
+	        	contentType : "application/json",
+	        	dataType : "json",
+	        	 success : function(result){
+	        		if(result.result == "up"){
+	        		 	/*동적으로 좋아요 수바꿔야함*/
+	        		 	swal("추천 등록되었습니다.", "", "success");
+	        		}else if(result.result == "down"){
+	        			/*동적으로 좋아요 수바꿔야함*/
+	        			swal("추천이 취소되었습니다.", "", "error");			
+	        		}else if(result.result == "login"){
+	        			/*로그인을 하지 않았을때*/
+	        			$(location).attr("href","loginForm.jsp");
+	        		}
+	        	},
+	        	error : function(request,status,error){
+	        		alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+	        		swal("추천이 등록되지 않았습니다.", "", "error");
+	        	}
+		  });
+		});
+
+		/*when the animation is over, remove the class*/
+		$(".heart").on('animationend', function(){
+		  $(this).toggleClass('is_animating');
+		});
+		
 	function downloadFun(){
 		$("#insertBoardFrm").attr("action","download.do");
 		$("#insertBoardFrm").submit();
