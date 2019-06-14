@@ -132,6 +132,7 @@
 			<th style="width:65%" class="text-center">제목</th>
 			<th class="text-center">날짜</th>
 			<th class="text-center">조회수</th>
+			<th class="text-center">좋아요</th>
 		</tr>
 		<tbody>
 		<c:forEach items="${boardList}" var="board">
@@ -156,6 +157,7 @@
 				</td>
 				<td class="text-center" style="vertical-align: middle;">${board.regDate }</td>
 				<td class="text-center" style="vertical-align: middle;">${board.cnt}</td>
+				<td class="text-center" style="vertical-align: middle;"><img src="./resources/images/heart.PNG"> ${board.like_cnt}</td>
 			</tr>
 		</c:forEach>
 		</tbody>
