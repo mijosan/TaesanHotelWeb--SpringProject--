@@ -14,8 +14,9 @@
 	</resultMap> -->
 	
 	<select id="getBoardList" parameterType="HashMap" resultType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
+	
 		SELECT *,(select count(*) from comment where b_seq = b.seq) c_cnt,(select count(*) from tshotel.like where b_seq = b.seq) like_cnt
-		FROM BOARD as b
+		FROM board as b
 		WHERE 1=1
 		<if test="BoardVO.searchCondition == 'TITLE'">
 			<![CDATA[ AND TITLE LIKE CONCAT('%', #{BoardVO.searchKeyword},'%') ]]>
@@ -28,13 +29,14 @@
 		</if> 
 		ORDER BY originNo DESC, groupOrd ASC
 		LIMIT #{pagenum}, #{contentnum}
+
 	</select>
 	
 	
 	<!--내가 쓴 글 목록 리스트-->
 	<select id="getMyBoardList" parameterType="HashMap" resultType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
 		SELECT *,(select count(*) from comment where b_seq = b.seq) c_cnt, (select count(*) from tshotel.like where b_seq = b.seq) like_cnt
-		FROM BOARD as b
+		FROM board as b
 		WHERE writer = #{BoardVO.writer}
 		ORDER BY originNo DESC, groupOrd ASC
 		LIMIT #{pagenum}, #{contentnum}
@@ -43,7 +45,7 @@
 	<!--내가 쓴 댓글 목록 리스트-->
 	<select id="getMyCommentList" parameterType="HashMap" resultType="com.spring.TaesanHotelWeb.biz.vo.CommentVO">
 		SELECT *
-		FROM Comment
+		FROM comment
 		WHERE c_writer = #{CommentVO.c_writer}
 		ORDER BY originNo DESC, groupOrd ASC
 		LIMIT #{pagenum}, #{contentnum}
@@ -52,7 +54,7 @@
 	
 	<select id="getComment"  parameterType="HashMap" resultType="com.spring.TaesanHotelWeb.biz.vo.CommentVO">
 		SELECT *,(select count(*) from comment where b_seq = #{b_seq}) c_cnt
-		FROM COMMENT
+		FROM comment
 		WHERE B_SEQ = #{b_seq}
 		ORDER BY originNo asc, groupOrd ASC
 	</select>
@@ -72,21 +74,23 @@
 	
 	
 	<select id="getBoardListCnt" resultType="int">
+	<![CDATA[
 		SELECT count(*) 
-		FROM BOARD
+		FROM board
+	]]>
 	</select>
 	
 	<!--내가 쓴 전체 게시글 수-->
 	<select id="getMyBoardListCnt" resultType="int">
 		SELECT count(*) 
-		FROM BOARD
+		FROM board
 		WHERE WRITER = #{id}
 	</select>
 	
 	<!--내가 쓴 전체 댓글 수-->
 	<select id="getMyCommentListCnt" resultType="int">
 		SELECT count(*) 
-		FROM Comment
+		FROM comment
 		WHERE C_WRITER = #{id}
 	</select>
 	

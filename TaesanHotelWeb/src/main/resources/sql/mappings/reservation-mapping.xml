@@ -5,7 +5,7 @@
 <mapper namespace="ReservationDAO">
 	<select id="getReservation"  parameterType="String" resultType="com.spring.TaesanHotelWeb.biz.vo.ReservationVO">
 		SELECT *
-		FROM Reservation
+		FROM reservation
 		WHERE id = #{id}
 		order by r_seq desc
 	</select>

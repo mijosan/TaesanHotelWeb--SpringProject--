@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="BoardDAO">
+	<!--resultMap-->
+	<!-- <resultMap id="boardResult" type="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
+		<id property="seq" column="SEQ"/> PK는 id 엘리먼트 사용
+		<result property="title" column="TITLE"/> column 에는 DB의 필드명을 적고 property에는 DTO 프라퍼티명을 적어준다.
+		<result property="writer" column="WRITER"/>
+		<result property="content" column="CONTENT"/>
+		<result property="regDate" column="REGDATE"/>
+		<result property="cnt" column="CNT"/>
+	</resultMap> -->
+	
+	<select id="getBoardList" parameterType="HashMap" resultType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
+		SELECT *,(select count(*) from comment where b_seq = b.seq) c_cnt,(select count(*) from tshotel.like where b_seq = b.seq) like_cnt
+		FROM BOARD as b
+		WHERE 1=1
+		<if test="BoardVO.searchCondition == 'TITLE'">
+			<![CDATA[ AND TITLE LIKE CONCAT('%', #{BoardVO.searchKeyword},'%') ]]>
+		</if> 
+		<if test="BoardVO.searchCondition == 'CONTENT'">
+			<![CDATA[ AND CONTENT LIKE CONCAT('%', #{BoardVO.searchKeyword},'%') ]]>
+		</if> 
+		<if test="BoardVO.searchCondition == 'WRITER'">
+			<![CDATA[ AND WRITER LIKE CONCAT('%', #{BoardVO.searchKeyword},'%') ]]>
+		</if> 
+		ORDER BY originNo DESC, groupOrd ASC
+		LIMIT #{pagenum}, #{contentnum}
+	</select>
+	
+	
+	<!--내가 쓴 글 목록 리스트-->
+	<select id="getMyBoardList" parameterType="HashMap" resultType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
+		SELECT *,(select count(*) from comment where b_seq = b.seq) c_cnt, (select count(*) from tshotel.like where b_seq = b.seq) like_cnt
+		FROM BOARD as b
+		WHERE writer = #{BoardVO.writer}
+		ORDER BY originNo DESC, groupOrd ASC
+		LIMIT #{pagenum}, #{contentnum}
+	</select>
+	
+	<!--내가 쓴 댓글 목록 리스트-->
+	<select id="getMyCommentList" parameterType="HashMap" resultType="com.spring.TaesanHotelWeb.biz.vo.CommentVO">
+		SELECT *
+		FROM Comment
+		WHERE c_writer = #{CommentVO.c_writer}
+		ORDER BY originNo DESC, groupOrd ASC
+		LIMIT #{pagenum}, #{contentnum}
+	</select>
+	
+	
+	<select id="getComment"  parameterType="HashMap" resultType="com.spring.TaesanHotelWeb.biz.vo.CommentVO">
+		SELECT *,(select count(*) from comment where b_seq = #{b_seq}) c_cnt
+		FROM COMMENT
+		WHERE B_SEQ = #{b_seq}
+		ORDER BY originNo asc, groupOrd ASC
+	</select>
+	<insert id="insertComment" parameterType="com.spring.TaesanHotelWeb.biz.vo.CommentVO">
+	<![CDATA[
+		insert into comment(c_seq,b_seq,c_content,c_writer,c_regdate,originNo,groupOrd,groupLayer)
+		values((select ifnull(max(c_seq) + 1,1) from comment b),#{b_seq},#{c_content},#{c_writer},#{c_regdate},#{originNo},#{groupOrd},#{groupLayer})
+	]]>
+	</insert>
+
+	<!-- <insert id="insertComment" parameterType="com.spring.TaesanHotelWeb.biz.vo.CommentVO">
+	<![CDATA[
+		insert into comment(c_seq,b_seq,c_content,c_writer,c_regdate,originNo,groupOrd,groupLayer)
+		values(#{c_seq},#{b_seq},#{c_content},#{c_writer},#{c_regdate},#{originNo},#{groupOrd},#{groupLayer})
+	]]>
+	</insert> -->
+	
+	
+	<select id="getBoardListCnt" resultType="int">
+		SELECT count(*) 
+		FROM BOARD
+	</select>
+	
+	<!--내가 쓴 전체 게시글 수-->
+	<select id="getMyBoardListCnt" resultType="int">
+		SELECT count(*) 
+		FROM BOARD
+		WHERE WRITER = #{id}
+	</select>
+	
+	<!--내가 쓴 전체 댓글 수-->
+	<select id="getMyCommentListCnt" resultType="int">
+		SELECT count(*) 
+		FROM Comment
+		WHERE C_WRITER = #{id}
+	</select>
+	
+	<select id="getBoard" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO" resultType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
+		<![CDATA[
+			select * from board where seq=#{seq}
+		]]>
+	</select>
+	
+	<select id="getSeq" resultType="int">
+		<![CDATA[
+			select ifnull(max(seq) + 1,1) from board b
+		]]>
+	</select>
+	
+	<select id="getC_seq" resultType="int">
+		<![CDATA[
+			select ifnull(max(c_seq) + 1,1) from comment b
+		]]>
+	</select>
+	
+	<update id="updateCnt" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
+		<![CDATA[
+			update board set cnt=cnt+1 where seq=#{seq}
+		]]>
+	</update>
+	
+	<!--updateOrd-->
+	<update id="updateOrd" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
+		<![CDATA[
+			update board set groupOrd=groupOrd+1 where originNo=#{originNo} and #{groupOrd}<=groupOrd;
+		]]>
+	</update>
+	
+	<!--updateOrd2 댓글-->
+	<update id="commentUpdateOrd" parameterType="com.spring.TaesanHotelWeb.biz.vo.CommentVO">
+		<![CDATA[
+			update comment set groupOrd=groupOrd+1 where originNo=#{originNo} and #{groupOrd}<groupOrd;
+		]]>
+	</update>
+	
+	<insert id="insertBoard" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
+		<![CDATA[
+			insert into board(seq, title, content, writer, regDate, cnt, fileName, originalFileName, fileSize, originNo, groupOrd, groupLayer)
+			values((select ifnull(max(seq) + 1,1) from board b), #{title}, #{content}, #{writer}, #{regDate}, #{cnt}, #{fileName}, #{originalFileName}, #{fileSize},
+			#{originNo},#{groupOrd},#{groupLayer}
+			)
+		]]>
+	</insert>
+	
+	<update id="updateBoard" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
+		<![CDATA[
+			update board set title=#{title}, content=#{content}, fileName=#{fileName}, originalFileName=#{originalFileName}, fileSize=#{fileSize} where seq=#{seq}
+		]]>
+	</update>
+	
+
+	<delete id="deleteBoard" parameterType="com.spring.TaesanHotelWeb.biz.vo.BoardVO">
+		<![CDATA[
+			delete from board where seq=#{seq}
+		]]>
+	</delete>
+	
+	<!--댓글 삭제-->
+	<delete id="deleteComment">
+		<![CDATA[
+			delete from comment where c_seq=#{c_seq}
+		]]>
+	</delete>
+	
+	<!--댓글 수정 -->
+	<update id="updateComment" parameterType="com.spring.TaesanHotelWeb.biz.vo.CommentVO">
+		<![CDATA[
+			update comment set c_content=#{c_content} where c_seq=#{c_seq}
+		]]>
+	</update>
+</mapper>

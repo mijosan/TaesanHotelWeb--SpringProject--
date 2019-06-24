@@ -24,7 +24,7 @@ public class UserController {
 	private UserService userService;
 	
 	//로그인
-	@RequestMapping(value="/login.do")
+	@RequestMapping(value="login.do")
 	public ModelAndView login(UserVO vo, ModelAndView mav, HttpSession session)throws SQLException {
 		System.out.println("로그인 처리");
 		
@@ -47,7 +47,7 @@ public class UserController {
 	}
 	
 	//로그아웃
-	@RequestMapping(value="/logout.do")
+	@RequestMapping(value="logout.do")
 	public ModelAndView logout(HttpSession session, ModelAndView mav) throws Exception {
 		System.out.println("로그아웃 처리");
 		
@@ -58,7 +58,7 @@ public class UserController {
 	
 	
 	//아이디 중복체크
-	@RequestMapping(value="/idcheck.do")
+	@RequestMapping(value="idcheck.do")
 	@ResponseBody //Ajax
 	public Map<Object, Object> idCheck(@RequestBody String id, ModelAndView mav) throws Exception {
 		System.out.println("아이디 중복체크");
@@ -86,7 +86,7 @@ public class UserController {
 	}
 	
 	//회원가입
-	@RequestMapping(value="/register.do")
+	@RequestMapping(value="register.do")
 	public ModelAndView register(UserVO vo, ModelAndView mav) throws Exception {
 		System.out.println("회원가입 처리");
 
