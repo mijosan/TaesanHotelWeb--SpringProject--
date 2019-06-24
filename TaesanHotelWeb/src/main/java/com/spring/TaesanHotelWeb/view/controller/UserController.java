@@ -1,18 +1,29 @@
 package com.spring.TaesanHotelWeb.view.controller;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.spring.TaesanHotelWeb.biz.common.NaverLoginBO;
 import com.spring.TaesanHotelWeb.biz.service.UserService;
 import com.spring.TaesanHotelWeb.biz.vo.UserVO;
 
@@ -22,6 +33,52 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private NaverLoginBO naverLoginBO;
+	
+	private String apiResult = null;
+	
+	//네아로
+	@RequestMapping(value = "naverLogin.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public void naverLogin(HttpSession session, HttpServletResponse response) throws IOException {
+
+		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+		
+		response.sendRedirect(naverAuthUrl);
+	}
+	
+	//네아로 콜백
+	@RequestMapping(value = "/callback.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session, UserVO user) throws IOException, ParseException {
+		
+		JSONParser parser = new JSONParser();
+		
+		OAuth2AccessToken oauthToken = naverLoginBO.getAccessToken(session, code, state);
+		
+		String apiResult = naverLoginBO.getUserProfile(oauthToken); //String형식의 json데이터
+		
+		//2. String형식인 apiResult를 json형태로 바꿈 
+		Object obj = parser.parse(apiResult); 
+		JSONObject jsonObj = (JSONObject) obj;
+
+		//3. 데이터 파싱
+		//Top레벨 단계 _response 파싱
+		JSONObject response_obj = (JSONObject)jsonObj.get("response"); 
+		
+		//response의 nickname값 파싱 
+		
+		String email = (String)response_obj.get("email"); 
+		String id = email.substring(0,email.indexOf("@"));
+		
+		user.setEmail(email);
+		user.setId(id);
+		
+		session.setAttribute("user", user);
+		session.setAttribute("naver", "true");
+		
+		return "redirect:index.jsp";
+	}
 	
 	//로그인
 	@RequestMapping(value="login.do")
@@ -43,7 +100,6 @@ public class UserController {
 
 			}
 		return mav;
-
 	}
 	
 	//로그아웃

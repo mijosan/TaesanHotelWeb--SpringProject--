@@ -230,6 +230,10 @@
 												<div class="text-center">
 													<a href="find.jsp" tabindex="5" class="forgot-password">아이디/비밀번호 찾기</a>
 												</div>
+												<br>
+												<a href="naverLogin.do">
+													<img src="./resources/images/naverLogin.PNG" style="width: 200px;">
+												</a>
 											</div>
 										</div>
 									</div>

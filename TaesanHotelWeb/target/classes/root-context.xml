@@ -11,7 +11,7 @@
 	<context:component-scan base-package="com.spring.TaesanHotelWeb.biz"></context:component-scan>
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy><!-- AOP관련 어노테이션들을 인식하고 용도에 맞게 처리-->
 	
-	
+
 	
 	<!-- Mail 인증 관련 -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">

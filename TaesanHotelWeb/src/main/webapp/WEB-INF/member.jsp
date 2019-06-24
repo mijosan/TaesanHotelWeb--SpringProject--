@@ -129,7 +129,7 @@
 		    </div>
 		  </div>
 		</div>
-
+<input type="hidden" id="naverLogin" value="${sessionScope.naver}">
 <%@include file="footer.jsp" %>
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -138,6 +138,10 @@
 	$(document).ready(function(){
 		/*회원 탈퇴*/
 		$("#deleteBtn").click(function(){
+			if($("#naverLogin").val() == "true"){
+				swal("네이버 아이디는 삭제할수 없습니다.", "", "error");
+				return;
+			}
 			var deletePassword = $("#deletePassword").val();
 			var deleteId = $("#deleteId").val()
 			if(deletePassword == ""){
@@ -174,6 +178,11 @@
 			
 		});
 		$("#modify").click(function(){
+			if($("#naverLogin").val() == "true"){
+				swal("네이버 아이디는 정보수정을 할수 없습니다.", "", "error");
+				return;
+			}
+			//네이버 아이디 검사
 			var getMail = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 			var userPw = $("#password").val();
 			var userPw2 = $("#confirm-password").val();
