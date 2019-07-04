@@ -10,7 +10,7 @@ import com.spring.TaesanHotelWeb.biz.service.BoardService;
 import com.spring.TaesanHotelWeb.biz.vo.BoardVO;
 import com.spring.TaesanHotelWeb.biz.vo.CommentVO;
 
-
+@Transactional
 @Service("boardService")
 public class BoardServiceImpl implements BoardService{
 	

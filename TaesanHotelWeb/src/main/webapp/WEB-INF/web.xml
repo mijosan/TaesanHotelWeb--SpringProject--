@@ -53,10 +53,10 @@
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
   
-  <!--ContextLoaderListener는 기본적으로 /WEB-INF/applicationContext.xml 파일을 읽는다 그것의 경로를 바꾸는 작업-->
+  
   <context-param>
   	<param-name>contextConfigLocation</param-name>
-  	<param-value>classpath:root-context.xml</param-value>
+  	<param-value>classpath:root-context.xml</param-value> <!--ContextLoaderListener는 기본적으로 /WEB-INF/applicationContext.xml 파일을 읽는다 그것의 경로를 바꾸는 작업-->
   </context-param>
   
   <!--ContextLoaderListener생성-->
@@ -65,4 +65,5 @@
   		org.springframework.web.context.ContextLoaderListener
   	</listener-class>
   </listener>
+  
 </web-app>

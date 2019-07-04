@@ -10,28 +10,8 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-	<context:component-scan base-package="com.spring.TaesanHotelWeb.biz"></context:component-scan>
-	
-	<!-- Mail 인증 관련 -->
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="smtp.gmail.com" />
-		<property name="port" value="587" />
-		<property name="username" value="erptaesanchoi" />
-		<property name="password" value="ghxpfrhksflwk" />
-		<property name="javaMailProperties">
-			<props>
-				<prop key="mail.transport.protocol">smtp</prop>
-				<prop key="mail.smtp.auth">true</prop>
-				<prop key="mail.smtp.starttls.enable">true</prop>
-				<prop key="mail.debug">true</prop>
-			</props>
-		</property>
-	</bean>
-	<!--SqlSessionFactoryBean-->
-	<bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"/><!-- 데이터베이스 커넥션 정보 (setter 인젝션) -->
-		<property name="configLocation" value="classpath:sql/sql-map-config.xml"/><!-- mybatis 설정정보 -->
-	</bean>
+	<!-- @Transactional 애노테이션을 sacn하기 위한 설정 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
 	
 	<!-- Datasource 설정(데이터베이스로부터 커넥션을 얻기위하여 사용)-->
 	<context:property-placeholder location="classpath:sql/databaseConfig/mySql.properties"/>
@@ -47,17 +27,6 @@
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
-	<!-- @Transactional 애노테이션을 sacn하기 위한 설정 -->
-	<tx:annotation-driven transaction-manager="transactionManager" />
-
-
-	<!-- file Upload -->
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <!-- max upload size in bytes -->
-        <property name="maxUploadSize" value="20971520" /> <!-- 20MB -->
-        <!-- max size of file in memory (in bytes) -->
-        <property name="maxInMemorySize" value="1048576" /> <!-- 1MB -->
-    </bean>
-
+	<bean id="test" class="com.spring.TaesanHotelWeb.biz.common.test"></bean>
 	
 </beans>

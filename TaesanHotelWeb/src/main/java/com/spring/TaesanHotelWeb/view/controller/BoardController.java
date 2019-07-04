@@ -55,7 +55,7 @@ public class BoardController implements ApplicationContextAware {
 
 	private WebApplicationContext context = null;
 	
-	String SAVE_PATH="C:/Spring/TaesanHotelWeb/TaesanHotelWeb/src/main/webapp/resources/files/";
+	String SAVE_PATH="/home/hosting_users/tshotel/tomcat/webapps/ROOT/resources/files/";
 	//세션 가져오기
 	@ResponseBody
 	@RequestMapping("getSession.do")
@@ -332,7 +332,7 @@ public class BoardController implements ApplicationContextAware {
             // 파일명을 받는다 - 일반 원본파일명
             String oldName = request.getHeader("file-name");
             // 파일 기본경로 _ 상세경로
-            String filePath = "C:/Spring/TaesanHotelWeb/TaesanHotelWeb/src/main/webapp/resources/editor/photoUpload/";
+            String filePath = "/home/hosting_users/tshotel/tomcat/webapps/ROOT/resources/editor/photoUpload/";
             String saveName = sb.append(new SimpleDateFormat("yyyyMMddHHmmss")
                           .format(System.currentTimeMillis()))
                           .append(UUID.randomUUID().toString())
@@ -350,7 +350,7 @@ public class BoardController implements ApplicationContextAware {
             sb = new StringBuffer();
             sb.append("&bNewLine=true")
               .append("&sFileName=").append(oldName)
-              .append("&sFileURL=").append("http://localhost:8080/TaesanHotelWeb/resources/editor/photoUpload/")
+              .append("&sFileURL=").append("http://tshotel.cafe24.com/resources/editor/photoUpload/")
                                                   
         .append(saveName);
         } catch (Exception e) {
