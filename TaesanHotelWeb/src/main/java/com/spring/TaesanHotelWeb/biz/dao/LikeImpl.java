@@ -2,10 +2,12 @@ package com.spring.TaesanHotelWeb.biz.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.TaesanHotelWeb.biz.service.LikeService;
 import com.spring.TaesanHotelWeb.biz.vo.LikeVO;
 
+@Transactional
 @Service("likeService")
 public class LikeImpl implements LikeService{
 	

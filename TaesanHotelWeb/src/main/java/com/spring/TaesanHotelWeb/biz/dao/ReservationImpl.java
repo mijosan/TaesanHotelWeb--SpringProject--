@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.TaesanHotelWeb.biz.service.ReservationService;
 import com.spring.TaesanHotelWeb.biz.vo.ReservationVO;
 
+@Transactional
 @Service("ReservationService")
 public class ReservationImpl implements ReservationService{
 	@Autowired
