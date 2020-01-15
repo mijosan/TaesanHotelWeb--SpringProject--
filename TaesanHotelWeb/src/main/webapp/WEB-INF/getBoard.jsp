@@ -159,6 +159,7 @@
 
 	<script>
 	var userID;
+	
 	var flag;
 	
 	$(document).ready(function(){

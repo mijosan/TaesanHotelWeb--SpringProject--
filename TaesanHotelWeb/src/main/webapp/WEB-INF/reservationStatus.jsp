@@ -13,6 +13,7 @@
 	
 	src:url("./resources/fonts/KBIZHanmaumMyungjo.ttf"); /*폰트 파일 주소*/
 	}
+	
 	.container{
 		font-family:"GoodFont";
 	}

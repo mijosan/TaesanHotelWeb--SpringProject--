@@ -39,7 +39,7 @@ public class EmailController {
 		
 		if(count != 0) { //Email이 존재할때
 	   
-		    String setfrom = "erptaesanchoi@gmail.com";         
+		    String setfrom = "cold7080@gmail.com";         
 		    String tomail  = vo.getEmail();// 받는 사람 이메일
 		    emailDept = vo.getEmail(); //아이디를 찾을때를위해 저장
 		    String title   = "[TsHotel] 회원님의 아이디 찾기 인증번호 입니다.";      // 제목
